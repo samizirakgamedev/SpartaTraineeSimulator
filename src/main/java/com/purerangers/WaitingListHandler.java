@@ -42,6 +42,11 @@ public class WaitingListHandler
         waitingList = new LinkedList<>();
     }
 
+    public Queue<Person> getWaitingList()
+    {
+        return waitingList;
+    }
+
     private WaitingListHandler()
     {
 
