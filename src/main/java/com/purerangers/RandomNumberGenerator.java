@@ -6,7 +6,7 @@ public class RandomNumberGenerator {
             System.out.println("Random Number"+getRandomNumbersUsingNextInt());
         }
 
-        private static int getRandomNumbersUsingNextInt() {
+        public static int getRandomNumbersUsingNextInt() {
             int min = 0;
             int max = 50;
             int random_int = (int)Math.floor(Math.random()*(max-min+1)+min);
