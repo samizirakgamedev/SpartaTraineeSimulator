@@ -2,8 +2,6 @@ package com.purerangers;
 
 import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.LinkedList;
 import java.util.Queue;
 
 public class TrainingCentre
@@ -17,7 +15,7 @@ public class TrainingCentre
         this.maxTrainees = maxTrainees;
         this.openDate = openDate;
 
-        trainees = new ArrayList<Person>();
+        trainees = new ArrayList<>();
     }
 
     public int getAmountOfTrainees()
@@ -48,18 +46,7 @@ public class TrainingCentre
         for (int i = 0; i < trainees.size(); i++)
         {
             Person trainee = trainees.get(i);
-            Date startDate = trainee.getStartDate();
-            int weeksAtCamp = trainee.getWeeksAtCamp();
-
-            Calendar c = Calendar.getInstance();
-            c.add(Calendar.DATE, weeksAtCamp*7);
-            Date graduation = new java.sql.Date(c.getTime().getTime());
-
-            if (graduation.before(newDate))
-            {
-                System.out.println("This one graduated!");
-            }
-            else
+            if (!trainee.checkGraduation(newDate))
             {
                 traineeListWithoutGraduates.add(trainee);
             }
