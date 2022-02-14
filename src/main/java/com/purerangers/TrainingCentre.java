@@ -9,7 +9,6 @@ public class TrainingCentre
     int maxTrainees;
     Date openDate;
     ArrayList<Person> trainees;
-    ArrayList<Graduation> graduations;
 
     public TrainingCentre(int maxTrainees, Date openDate)
     {
@@ -17,7 +16,6 @@ public class TrainingCentre
         this.openDate = openDate;
 
         trainees = new ArrayList<>();
-        graduations = new ArrayList<>();
     }
 
     public int getAmountOfTrainees()
@@ -40,7 +38,6 @@ public class TrainingCentre
         if (getAmountOfTrainees() < maxTrainees)
         {
             trainees.add(trainee);
-            graduations.add(trainee);
             return true;
         }
 

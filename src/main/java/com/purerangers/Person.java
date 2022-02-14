@@ -3,7 +3,7 @@ package com.purerangers;
 import java.sql.Date;
 import java.util.Calendar;
 
-public class Person implements Graduation
+public class Person implements Graduation, SQLReadable
 {
     public static int idCounter = 0;
     public static int getID()
@@ -15,6 +15,7 @@ public class Person implements Graduation
 
     private int id;
     private Date startDate;
+    private CourseType courseType;
     private int weeksAtCamp;
 
     public Date getStartDate()
@@ -27,18 +28,12 @@ public class Person implements Graduation
         return weeksAtCamp;
     }
 
-    public Person(Date startDate, int weeksAtCamp)
-    {
-        this.id = getID();
-        this.startDate = startDate;
-        this.weeksAtCamp = weeksAtCamp;
-    }
-
     public Person()
     {
         this.startDate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
         weeksAtCamp = 8;
         this.id = getID();
+        this.courseType = CourseType.JAVA_SDET;
     }
 
     @Override
@@ -60,5 +55,16 @@ public class Person implements Graduation
         }
 
         return false;
+    }
+
+    @Override
+    public String[] getSQL()
+    {
+        String[] stringArray = new String[3];
+        stringArray[0] = String.valueOf(id);
+        stringArray[1] = courseType.getCourseName();
+        stringArray[2] = String.valueOf(startDate);
+
+        return stringArray;
     }
 }
