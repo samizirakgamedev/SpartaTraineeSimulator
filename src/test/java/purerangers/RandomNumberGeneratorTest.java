@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class RandomNumberGeneratorTest {
     @Test
-    @DisplayName("Check distribution probability above 40")
+    @DisplayName("RandomNumber: Check distribution probability above 40")
     public void checkRandomHigherNumDistribution() throws ParseException
     {
         /*for mean*/
@@ -43,7 +43,7 @@ public class RandomNumberGeneratorTest {
        assertEquals(true,Z<3&&Z>-3);
     }
     @Test
-    @DisplayName("Check distribution probability above 40")
+    @DisplayName("RandomNumber: Check distribution probability above 40")
     public void checkRandomLowerNumDistribution() throws ParseException
     {
         //NORMAL DISTRIBUTION
@@ -54,7 +54,7 @@ public class RandomNumberGeneratorTest {
             int x=getRandomNumbersUsingNextInt();
             total= total+x;
             a.add(x);
-        }        // initialization of variables
+        }        
         double Z, X, s, u;
         u = total/50; //mean
         X=10; // the value

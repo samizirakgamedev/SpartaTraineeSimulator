@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DateFormatTest {
     @Test
-    @DisplayName("Invalid String entered on formatDate")
+    @DisplayName("Format Date:Invalid String")
     public void checkInvalidStringToDate() throws ParseException
     {
         String s="hello";
@@ -22,14 +22,26 @@ public class DateFormatTest {
         LocalDate actual= formatDate(s);
         assertEquals(expected,actual);
     }
+
     @Test
-    @DisplayName("Invalid String entered on formatDate")
+    @DisplayName("Format Date: Valid String")
     public void checkValidStringToDate() throws ParseException
     {
         String s="21/9/1982";
         formatDate(s);
         LocalDate actual= formatDate(s);
         LocalDate expected = LocalDate.of(1982, 9, 21);
+        assertEquals(expected,actual);
+    }
+
+    @Test
+    @DisplayName("Format Date: Checks null input formatDate")
+    public void checkNullStringToDate() throws ParseException
+    {
+        String s=null;
+        formatDate(s);
+        LocalDate actual= formatDate(s);
+        LocalDate expected = null;
         assertEquals(expected,actual);
     }
 }
