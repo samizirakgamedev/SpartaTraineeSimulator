@@ -58,13 +58,13 @@ public class Person implements Graduation, SQLReadable
     }
 
     @Override
-    public String[] getSQL()
+    public Object[] getSQL()
     {
-        String[] stringArray = new String[3];
-        stringArray[0] = String.valueOf(id);
-        stringArray[1] = courseType.getCourseName();
-        stringArray[2] = String.valueOf(startDate);
+        Object[] objectArray = new Object[3];
+        objectArray[0] = id;
+        objectArray[1] = courseType.getCourseName();
+        objectArray[2] = startDate;
 
-        return stringArray;
+        return objectArray;
     }
 }
