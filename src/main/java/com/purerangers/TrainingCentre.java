@@ -64,4 +64,7 @@ public class TrainingCentre
 
         return trainees;
     }
+    public boolean isFull(){
+        return (maxTrainees <=  getAmountOfTrainees());
+    }
 }
