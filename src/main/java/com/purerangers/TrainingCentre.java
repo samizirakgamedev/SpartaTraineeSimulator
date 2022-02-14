@@ -23,13 +23,18 @@ public class TrainingCentre
         return trainees.size();
     }
 
-    public Person getTrainee(int index)
+    public Person getTrainee(Integer index)
     {
         return trainees.get(index);
     }
 
     public boolean addTrainee(Person trainee)
     {
+        if (trainee == null)
+        {
+            throw new NullPointerException();
+        }
+
         if (getAmountOfTrainees() < maxTrainees)
         {
             trainees.add(trainee);
@@ -41,6 +46,11 @@ public class TrainingCentre
 
     public void updateDate(Date newDate)
     {
+        if (newDate == null)
+        {
+            throw new NullPointerException();
+        }
+
         ArrayList<Person> traineeListWithoutGraduates = new ArrayList<>();
 
         for (int i = 0; i < trainees.size(); i++)
@@ -57,6 +67,11 @@ public class TrainingCentre
 
     public Queue<Person> attemptToRecruitTrainees(Queue<Person> trainees)
     {
+        if (trainees == null)
+        {
+            throw new NullPointerException();
+        }
+
         while (getAmountOfTrainees() < maxTrainees)
         {
             addTrainee(trainees.remove());

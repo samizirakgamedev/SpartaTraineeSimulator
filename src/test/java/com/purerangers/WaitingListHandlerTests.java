@@ -102,4 +102,17 @@ public class WaitingListHandlerTests
 
         Assertions.assertEquals(expected, actual);
     }
+
+    @Test
+    @DisplayName("When given a null value the waiting list add will throw an exception")
+    public void throwsExceptionWhenGivenNull()
+    {
+        WaitingListHandler waitingList = WaitingListHandler.getInstance();
+        waitingList.clearWaitingList();
+
+        Assertions.assertThrows(NullPointerException.class, () ->
+        {
+            waitingList.addPeople(null);
+        });
+    }
 }
