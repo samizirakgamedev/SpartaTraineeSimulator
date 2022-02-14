@@ -9,6 +9,7 @@ public class TrainingCentre
     int maxTrainees;
     Date openDate;
     ArrayList<Person> trainees;
+    ArrayList<Graduation> graduations;
 
     public TrainingCentre(int maxTrainees, Date openDate)
     {
@@ -16,6 +17,7 @@ public class TrainingCentre
         this.openDate = openDate;
 
         trainees = new ArrayList<>();
+        graduations = new ArrayList<>();
     }
 
     public int getAmountOfTrainees()
@@ -38,6 +40,7 @@ public class TrainingCentre
         if (getAmountOfTrainees() < maxTrainees)
         {
             trainees.add(trainee);
+            graduations.add(trainee);
             return true;
         }
 
@@ -53,10 +56,10 @@ public class TrainingCentre
 
         ArrayList<Person> traineeListWithoutGraduates = new ArrayList<>();
 
-        for (int i = 0; i < trainees.size(); i++)
+        for (Person trainee : trainees)
         {
-            Person trainee = trainees.get(i);
-            if (!trainee.checkGraduation(newDate))
+
+            if (!((Graduation) trainee).checkGraduation(newDate))
             {
                 traineeListWithoutGraduates.add(trainee);
             }
