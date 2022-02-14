@@ -10,11 +10,11 @@ import java.time.format.DateTimeFormatter;
 
 public class DateFormat {
     private static final Logger logger = LogManager.getLogger("DateFormat logger:");
-    public static void main(String[] args) throws ParseException {
+    public static void main(String[] args) {
         //"9/21/1982"
         formatDate("21/9/1982");
     }
-    public static LocalDate formatDate(String s) throws ParseException {
+    public static LocalDate formatDate(String s) {
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
             LocalDate date = LocalDate.parse(s, formatter);
