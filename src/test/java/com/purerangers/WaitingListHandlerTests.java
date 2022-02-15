@@ -1,10 +1,11 @@
 package com.purerangers;
 
+import com.purerangers.TrainingCentreTypes.BootCamp;
+import com.purerangers.TrainingCentreTypes.TrainingCentre;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.sql.Date;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -60,19 +61,19 @@ public class WaitingListHandlerTests
 
         Queue<Person> people = new LinkedList<>();
 
-        for (int i = 0; i < 200; i++)
+        for (int i = 0; i < 500; i++)
         {
             people.add(new Person());
         }
 
         waitingList.addPeople(people);
 
-        TrainingCentre trainingCentre = new TrainingCentre(100, new Date(System.currentTimeMillis()));
+        TrainingCentre trainingCentre = new BootCamp();
 
         trainingCentre.attemptToRecruitTrainees(waitingList.getWaitingList());
 
         int actual = trainingCentre.getAmountOfTrainees();
-        int expected = 100;
+        int expected = 500;
 
         Assertions.assertEquals(expected, actual);
     }
@@ -86,14 +87,14 @@ public class WaitingListHandlerTests
 
         Queue<Person> people = new LinkedList<>();
 
-        for (int i = 0; i < 200; i++)
+        for (int i = 0; i < 600; i++)
         {
             people.add(new Person());
         }
 
         waitingList.addPeople(people);
 
-        TrainingCentre trainingCentre = new TrainingCentre(100, new Date(System.currentTimeMillis()));
+        TrainingCentre trainingCentre = new BootCamp();
 
         trainingCentre.attemptToRecruitTrainees(waitingList.getWaitingList());
 

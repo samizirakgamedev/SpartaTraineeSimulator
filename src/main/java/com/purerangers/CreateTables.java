@@ -9,7 +9,7 @@ public class CreateTables {
     static TraineeDatabase mysqlConnect = new TraineeDatabase();
 
     public static void dropAllTables() {
-        String[] tables = {"Training_Centres", "Trainees"};
+        String[] tables = {"Training_Centres", "Trainees", "Centre_Type", "Course_Type"};
         for (String t : tables) {
 
             String dropTable = "DROP TABLE IF EXISTS `" + t + "`;";
@@ -28,7 +28,7 @@ public class CreateTables {
     public static void createTables(){
         try {
             String createTable = "CREATE TABLE `Training_Centres` (" +
-                    "`ID` INT," +
+                    "`ID` INT AUTO_INCREMENT," +
                     "`Creation_Date` DATE," +
                     "`Type_ID` INT," +
                     "PRIMARY KEY (`ID`)" +
@@ -44,7 +44,7 @@ public class CreateTables {
         }
         try {
             String createTable = "CREATE TABLE `Trainees` (" +
-                    "`ID` INT," +
+                    "`ID` INT AUTO_INCREMENT," +
                     "`TC_ID` INT," +
                     "`Course_ID` INT," +
                     "`Date_Joined` DATE," +
@@ -61,7 +61,7 @@ public class CreateTables {
         }
         try {
             String createTable = "CREATE TABLE `Course_Type` (" +
-                    "`ID` INT," +
+                    "`ID` INT AUTO_INCREMENT," +
                     "`Name` VARCHAR(255)," +
                     "PRIMARY KEY (`ID`)" +
                     ");";
@@ -76,7 +76,7 @@ public class CreateTables {
         }
         try {
             String createTable = "CREATE TABLE `Centre_Type` (" +
-                    "`ID` INT," +
+                    "`ID` INT AUTO_INCREMENT," +
                     "`Name` VARCHAR(255)," +
                     "PRIMARY KEY (`ID`)" +
                     ");";
@@ -91,7 +91,7 @@ public class CreateTables {
         }
         //populate Course_Type and Centre_Type with data
         try {
-            String createTable = "INSERT INTO `Centre_Type` (`ID`, `Name`) VALUES (0, 'Training Hub'), (1, 'Bootcamp'), (2, 'Tech Centre');";
+            String createTable = "INSERT INTO `Centre_Type` (`Name`) VALUES ('Training Hub'), ('Bootcamp'), ('Tech Centre');";
             PreparedStatement st = mysqlConnect.connect().prepareStatement(createTable); //prepare java statement
             st.executeUpdate(createTable); //execute the query
             logger.info("Successfully inserted data into 'Centre_Type' table");
@@ -102,7 +102,7 @@ public class CreateTables {
             mysqlConnect.disconnect();
         }
         try {
-            String createTable = "INSERT INTO `Course_Type` (`ID`, `Name`) VALUES (0, 'Java'), (1, 'C#'), (2, 'Data'), (3, 'DevOps'), (4, 'Business');";
+            String createTable = "INSERT INTO `Course_Type` (`Name`) VALUES ('Java'), ('C#'), ('Data'), ('DevOps'), ('Business');";
             PreparedStatement st = mysqlConnect.connect().prepareStatement(createTable); //prepare java statement
             st.executeUpdate(createTable); //execute the query
             logger.info("Successfully inserted data into 'Centre_Type' table");

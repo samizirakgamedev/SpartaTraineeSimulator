@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Connection;
+import java.util.Random;
 
 import static com.purerangers.CreateTables.mysqlConnect;
 
@@ -15,7 +16,11 @@ public class PopulateDatabase {
         CreateTables.dropAllTables();
         CreateTables.createTables();
         for (int i = 0; i < 100; i++) {
-            String sqlInsert = "INSERT INTO `Training_Centres` (ID, Creation_Date) VALUES (" + i + ", '2022-05-06');";
+            String[] arr = {"Training Hub", "Bootcamp", "Tech Centre"};
+            Random random = new Random();
+            // randomly selects an index from the arr
+            int chosen = random.nextInt(arr.length);
+            String sqlInsert = "INSERT INTO `Training_Centres` (ID, Creation_Date, Type_ID) VALUES (" + i + ", '2022-05-06', '" + random.nextInt(3) + "');";
             PreparedStatement st = mysqlConnect.connect().prepareStatement(sqlInsert);
             st.executeUpdate(sqlInsert);
             for (int j = 0; j < 10; j++) {
