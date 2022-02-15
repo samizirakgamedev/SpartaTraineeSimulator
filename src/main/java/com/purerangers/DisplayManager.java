@@ -18,12 +18,55 @@ public class DisplayManager {
 
     }
     // Method for outputting the stats from the simulation to the user into the console.
-    public static void outputSimStats(int openCentres, int fullCentres, int traineesTraining, int traineesWaiting){
+    public static void outputStats(int openCentres,
+                                   int tHubOpen,
+                                   int bCampOpen,
+                                   int tCentresOpen,
+                                   int closedCentres,
+                                   int tHubClosed,
+                                   int bCampClosed,
+                                   int tCentresClosed,
+                                   int fullCentres,
+                                   int tHubFull,
+                                   int bCampFull,
+                                   int tCentresFull,
+                                   int traineesTraining,
+                                   int javaTraining,
+                                   int cSharpTraining,
+                                   int dataTraining,
+                                   int devOpsTraining,
+                                   int businessTraining,
+                                   int traineesWaiting,
+                                   int javaWaiting,
+                                   int cSharpWaiting,
+                                   int dataWaiting,
+                                   int devOpsWaiting,
+                                   int businessWaiting){
         displayMessage(
-                "\nSimulation Complete:\n" +
-                        "\n• Number of open centres: " + openCentres + "\n" +
-                        "\n• Number of full centres: " + fullCentres + "\n" +
-                        "\n• Number of trainees in training: " + traineesTraining + "\n" +
-                        "\n• Number of trainees on the waiting list: " + traineesWaiting + "\n");
+                "\nSIMULATION STATISTICS\n" +
+                        "• Number of open centres: " + openCentres + "\n" +
+                        "   • Training Hubs: " + tHubOpen + "\n" +
+                        "   • Boot Camps: " + bCampOpen + "\n" +
+                        "   • Tech Centres: " + tCentresOpen + "\n" +
+                        "• Number of closed centres: " + closedCentres + "\n" +
+                        "   • Training Hubs: " + tHubClosed + "\n" +
+                        "   • Boot Camps: " + bCampClosed + "\n" +
+                        "   • Tech Centres: " + tCentresClosed + "\n" +
+                        "• Number of full centres: " + fullCentres + "\n" +
+                        "   • Training Hubs: " + tHubFull + "\n" +
+                        "   • Boot Camps: " + bCampFull + "\n" +
+                        "   • Tech Centres: " + tCentresFull + "\n" +
+                        "• Number of trainees in training: " + traineesTraining + "\n" +
+                        "   • Java: " + javaTraining + "\n" +
+                        "   • C#: " + cSharpTraining + "\n" +
+                        "   • Data: " + dataTraining + "\n" +
+                        "   • DevOps: " + devOpsTraining + "\n" +
+                        "   • Business: " + businessTraining + "\n" +
+                        "• Number of trainees on the waiting list: " + traineesWaiting + "\n" +
+                        "   • Java: " + javaWaiting + "\n" +
+                        "   • C#: " + cSharpWaiting + "\n" +
+                        "   • Data: " + dataWaiting + "\n" +
+                        "   • DevOps: " + devOpsWaiting + "\n" +
+                        "   • Business: " + businessWaiting + "\n");
     }
 }

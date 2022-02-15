@@ -11,6 +11,6 @@ public class DisplayMain {
 
         InputManager.getDouble();
 
-        DisplayManager.outputSimStats(0,0,0,0);
+        DisplayManager.outputStats(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
     }
 }
