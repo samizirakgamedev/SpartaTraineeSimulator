@@ -2,6 +2,8 @@ package com.purerangers;
 
 import com.purerangers.TrainingCentreTypes.TrainingCentre;
 import com.purerangers.TrainingCentreTypes.TrainingHub;
+
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -43,7 +45,8 @@ public class TimeManagerTests
     }
 
     @Test
-    @DisplayName("Can graduate trainees.")
+    @DisplayName("Closes centres.")
+
     public void centresClose()
     {
         TimeManager tm = TimeManager.getInstance();
@@ -51,20 +54,11 @@ public class TimeManagerTests
 
         int numberOfCentres = 10;
         ArrayList<TrainingCentre> trainingCentres = new ArrayList<>();
+        TrainingCentre.clearCentreList();
 
         for (int i = 0; i < numberOfCentres; i++)
         {
-            Queue<Person> trainingQueue = new LinkedList<>();
-
-            for (int j = 0; j < 510; j++)
-            {
-                trainingQueue.add(new Person());
-            }
-
-            wlh.addPeople(trainingQueue);
-
             TrainingHub hub = new TrainingHub();
-            hub.attemptToRecruitTrainees(wlh.getWaitingList());
 
             trainingCentres.add(hub);
         }
@@ -75,5 +69,9 @@ public class TimeManagerTests
         {
             tm.addMonth();
         }
+        int expected = 0;
+        int actual = TrainingCentre.getOpenCentreList().size();
+
+        Assertions.assertEquals(expected, actual);
     }
 }

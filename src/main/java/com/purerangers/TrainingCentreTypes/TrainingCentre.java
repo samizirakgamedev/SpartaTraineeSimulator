@@ -97,7 +97,6 @@ public abstract class TrainingCentre
 
         for (Person trainee : trainees)
         {
-
             if (!((Graduation) trainee).checkGraduation(newDate))
             {
                 traineeListWithoutGraduates.add(trainee);
@@ -105,6 +104,16 @@ public abstract class TrainingCentre
         }
 
         trainees = traineeListWithoutGraduates;
+
+        /// close code
+
+        if (getAmountOfTrainees() < 25)
+        {
+            //System.out.println("Amount of trainees: " + getAmountOfTrainees());
+            closeAndReassign();
+        }
+
+        /// close code
     }
 
     public Queue<Person> attemptToRecruitTrainees(Queue<Person> trainees)
@@ -131,9 +140,6 @@ public abstract class TrainingCentre
 
         LinkedList<Person> refuges = new LinkedList<>(trainees);
 
-        System.out.println(list.size());
-        System.out.println(refuges.size());
-
         for (int i = 0; i < list.size(); i++)
         {
             TrainingCentre tc = list.get(i);
@@ -142,5 +148,7 @@ public abstract class TrainingCentre
                 refuges = (LinkedList<Person>) tc.attemptToRecruitTrainees(refuges);
             }
         }
+
+        getOpenCentreList().remove(this);
     }
 }
