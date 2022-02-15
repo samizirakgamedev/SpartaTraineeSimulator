@@ -33,7 +33,7 @@ public class Person implements Graduation, SQLReadable
         this.startDate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
         weeksAtCamp = 8;
         this.id = getID();
-        this.courseType = CourseType.JAVA_SDET;
+        this.courseType = CourseType.JAVA;
     }
 
     @Override
@@ -67,5 +67,10 @@ public class Person implements Graduation, SQLReadable
         objectArray[2] = courseType;
 
         return objectArray;
+    }
+
+    public CourseType getCourseType()
+    {
+        return courseType;
     }
 }

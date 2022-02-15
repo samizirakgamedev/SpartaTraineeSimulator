@@ -11,7 +11,7 @@ public abstract class TrainingCentre
 {
     protected static final int MAX_TRAINEES = 100;
 
-    public static ArrayList<TrainingCentre> openCentreList;
+    private static ArrayList<TrainingCentre> openCentreList;
 
     public static ArrayList<TrainingCentre> getOpenCentreList()
     {
