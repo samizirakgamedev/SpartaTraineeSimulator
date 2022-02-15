@@ -10,6 +10,7 @@ import java.sql.Connection;
 public class CheckCentresSpaces {
     static TraineeDatabase mysqlConnect = new TraineeDatabase();
     int result = 0;
+    int maxSpaces = 0;
     int returnAvailable(int c){
         try {
             String sqlCentresList;
@@ -22,7 +23,10 @@ public class CheckCentresSpaces {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        if (c == 0) maxSpaces = 100;
+        else if (c == 1) maxSpaces = 500;
+        else if (c == 2) maxSpaces = 200;
 
-        return result;
+        return maxSpaces - result;
     }
 }
