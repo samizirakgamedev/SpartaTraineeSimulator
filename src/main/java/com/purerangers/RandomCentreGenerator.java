@@ -5,10 +5,7 @@ import com.purerangers.TrainingCentreTypes.TechCentre;
 import com.purerangers.TrainingCentreTypes.TrainingCentre;
 import com.purerangers.TrainingCentreTypes.TrainingHub;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class RandomCentreGenerator {
     public enum TrainingCentreType{
@@ -25,13 +22,23 @@ public class RandomCentreGenerator {
         }
     }
 
-    public TrainingCentre generateCentre(){
-        TrainingCentre t = null;
+    public static void main(String[] args) {
+        RandomCentreGenerator r = new RandomCentreGenerator();
+        System.out.println(r.generateCentre().size());
+    }
+
+    public ArrayList<TrainingCentre> generateCentre(){
+        ArrayList<TrainingCentre> t = new ArrayList<>();
         TrainingCentreType centreType = TrainingCentreType.RandomCentre();
         switch (centreType){
-            case TRAININGHUB -> t = new TrainingHub();
-            case BOOTCAMP -> t = new BootCamp();
-            case TECHCENTRE -> new TechCentre();
+            case TRAININGHUB -> {
+                Random r = new Random();
+                for (int i = 0; i< r.nextInt(1,4);i++){
+                    t.add(new TrainingHub());
+                }
+            }
+            case BOOTCAMP -> t.add(new BootCamp());
+            case TECHCENTRE -> t.add(new TechCentre());
         }
         return t;
     }
