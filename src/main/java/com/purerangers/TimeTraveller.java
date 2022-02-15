@@ -21,7 +21,7 @@ public class TimeTraveller {
             System.out.println(date + " time to do some sketchy shit, doo daa, doo daa!"); //month by month
             System.out.println("Today we shall have " + getRandomNumbersUsingNextInt(50, 100) + " poor souls to enlist."); //get the random number of so called trainees
             if (variable % 2 == 0) {
-                String newCentre = GenerateCentreType.generateType();
+                String newCentre = GenerateCentreType.generateType(date);
                 System.out.println("It's time to generate a new centre. And the Gods have chosen: " + newCentre);
             }
             for (int i = 0; i <= 2; i++) {
