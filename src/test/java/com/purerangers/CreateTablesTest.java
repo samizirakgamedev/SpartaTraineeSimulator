@@ -3,6 +3,7 @@ package com.purerangers;
 import com.mysql.cj.jdbc.DatabaseMetaData;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import com.purerangers.TraineeDatabase;
 import com.purerangers.CreateTables;
@@ -19,6 +20,7 @@ class CreateTablesTest {
     //private Connection connection = TraineeDatabase.connect();
 
     @Test
+    @DisplayName("Check if the tables are created in the database")
     void createTables() {
         CreateTables.dropAllTables();
         CreateTables.createTables();
