@@ -11,6 +11,9 @@ public abstract class TrainingCentre
 {
     protected static final int MAX_TRAINEES = 100;
 
+    int strikes = 0;
+    int maxStrikes = 1;
+
     private static ArrayList<TrainingCentre> openCentreList;
 
     public static ArrayList<TrainingCentre> getOpenCentreList()
@@ -109,8 +112,11 @@ public abstract class TrainingCentre
 
         if (getAmountOfTrainees() < 25)
         {
-            //System.out.println("Amount of trainees: " + getAmountOfTrainees());
             closeAndReassign();
+        }
+        else
+        {
+            strikes = 0;
         }
 
         /// close code
@@ -136,6 +142,13 @@ public abstract class TrainingCentre
 
     public void closeAndReassign()
     {
+        strikes++;
+
+        if (strikes < maxStrikes)
+        {
+            return;
+        }
+
         ArrayList<TrainingCentre> list = getOpenCentreList();
 
         LinkedList<Person> refuges = new LinkedList<>(trainees);
@@ -150,5 +163,15 @@ public abstract class TrainingCentre
         }
 
         getOpenCentreList().remove(this);
+    }
+
+    public boolean isFull()
+    {
+        if (getAmountOfTrainees() >= maxTrainees)
+        {
+            return true;
+        }
+
+        return false;
     }
 }

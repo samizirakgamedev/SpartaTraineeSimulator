@@ -1,5 +1,6 @@
 package com.purerangers;
 
+import com.purerangers.TrainingCentreTypes.BootCamp;
 import com.purerangers.TrainingCentreTypes.TrainingCentre;
 import com.purerangers.TrainingCentreTypes.TrainingHub;
 
@@ -46,7 +47,6 @@ public class TimeManagerTests
 
     @Test
     @DisplayName("Closes centres.")
-
     public void centresClose()
     {
         TimeManager tm = TimeManager.getInstance();
@@ -58,17 +58,26 @@ public class TimeManagerTests
 
         for (int i = 0; i < numberOfCentres; i++)
         {
-            TrainingHub hub = new TrainingHub();
-
-            trainingCentres.add(hub);
+            if (i == 0)
+            {
+                BootCamp bootCamp = new BootCamp();
+                trainingCentres.add(bootCamp);
+            }
+            else
+            {
+                TrainingHub hub = new TrainingHub();
+                trainingCentres.add(hub);
+            }
         }
 
         int monthsToSimulate = 12;
 
         for (int i = 0; i < monthsToSimulate; i++)
         {
+            System.out.println(TrainingCentre.getOpenCentreList().size());
             tm.addMonth();
         }
+
         int expected = 0;
         int actual = TrainingCentre.getOpenCentreList().size();
 
