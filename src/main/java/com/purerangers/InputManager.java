@@ -4,18 +4,40 @@ import java.util.Scanner;
 
 public class InputManager {
     // Initiates the 'Scanner'.
-    static Scanner scanner = new Scanner(System.in);
+    public static Scanner scanner = new Scanner(System.in);
     // Getter for getting a String from the user.
     public static String getString() {
-        return scanner.nextLine();
+        try{
+            return scanner.nextLine();
+        }catch (Exception e){
+            handleInputExceptions(e);
+            scanner.nextLine();
+            getString();
+            return null;
+        }
     }
     // Getter for getting an int from the user.
-    public static int getInteger()
-    {
-        return scanner.nextInt();
+    public static int getInteger() {
+        try{
+            return scanner.nextInt();
+        }catch (Exception e){
+            handleInputExceptions(e);
+            scanner.nextLine();
+            getInteger();
+            return 0;
+        }
     }
     // Getter for getting a double from the user
-    public static double getDouble(){return scanner.nextDouble();}
+    public static double getDouble(){
+        try{
+            return scanner.nextDouble();
+        }catch (Exception e){
+            handleInputExceptions(e);
+            scanner.nextLine();
+            getDouble();
+            return 0;
+        }
+    }
     // Method to be called to  handle input exceptions.
     public static void handleInputExceptions(Exception e){
         String message;
