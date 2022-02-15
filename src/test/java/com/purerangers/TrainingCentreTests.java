@@ -153,6 +153,8 @@ public class TrainingCentreTests
 
         centreOne.attemptToRecruitTrainees(wlh.getWaitingList());
         centreOne.closeAndReassign();
+        centreOne.closeAndReassign();
+        centreOne.closeAndReassign();
 
         int expected = 100;
         int actual = centreTwo.getAmountOfTrainees();

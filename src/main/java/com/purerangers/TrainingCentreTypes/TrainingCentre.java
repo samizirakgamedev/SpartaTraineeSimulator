@@ -1,5 +1,6 @@
 package com.purerangers.TrainingCentreTypes;
 
+import com.purerangers.CourseType;
 import com.purerangers.Graduation;
 import com.purerangers.Person;
 import com.purerangers.TimeManager;
@@ -10,6 +11,9 @@ import java.util.*;
 public abstract class TrainingCentre
 {
     protected static final int MAX_TRAINEES = 100;
+
+    int strikes = 0;
+    int maxStrikes = 1;
 
     private static ArrayList<TrainingCentre> openCentreList;
 
@@ -109,8 +113,11 @@ public abstract class TrainingCentre
 
         if (getAmountOfTrainees() < 25)
         {
-            //System.out.println("Amount of trainees: " + getAmountOfTrainees());
             closeAndReassign();
+        }
+        else
+        {
+            strikes = 0;
         }
 
         /// close code
@@ -136,6 +143,13 @@ public abstract class TrainingCentre
 
     public void closeAndReassign()
     {
+        strikes++;
+
+        if (strikes < maxStrikes)
+        {
+            return;
+        }
+
         ArrayList<TrainingCentre> list = getOpenCentreList();
 
         LinkedList<Person> refuges = new LinkedList<>(trainees);
@@ -150,5 +164,61 @@ public abstract class TrainingCentre
         }
 
         getOpenCentreList().remove(this);
+    }
+
+    public boolean isFull()
+    {
+        if (getAmountOfTrainees() >= maxTrainees)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public String toString()
+    {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(this.getClass().getSimpleName());
+        sb.append(" ");
+        sb.append(getID());
+        sb.append("\nPopulation: ");
+        sb.append(getAmountOfTrainees());
+        sb.append("\n");
+
+        for (int i = 0; i < CourseType.values().length; i++)
+        {
+            ArrayList<Person> gottenTrainees = getTrainees();
+
+            CourseType currentType = CourseType.values()[i];
+            int numberOnCourse = 0;
+
+            for (int j = 0; j < gottenTrainees.size(); j++)
+            {
+                if (gottenTrainees.get(j).getCourseType() == currentType)
+                {
+                    numberOnCourse++;
+                }
+            }
+
+            if (numberOnCourse > 0)
+            {
+                sb.append(currentType.getCourseName());
+                sb.append(": ");
+                sb.append(numberOnCourse);
+                sb.append("\n");
+            }
+        }
+
+        sb.append("\n");
+
+        return sb.toString();
+    }
+
+    public int getID()
+    {
+        return getOpenCentreList().indexOf(this);
     }
 }
