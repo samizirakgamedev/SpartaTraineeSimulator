@@ -44,9 +44,14 @@ public class Person implements Graduation
     @Override
     public boolean checkGraduation(Date date)
     {
-        Calendar c = Calendar.getInstance();
-        c.add(Calendar.DATE, weeksAtCamp*7);
-        Date graduation = new java.sql.Date(c.getTime().getTime());
+        if (date == null)
+        {
+            throw new NullPointerException();
+        }
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DATE, weeksAtCamp*7);
+        Date graduation = new java.sql.Date(calendar.getTime().getTime());
 
         if (graduation.before(date))
         {
