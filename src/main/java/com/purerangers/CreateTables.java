@@ -7,6 +7,7 @@ import static com.purerangers.SimLogger.logger;
 
 public class CreateTables {
     static TraineeDatabase mysqlConnect = new TraineeDatabase();
+
     public static void dropAllTables() {
         String[] tables = {"Training_Centres", "Trainees"};
         for (String t : tables) {
@@ -23,6 +24,7 @@ public class CreateTables {
             }
         }
     }
+
     public static void createTables(){
         try {
             String createTable = "CREATE TABLE `Training_Centres` (" +

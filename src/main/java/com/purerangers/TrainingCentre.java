@@ -9,6 +9,7 @@ public class TrainingCentre
     int maxTrainees;
     Date openDate;
     ArrayList<Person> trainees;
+    ArrayList<Graduation> graduations;
 
     public TrainingCentre(int maxTrainees, Date openDate)
     {
@@ -16,6 +17,7 @@ public class TrainingCentre
         this.openDate = openDate;
 
         trainees = new ArrayList<>();
+        graduations = new ArrayList<>();
     }
 
     public int getAmountOfTrainees()
@@ -23,16 +25,22 @@ public class TrainingCentre
         return trainees.size();
     }
 
-    public Person getTrainee(int index)
+    public Person getTrainee(Integer index)
     {
         return trainees.get(index);
     }
 
     public boolean addTrainee(Person trainee)
     {
+        if (trainee == null)
+        {
+            throw new NullPointerException();
+        }
+
         if (getAmountOfTrainees() < maxTrainees)
         {
             trainees.add(trainee);
+            graduations.add(trainee);
             return true;
         }
 
@@ -41,12 +49,17 @@ public class TrainingCentre
 
     public void updateDate(Date newDate)
     {
+        if (newDate == null)
+        {
+            throw new NullPointerException();
+        }
+
         ArrayList<Person> traineeListWithoutGraduates = new ArrayList<>();
 
-        for (int i = 0; i < trainees.size(); i++)
+        for (Person trainee : trainees)
         {
-            Person trainee = trainees.get(i);
-            if (!trainee.checkGraduation(newDate))
+
+            if (!((Graduation) trainee).checkGraduation(newDate))
             {
                 traineeListWithoutGraduates.add(trainee);
             }
@@ -57,6 +70,11 @@ public class TrainingCentre
 
     public Queue<Person> attemptToRecruitTrainees(Queue<Person> trainees)
     {
+        if (trainees == null)
+        {
+            throw new NullPointerException();
+        }
+
         while (getAmountOfTrainees() < maxTrainees)
         {
             addTrainee(trainees.remove());
