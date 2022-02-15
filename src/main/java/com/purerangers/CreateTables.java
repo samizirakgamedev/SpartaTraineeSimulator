@@ -9,7 +9,7 @@ public class CreateTables {
     static TraineeDatabase mysqlConnect = new TraineeDatabase();
 
     public static void dropAllTables() {
-        String[] tables = {"Training_Centres", "Trainees"};
+        String[] tables = {"Training_Centres", "Trainees", "Centre_Type", "Course_Type"};
         for (String t : tables) {
 
             String dropTable = "DROP TABLE IF EXISTS `" + t + "`;";
