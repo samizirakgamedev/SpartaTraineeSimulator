@@ -58,14 +58,25 @@ public class TimeManagerTests
 
         for (int i = 0; i < numberOfCentres; i++)
         {
+            Queue<Person> trainingQueue = new LinkedList<>();
+
+            for (int j = 0; j < 200; j++)
+            {
+                trainingQueue.add(new Person());
+            }
+
+            wlh.addPeople(trainingQueue);
+
             if (i == 0)
             {
                 BootCamp bootCamp = new BootCamp();
+                bootCamp.attemptToRecruitTrainees(wlh.getWaitingList());
                 trainingCentres.add(bootCamp);
             }
             else
             {
                 TrainingHub hub = new TrainingHub();
+                hub.attemptToRecruitTrainees(wlh.getWaitingList());
                 trainingCentres.add(hub);
             }
         }
@@ -74,7 +85,14 @@ public class TimeManagerTests
 
         for (int i = 0; i < monthsToSimulate; i++)
         {
-            System.out.println(TrainingCentre.getOpenCentreList().size());
+
+            System.out.println(new StringBuilder().append("\nMonth: ").append(i).append("\n").toString());
+
+            for (TrainingCentre trainingCentre : TrainingCentre.getOpenCentreList())
+            {
+                System.out.println(trainingCentre.toString());
+            }
+
             tm.addMonth();
         }
 

@@ -1,5 +1,6 @@
 package com.purerangers.TrainingCentreTypes;
 
+import com.purerangers.CourseType;
 import com.purerangers.Graduation;
 import com.purerangers.Person;
 import com.purerangers.TimeManager;
@@ -173,5 +174,51 @@ public abstract class TrainingCentre
         }
 
         return false;
+    }
+
+    @Override
+    public String toString()
+    {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(this.getClass().getSimpleName());
+        sb.append(" ");
+        sb.append(getID());
+        sb.append("\nPopulation: ");
+        sb.append(getAmountOfTrainees());
+        sb.append("\n");
+
+        for (int i = 0; i < CourseType.values().length; i++)
+        {
+            ArrayList<Person> gottenTrainees = getTrainees();
+
+            CourseType currentType = CourseType.values()[i];
+            int numberOnCourse = 0;
+
+            for (int j = 0; j < gottenTrainees.size(); j++)
+            {
+                if (gottenTrainees.get(j).getCourseType() == currentType)
+                {
+                    numberOnCourse++;
+                }
+            }
+
+            if (numberOnCourse > 0)
+            {
+                sb.append(currentType.getCourseName());
+                sb.append(": ");
+                sb.append(numberOnCourse);
+                sb.append("\n");
+            }
+        }
+
+        sb.append("\n");
+
+        return sb.toString();
+    }
+
+    public int getID()
+    {
+        return getOpenCentreList().indexOf(this);
     }
 }
