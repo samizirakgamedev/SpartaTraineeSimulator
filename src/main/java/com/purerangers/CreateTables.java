@@ -50,7 +50,7 @@ public class CreateTables {
         }
         try {
             String createTable = "CREATE TABLE `Trainees` (" +
-                    "`ID` INT AUTO_INCREMENT," +
+                    "`ID` INT," +
                     "`TC_ID` INT," +
                     "`Course_ID` INT," +
                     "`Date_Joined` DATE," +

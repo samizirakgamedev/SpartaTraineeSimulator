@@ -24,14 +24,12 @@ public class TimeTraveller {
             System.out.println("Today we shall have " + getRandomTrainees + " poor souls to enlist."); //get the random number of so called trainees
             CreateTrainees.generateTrainees(getRandomTrainees);
             //CreateTrainees.showQueue();
+            //CheckCentresSpaces.checkAvailability();
             if (variable % 2 == 0) {
                 String newCentre = GenerateCentreType.generateType(date);
                 System.out.println("It's time to generate a new centre. And the Gods have chosen: " + newCentre);
             }
             CreateTrainees.parseQueue();
-            for (int i = 0; i <= 2; i++) {
-                System.out.println("Available spaces: " + CheckCentresSpaces.returnAvailable(i) + " for " + CheckCentresSpaces.returnCentreType(i));
-            }
             GenerateCentreType.returnCentres();
             System.out.println("=======================");
             variable++;

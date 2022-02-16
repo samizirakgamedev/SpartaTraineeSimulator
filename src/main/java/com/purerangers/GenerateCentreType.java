@@ -68,7 +68,13 @@ public class GenerateCentreType {
             while (rs3.next()) {
                 centreType = rs3.getString("Name");
             }
-            System.out.println("ID: " + number + " - Type: " + centreType + " - Teaching: " + courseType);
+            String sqlGetText4 = "SELECT COUNT(*) AS Spaces FROM Trainees WHERE TC_ID = " + number2 + ";";
+            ResultSet rs4 = st2.executeQuery(sqlGetText4);
+            int spaces = 0;
+            while (rs4.next()) {
+                spaces = rs4.getInt("Spaces");
+            }
+            System.out.println("ID: " + number + " - Type: " + centreType + " - Teaching: " + courseType + "; spaces filled: " + spaces);
         }
     }
 }
