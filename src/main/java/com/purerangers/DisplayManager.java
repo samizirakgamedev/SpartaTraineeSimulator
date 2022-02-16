@@ -18,6 +18,7 @@ public class DisplayManager {
 
     }
     // Method for outputting the stats from the simulation to the user into the console.
+    // Variables are currently placeholders as we will simply be passing through an arraylist of centre types and pulling the individual stats from the list.
     public static void outputStats(int openCentres,
                                    int tHubOpen,
                                    int bCampOpen,
