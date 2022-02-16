@@ -1,8 +1,6 @@
 package com.purerangers.TrainingCentreTypes;
 
-import com.purerangers.CourseType;
-import com.purerangers.Person;
-import com.purerangers.TimeManager;
+import com.purerangers.*;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -22,7 +20,8 @@ public class TechCentre extends TrainingCentre
 
     private CourseType getRandomCourseType()
     {
-        return CourseType.JAVA;
+        CourseType b= RandomCourseGenerator.RandomCourse();
+        return b;
     }
 
     @Override

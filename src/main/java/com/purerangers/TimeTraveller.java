@@ -24,12 +24,31 @@ public class TimeTraveller {
                 String newCentre = GenerateCentreType.generateType(date);
                 System.out.println("It's time to generate a new centre. And the Gods have chosen: " + newCentre);
             }
-            for (int i = 1; i <= 3; i++) {
-                System.out.println("Available spaces: " + CheckCentresSpaces.returnAvailable(i) + " for " + CheckCentresSpaces.returnCentreType(i));
+            for (int i = 0; i <= 2; i++) {
+                //the index for centres is 1-3
+                System.out.println("Available spaces: " + CheckCentresSpaces.returnAvailable(i) + " for " + CheckCentresSpaces.returnCentreType(i+1));
             }
             GenerateCentreType.returnCentres();
             System.out.println("=======================");
             variable++;
         }
     }
+    //Centres
+    /* if centre population < 25 for 2 months recurring
+        then close and redestribute people
+    if Centre = training hub
+     population must be <100
+     only 1-3 can be opened
+
+    if centre = bootcamp
+    population <500
+        if it has been open for 3 months then close it
+        only 2 bootcamps can exist
+
+     if tech centre:
+     can only be one course per centre, must be stored randomly
+        */
+//    public static int checkPopulation(int ){
+//
+//    }
 }

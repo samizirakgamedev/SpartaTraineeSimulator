@@ -6,23 +6,15 @@ import java.util.List;
 import java.util.Random;
 
 public class RandomCourseGenerator {
-    public enum CourseType{
-        JAVA,
-        CSHARP,
-        DATA,
-        DEVOPS,
-        BUSINESS;
-
-        private static final List<CourseType> COURSES = Collections.unmodifiableList(Arrays.asList(values()));
-        private static final int SIZE = COURSES.size();
-        private static final Random RANDOM = new Random();
 
         public static CourseType RandomCourse(){
-            return  COURSES.get(RANDOM.nextInt(SIZE));
+            Random random = new Random();
+            return CourseType.values()[random.nextInt(CourseType.values().length)];
         }
-    }
+
     //
     public static void main(String[] args) {
-        System.out.println(CourseType.RandomCourse());
+
+            System.out.println(RandomCourse());
     }
 }
