@@ -30,8 +30,7 @@ public class TimeTraveller {
             }
             CreateTrainees.parseQueue();
             for (int i = 0; i <= 2; i++) {
-                //the index for centres is 1-3
-                System.out.println("Available spaces: " + CheckCentresSpaces.returnAvailable(i) + " for " + CheckCentresSpaces.returnCentreType(i+1));
+                System.out.println("Available spaces: " + CheckCentresSpaces.returnAvailable(i) + " for " + CheckCentresSpaces.returnCentreType(i));
             }
             GenerateCentreType.returnCentres();
             System.out.println("=======================");
