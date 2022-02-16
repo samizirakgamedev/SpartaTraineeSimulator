@@ -34,12 +34,14 @@ public class TimeManager
     }
 
     public ArrayList<TrainingCentre> trainingCentres;
+    public ArrayList<Client> clients ;
 
     private TimeManager()
     {
         simulationStartDate = new Date(System.currentTimeMillis());;
         currentDate = new Date(simulationStartDate.getTime());
         trainingCentres = new ArrayList<>();
+        clients = new ArrayList<>();
     }
 
     public void addMonth()
@@ -50,6 +52,10 @@ public class TimeManager
         for (TrainingCentre trainingCentre : trainingCentres)
         {
             trainingCentre.updateDate(currentDate);
+        }
+        for (Client c : clients)
+        {
+            c.updateDate(currentDate);
         }
     }
 }

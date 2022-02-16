@@ -17,8 +17,8 @@ public class GraduateBenchHandler
         return instance;
     }
 
-    private ArrayList<Person> graduateBench;
-    public ArrayList<Person> getGraduateBench()
+    public static ArrayList<Person> graduateBench;
+    public static ArrayList<Person> getGraduateBench()
     {
         if (graduateBench == null)
         {
@@ -28,16 +28,21 @@ public class GraduateBenchHandler
         return graduateBench;
     }
 
-    public void addToBench(Person personToBeAdded)
+    public static void addToBench(Person personToBeAdded)
     {
         getGraduateBench().add(personToBeAdded);
     }
 
-    public void addPeople(Queue<Person> peopleToAdd)
+    public static void addPeople(Queue<Person> peopleToAdd)
     {
         while (0 < peopleToAdd.size())
         {
             getGraduateBench().add(peopleToAdd.remove());
         }
+    }
+
+    public static void main(String[] args) {
+        GraduateBenchHandler a= new GraduateBenchHandler();
+
     }
 }
