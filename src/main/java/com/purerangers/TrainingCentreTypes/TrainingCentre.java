@@ -1,9 +1,6 @@
 package com.purerangers.TrainingCentreTypes;
 
-import com.purerangers.CourseType;
-import com.purerangers.Graduation;
-import com.purerangers.Person;
-import com.purerangers.TimeManager;
+import com.purerangers.*;
 
 import java.sql.Date;
 import java.util.*;
@@ -98,6 +95,7 @@ public abstract class TrainingCentre
         }
 
         ArrayList<Person> traineeListWithoutGraduates = new ArrayList<>();
+        LinkedList<Person> graduateList = new LinkedList<>();
 
         for (Person trainee : trainees)
         {
@@ -105,7 +103,14 @@ public abstract class TrainingCentre
             {
                 traineeListWithoutGraduates.add(trainee);
             }
+            else
+            {
+                graduateList.add(trainee);
+            }
         }
+
+        GraduateBenchHandler gbh = GraduateBenchHandler.getInstance();
+        gbh.addPeople(graduateList);
 
         trainees = traineeListWithoutGraduates;
 

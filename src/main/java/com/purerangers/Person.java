@@ -31,7 +31,7 @@ public class Person implements Graduation, SQLReadable
     public Person()
     {
         this.startDate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
-        weeksAtCamp = 8;
+        weeksAtCamp = 4 * 12;
         this.id = getID();
         this.courseType = CourseType.JAVA;
     }
