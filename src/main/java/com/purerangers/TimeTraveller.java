@@ -24,7 +24,7 @@ public class TimeTraveller {
                 String newCentre = GenerateCentreType.generateType(date);
                 System.out.println("It's time to generate a new centre. And the Gods have chosen: " + newCentre);
             }
-            for (int i = 0; i <= 2; i++) {
+            for (int i = 1; i <= 3; i++) {
                 System.out.println("Available spaces: " + CheckCentresSpaces.returnAvailable(i) + " for " + CheckCentresSpaces.returnCentreType(i));
             }
             GenerateCentreType.returnCentres();
