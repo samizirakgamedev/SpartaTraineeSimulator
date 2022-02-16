@@ -18,11 +18,12 @@ public class GenerateCentreType {
         int chosen = random.nextInt(arr.length);
         int teaches = 0;
         int chosen2 = random2.nextInt(courses.length -1) + 1;
-        System.out.println(date);
+        //System.out.println(date);
         if (chosen == 2) teaches = random2.nextInt(courses.length - 1) + 1;
         if (chosen == 1 && isBootcampAvailable() == false) generateType(date);
         System.out.println("Can we create bootcamp? " + isBootcampAvailable());
         String sqlCreateCentre = "INSERT INTO Training_Centres (Creation_Date, Type_ID, Teaching) VALUES ('" + date + "', " + chosen + ", " + teaches + ");";
+        System.out.println(sqlCreateCentre);
         PreparedStatement st = mysqlConnect.connect().prepareStatement(sqlCreateCentre);
         st.executeUpdate(sqlCreateCentre);
         System.out.println(arr[chosen] + " was created and inserted into database.");
@@ -43,7 +44,7 @@ public class GenerateCentreType {
         return result;
     }
     public static void returnCentres() throws SQLException {
-        String sqlReturnCentres = "SELECT ID, Type_ID, Teaching FROM `Training_Centres` GROUP BY Type_ID;";
+        String sqlReturnCentres = "SELECT ID, Type_ID, Teaching FROM `Training_Centres`;";
         Statement st = mysqlConnect.connect().createStatement();
         ResultSet rs = st.executeQuery(sqlReturnCentres);
         System.out.println("Training centres opened:");
