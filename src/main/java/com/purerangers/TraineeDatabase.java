@@ -11,7 +11,7 @@ public class TraineeDatabase {
     private static final String DATABASE_DRIVER = "com.mysql.cj.jdbc.Driver";
     private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/zzz";
     private static final String USERNAME = "root";
-    private static final String PASSWORD = "12pass34";
+    private static final String PASSWORD = "password";
 
     // init connection object
     private static Connection connection;

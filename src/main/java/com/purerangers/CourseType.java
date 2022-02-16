@@ -13,6 +13,10 @@ public enum CourseType
         return courseName;
     }
 
+    public int courseTypeSize(){
+        return CourseType.values().length;
+    }
+
     private String courseName;
 
     CourseType(String courseName)
