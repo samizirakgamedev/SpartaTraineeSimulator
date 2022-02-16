@@ -50,7 +50,7 @@ public class Person implements Graduation, SQLReadable
 
         if (graduation.before(date))
         {
-            System.out.println(id + " graduated!");
+            //System.out.println(id + " graduated!");
             return true;
         }
 
