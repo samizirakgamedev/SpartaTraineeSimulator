@@ -47,6 +47,25 @@ public class WaitingListHandler
         return waitingList;
     }
 
+    public void addRandomPeopleToList(int amountToAdd)
+    {
+        //System.out.println("Adding " + amountToAdd + " trainees");
+        //System.out.println("Size before: " + getWaitingList().size());
+
+        Queue<Person> trainingQueue = new LinkedList<>();
+
+        for (int j = 0; j < amountToAdd; j++)
+        {
+            Person person = new Person();
+
+            trainingQueue.add(person);
+        }
+
+        addPeople(trainingQueue);
+
+        //System.out.println("Size after: " + getWaitingList().size());
+    }
+
     private WaitingListHandler()
     {
 

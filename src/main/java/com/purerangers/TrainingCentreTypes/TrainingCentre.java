@@ -1,9 +1,6 @@
 package com.purerangers.TrainingCentreTypes;
 
-import com.purerangers.CourseType;
-import com.purerangers.Graduation;
-import com.purerangers.Person;
-import com.purerangers.TimeManager;
+import com.purerangers.*;
 
 import java.sql.Date;
 import java.util.*;
@@ -35,6 +32,7 @@ public abstract class TrainingCentre
     protected int maxTrainees;
     protected Date openDate;
     protected ArrayList<Person> trainees;
+    protected boolean closed;
 
     public TrainingCentre()
     {
@@ -43,6 +41,7 @@ public abstract class TrainingCentre
         trainees = new ArrayList<>();
         getOpenCentreList().add(this);
         TimeManager.getInstance().trainingCentres.add(this);
+        closed = false;
     }
 
     public TrainingCentre(int maxTrainees)
@@ -52,6 +51,7 @@ public abstract class TrainingCentre
         trainees = new ArrayList<>();
         getOpenCentreList().add(this);
         TimeManager.getInstance().trainingCentres.add(this);
+        closed = false;
     }
 
     public int getAmountOfTrainees()
@@ -92,12 +92,18 @@ public abstract class TrainingCentre
 
     public void updateDate(Date newDate)
     {
+        if (closed)
+        {
+            return;
+        }
+
         if (newDate == null)
         {
             throw new NullPointerException();
         }
 
         ArrayList<Person> traineeListWithoutGraduates = new ArrayList<>();
+        LinkedList<Person> graduateList = new LinkedList<>();
 
         for (Person trainee : trainees)
         {
@@ -105,9 +111,26 @@ public abstract class TrainingCentre
             {
                 traineeListWithoutGraduates.add(trainee);
             }
+            else
+            {
+                graduateList.add(trainee);
+            }
         }
 
+        GraduateBenchHandler gbh = GraduateBenchHandler.getInstance();
+        gbh.addPeople(graduateList);
+
         trainees = traineeListWithoutGraduates;
+
+        // auto recruit
+
+        if (getAmountOfTrainees() < maxTrainees)
+        {
+
+            //System.out.println("Size before: " + WaitingListHandler.getInstance().getWaitingList().size());
+            attemptToRecruitTrainees(WaitingListHandler.getInstance().getWaitingList());
+            //System.out.println("Size after: " + WaitingListHandler.getInstance().getWaitingList().size());
+        }
 
         /// close code
 
@@ -164,6 +187,7 @@ public abstract class TrainingCentre
         }
 
         getOpenCentreList().remove(this);
+        closed = true;
     }
 
     public boolean isFull()
