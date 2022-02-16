@@ -3,6 +3,8 @@ import com.purerangers.TraineeDatabase;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Random;
+
 import static com.purerangers.SimLogger.logger;
 
 public class CreateTables {
@@ -10,12 +12,14 @@ public class CreateTables {
 
     public static void dropAllTables() {
         String[] tables = {"Training_Centres", "Trainees", "Centre_Type", "Course_Type"};
+
         for (String t : tables) {
 
             String dropTable = "DROP TABLE IF EXISTS `" + t + "`;";
             try {
                 PreparedStatement st = mysqlConnect.connect().prepareStatement(dropTable);
                 st.executeUpdate(dropTable); //execute the query
+                System.out.println("dropped " + t);
             } catch (
                     SQLException e) {
                 logger.fatal("Error dropping table.");
@@ -31,6 +35,7 @@ public class CreateTables {
                     "`ID` INT AUTO_INCREMENT," +
                     "`Creation_Date` DATE," +
                     "`Type_ID` INT," +
+                    "`Teaching` INT," +
                     "PRIMARY KEY (`ID`)" +
                     ");";
             PreparedStatement st = mysqlConnect.connect().prepareStatement(createTable); //prepare java statement

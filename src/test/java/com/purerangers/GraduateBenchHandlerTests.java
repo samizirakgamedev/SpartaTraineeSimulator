@@ -3,7 +3,6 @@ package com.purerangers;
 import com.purerangers.TrainingCentreTypes.BootCamp;
 import com.purerangers.TrainingCentreTypes.TrainingCentre;
 import com.purerangers.TrainingCentreTypes.TrainingHub;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,43 +11,13 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class TimeManagerTests
+public class GraduateBenchHandlerTests
 {
     @Test
-    @DisplayName("Can graduate trainees.")
-    public void canBeAddedTo()
+    @DisplayName("Graduate bench populates.")
+    public void graduateBenchPopulates()
     {
-        TimeManager tm = TimeManager.getInstance();
-        WaitingListHandler wlh = WaitingListHandler.getInstance();
-
-        int numberOfCentres = 10;
-        ArrayList<TrainingCentre> trainingCentres = new ArrayList<>();
-
-        for (int i = 0; i < numberOfCentres; i++)
-        {
-            Queue<Person> trainingQueue = new LinkedList<>();
-
-            for (int j = 0; j < 510; j++)
-            {
-                trainingQueue.add(new Person());
-            }
-
-            wlh.addPeople(trainingQueue);
-
-            TrainingHub hub = new TrainingHub();
-            hub.attemptToRecruitTrainees(wlh.getWaitingList());
-
-            trainingCentres.add(hub);
-        }
-
-        tm.addMonth();
-        tm.addMonth();
-    }
-
-    @Test
-    @DisplayName("Closes centres.")
-    public void centresClose()
-    {
+        GraduateBenchHandler gbh = GraduateBenchHandler.getInstance();
         TimeManager tm = TimeManager.getInstance();
         WaitingListHandler wlh = WaitingListHandler.getInstance();
 
@@ -81,11 +50,10 @@ public class TimeManagerTests
             }
         }
 
-        int monthsToSimulate = 12;
+        int monthsToSimulate = 24;
 
         for (int i = 0; i < monthsToSimulate; i++)
         {
-
             System.out.println(new StringBuilder().append("\nMonth: ").append(i).append("\n").toString());
 
             for (TrainingCentre trainingCentre : TrainingCentre.getOpenCentreList())
@@ -96,8 +64,8 @@ public class TimeManagerTests
             tm.addMonth();
         }
 
-        int expected = 0;
-        int actual = TrainingCentre.getOpenCentreList().size();
+        int expected = 1100;
+        int actual = gbh.getGraduateBench().size();
 
         Assertions.assertEquals(expected, actual);
     }

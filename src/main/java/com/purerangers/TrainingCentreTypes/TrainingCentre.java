@@ -1,8 +1,6 @@
 package com.purerangers.TrainingCentreTypes;
 
-import com.purerangers.Graduation;
-import com.purerangers.Person;
-import com.purerangers.TimeManager;
+import com.purerangers.*;
 
 import java.sql.Date;
 import java.util.*;
@@ -10,6 +8,9 @@ import java.util.*;
 public abstract class TrainingCentre
 {
     protected static final int MAX_TRAINEES = 100;
+
+    int strikes = 0;
+    int maxStrikes = 1;
 
     private static ArrayList<TrainingCentre> openCentreList;
 
@@ -31,6 +32,7 @@ public abstract class TrainingCentre
     protected int maxTrainees;
     protected Date openDate;
     protected ArrayList<Person> trainees;
+    protected boolean closed;
 
     public TrainingCentre()
     {
@@ -39,6 +41,7 @@ public abstract class TrainingCentre
         trainees = new ArrayList<>();
         getOpenCentreList().add(this);
         TimeManager.getInstance().trainingCentres.add(this);
+        closed = false;
     }
 
     public TrainingCentre(int maxTrainees)
@@ -48,6 +51,7 @@ public abstract class TrainingCentre
         trainees = new ArrayList<>();
         getOpenCentreList().add(this);
         TimeManager.getInstance().trainingCentres.add(this);
+        closed = false;
     }
 
     public int getAmountOfTrainees()
@@ -88,12 +92,18 @@ public abstract class TrainingCentre
 
     public void updateDate(Date newDate)
     {
+        if (closed)
+        {
+            return;
+        }
+
         if (newDate == null)
         {
             throw new NullPointerException();
         }
 
         ArrayList<Person> traineeListWithoutGraduates = new ArrayList<>();
+        LinkedList<Person> graduateList = new LinkedList<>();
 
         for (Person trainee : trainees)
         {
@@ -101,16 +111,36 @@ public abstract class TrainingCentre
             {
                 traineeListWithoutGraduates.add(trainee);
             }
+            else
+            {
+                graduateList.add(trainee);
+            }
         }
 
+        GraduateBenchHandler gbh = GraduateBenchHandler.getInstance();
+        gbh.addPeople(graduateList);
+
         trainees = traineeListWithoutGraduates;
+
+        // auto recruit
+
+        if (getAmountOfTrainees() < maxTrainees)
+        {
+
+            //System.out.println("Size before: " + WaitingListHandler.getInstance().getWaitingList().size());
+            attemptToRecruitTrainees(WaitingListHandler.getInstance().getWaitingList());
+            //System.out.println("Size after: " + WaitingListHandler.getInstance().getWaitingList().size());
+        }
 
         /// close code
 
         if (getAmountOfTrainees() < 25)
         {
-            //System.out.println("Amount of trainees: " + getAmountOfTrainees());
             closeAndReassign();
+        }
+        else
+        {
+            strikes = 0;
         }
 
         /// close code
@@ -136,6 +166,13 @@ public abstract class TrainingCentre
 
     public void closeAndReassign()
     {
+        strikes++;
+
+        if (strikes < maxStrikes)
+        {
+            return;
+        }
+
         ArrayList<TrainingCentre> list = getOpenCentreList();
 
         LinkedList<Person> refuges = new LinkedList<>(trainees);
@@ -150,5 +187,62 @@ public abstract class TrainingCentre
         }
 
         getOpenCentreList().remove(this);
+        closed = true;
+    }
+
+    public boolean isFull()
+    {
+        if (getAmountOfTrainees() >= maxTrainees)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public String toString()
+    {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(this.getClass().getSimpleName());
+        sb.append(" ");
+        sb.append(getID());
+        sb.append("\nPopulation: ");
+        sb.append(getAmountOfTrainees());
+        sb.append("\n");
+
+        for (int i = 0; i < CourseType.values().length; i++)
+        {
+            ArrayList<Person> gottenTrainees = getTrainees();
+
+            CourseType currentType = CourseType.values()[i];
+            int numberOnCourse = 0;
+
+            for (int j = 0; j < gottenTrainees.size(); j++)
+            {
+                if (gottenTrainees.get(j).getCourseType() == currentType)
+                {
+                    numberOnCourse++;
+                }
+            }
+
+            if (numberOnCourse > 0)
+            {
+                sb.append(currentType.getCourseName());
+                sb.append(": ");
+                sb.append(numberOnCourse);
+                sb.append("\n");
+            }
+        }
+
+        sb.append("");
+
+        return sb.toString();
+    }
+
+    public int getID()
+    {
+        return getOpenCentreList().indexOf(this);
     }
 }

@@ -8,6 +8,11 @@ public enum CourseType
     DEV_OPS("DevOps"),
     BUSINESS("Business");
 
+    public String getCourseName()
+    {
+        return courseName;
+    }
+
     private String courseName;
 
     CourseType(String courseName)
