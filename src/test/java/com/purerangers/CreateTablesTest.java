@@ -21,7 +21,7 @@ class CreateTablesTest {
 
     @Test
     @DisplayName("Check if the tables are created in the database")
-    void createTables() {
+    void createTables() throws SQLException {
         CreateTables.dropAllTables();
         CreateTables.createTables();
         Boolean exists = false;

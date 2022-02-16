@@ -1,6 +1,7 @@
 package com.purerangers;
 import com.purerangers.TraineeDatabase;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Random;
@@ -29,7 +30,7 @@ public class CreateTables {
         }
     }
 
-    public static void createTables(){
+    public static void createTables() throws SQLException {
         try {
             String createTable = "CREATE TABLE `Training_Centres` (" +
                     "`ID` INT AUTO_INCREMENT," +
@@ -117,5 +118,15 @@ public class CreateTables {
         } finally {
             mysqlConnect.disconnect();
         }
+
+        String sqlReturnCentres = "SELECT ID, Name FROM `Centre_Type`;";
+        Statement st = mysqlConnect.connect().createStatement();
+        ResultSet rs = st.executeQuery(sqlReturnCentres);
+        while (rs.next()) {
+            int number = rs.getInt("ID");
+            String course = rs.getString("Name");
+            System.out.println(number + " - " + course);
+        }
+        }
     }
-}
+
