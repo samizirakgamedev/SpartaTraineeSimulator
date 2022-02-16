@@ -13,7 +13,7 @@ public class TimeTraveller {
     public static void main(String[] args) throws ParseException, SQLException {
         CreateTables.dropAllTables();
         CreateTables.createTables();
-        int numberOfMonths = 7; //we'll get it from user input
+        int numberOfMonths = 12; //we'll get it from user input
         LocalDate today = LocalDate.now(); //start today because why not?
         LocalDate endDate = LocalDate.now().plusMonths(numberOfMonths); //calculate the end of all times
         int variable = 0;
