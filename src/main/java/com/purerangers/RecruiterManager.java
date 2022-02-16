@@ -1,11 +1,13 @@
 package com.purerangers;
 
+import com.purerangers.TrainingCentreTypes.TrainingCentre;
+
 import java.util.ArrayList;
 import java.sql.Date;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class RecruiterManager {
+public class RecruiterManager extends TrainingCentre{
     //list of centres, for loop on size of centres
     //que of person class (LinkedList)
     ArrayList<TrainingCentre> centres = new ArrayList<>();
