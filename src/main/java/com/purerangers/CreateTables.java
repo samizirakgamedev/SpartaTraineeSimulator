@@ -12,7 +12,7 @@ public class CreateTables {
     static TraineeDatabase mysqlConnect = new TraineeDatabase();
 
     public static void dropAllTables() {
-        String[] tables = {"Training_Centres", "Trainees", "Centre_Type", "Course_Type"};
+        String[] tables = {"Training_Centres", "Trainees", "Centre_Type", "Course_Type", "Queue"};
 
         for (String t : tables) {
 
@@ -20,7 +20,7 @@ public class CreateTables {
             try {
                 PreparedStatement st = mysqlConnect.connect().prepareStatement(dropTable);
                 st.executeUpdate(dropTable); //execute the query
-                System.out.println("dropped " + t);
+                //System.out.println("dropped " + t);
             } catch (
                     SQLException e) {
                 logger.fatal("Error dropping table.");
@@ -95,6 +95,22 @@ public class CreateTables {
         } finally {
             mysqlConnect.disconnect();
         }
+        try {
+            String createTable = "CREATE TABLE `Queue` (" +
+                    "`ID` INT AUTO_INCREMENT," +
+                    "`ID_Trainee` INT," +
+                    "`ID_Course` INT," +
+                    "PRIMARY KEY (`ID`)" +
+                    ");";
+            PreparedStatement st = mysqlConnect.connect().prepareStatement(createTable); //prepare java statement
+            st.executeUpdate(createTable); //execute the query
+            logger.info("Successfully created 'Queue' table");
+        } catch (SQLException e) {
+            logger.fatal("Error while creating the table ", e.getMessage(), e);
+            e.printStackTrace();
+        } finally {
+            mysqlConnect.disconnect();
+        }
         //populate Course_Type and Centre_Type with data
         try {
             String createTable = "INSERT INTO `Centre_Type` (`Name`) VALUES ('Training Hub'), ('Bootcamp'), ('Tech Centre');";
@@ -125,7 +141,7 @@ public class CreateTables {
         while (rs.next()) {
             int number = rs.getInt("ID");
             String course = rs.getString("Name");
-            System.out.println(number + " - " + course);
+            //System.out.println(number + " - " + course);
         }
         }
     }
