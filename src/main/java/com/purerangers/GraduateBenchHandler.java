@@ -37,7 +37,12 @@ public class GraduateBenchHandler
     {
         while (0 < peopleToAdd.size())
         {
-            getGraduateBench().add(peopleToAdd.remove());
+            Person person = peopleToAdd.remove();
+
+            if (!getGraduateBench().contains(person))
+            {
+                getGraduateBench().add(person);
+            }
         }
     }
 }

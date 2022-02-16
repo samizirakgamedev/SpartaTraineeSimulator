@@ -236,7 +236,7 @@ public abstract class TrainingCentre
             }
         }
 
-        sb.append("\n");
+        sb.append("");
 
         return sb.toString();
     }
