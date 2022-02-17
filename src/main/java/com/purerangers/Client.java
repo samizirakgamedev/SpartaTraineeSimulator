@@ -1,6 +1,7 @@
 package com.purerangers;
 
 import java.sql.Date;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 public class Client {
@@ -9,7 +10,8 @@ public class Client {
     protected Date openDate;
     protected static CourseType courseType;
     protected ArrayList<Person> spartans = filter(GraduateBenchHandler.getGraduateBench()); //filters bench list
-    protected ArrayList<Person> spartansAtClient;
+    protected ArrayList<Person> spartansAtClient= new ArrayList<>();
+
 
     protected boolean isClient;
     protected int monthsTillReview=11;
@@ -34,7 +36,7 @@ public class Client {
     private static ArrayList<Person> filteredSpartans;
 
     public static ArrayList<Person> filter(ArrayList<Person> spartans){
-        if (spartans==null){
+        if (spartans.isEmpty()){
             filteredSpartans= new ArrayList<>();
         }
         for (Person p:spartans){
@@ -54,8 +56,12 @@ public class Client {
     public int getAmountOfSpartans() {
         return spartans.size();
     }
+
     //amount of spartans at client
     public int getAmountOfSpartansAtClient() {
+        if (spartansAtClient == null){
+            return 0;
+        }
         return spartansAtClient.size();
     }
 
@@ -79,11 +85,12 @@ public class Client {
     }
 
     public boolean addSpartan(Person spartan) {
-        if (spartan == null) {
+        if (spartan ==null) {
             throw new NullPointerException();
         }
 
         if (getAmountOfSpartansAtClient() < spartanNeeded) {
+            //System.out.println("SPARTAN SIZE"+spartansAtClient.size());
             spartansAtClient.add(spartan);
             return true;
         }
@@ -117,15 +124,19 @@ public class Client {
         if (spartans == null) {
             throw new NullPointerException();
         }
-
-        while (spartans.size() > 0 && getAmountOfSpartansAtClient() < spartanNeeded) {
-            int b= RandomNumberGenerator.getRandomNumbersUsingNextInt(1,getFreeSpace());
-            for (int i = 0; i < b; i++) {
+        int b= RandomNumberGenerator.getRandomNumbersUsingNextInt(1,getFreeSpace());
+        //System.out.println("Random number"+ b);
+        int i=0;
+        do  {
+            if (spartans.size() > 0 && getAmountOfSpartansAtClient() < spartanNeeded) {
                 Person spartan = spartans.get(i);
                 spartans.remove(i);
                 addSpartan(spartan);
             }
+            i++;
         }
+        while (i<b-1);
+
         return spartans;
     }
 
@@ -153,4 +164,6 @@ public class Client {
     public int getClientID() {
         return getClientList().indexOf(this);
     }
+
 }
+

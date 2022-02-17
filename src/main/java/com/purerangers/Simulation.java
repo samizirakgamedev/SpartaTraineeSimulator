@@ -59,13 +59,16 @@ public class Simulation
                 addPeopleToTrainingList(50, 100);
                 //System.out.println(trainingCentre.toString());
             }
-            if ( i % 12 == 0)
+
+            System.out.println("Month"+i);
+           if ( i % 12 == 0)
             {
                 clientList.add(new Client());
             }
-
-            if ( i % 12 == 0{
-                clientList.add(new Client());
+            if (i >12){
+                if(i%2 == 0){
+                    clientList.add(new Client());
+                }
             }
             
              tm.addMonth();
