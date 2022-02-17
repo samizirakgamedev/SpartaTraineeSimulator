@@ -16,6 +16,7 @@ public class Simulation
     int monthsToSimulate;
     int totalPeopleAdded;
     ArrayList<TrainingCentre> trainingCentres;
+    ArrayList<Client> clientList;
     Random r;
 
     public Simulation(boolean monthlyProgressReporting, int monthsToSimulate)
@@ -25,11 +26,13 @@ public class Simulation
         this.tm = TimeManager.getInstance();
         this.wlh = WaitingListHandler.getInstance();
 
+
         this.monthlyProgressReporting = monthlyProgressReporting;
 
         this.monthsToSimulate = monthsToSimulate;
         totalPeopleAdded = 0;
         trainingCentres = new ArrayList<>();
+        clientList = new ArrayList<>();
         TrainingCentre.clearCentreList();
         wlh.clearWaitingList();
         r = new Random();
@@ -56,8 +59,16 @@ public class Simulation
                 addPeopleToTrainingList(50, 100);
                 //System.out.println(trainingCentre.toString());
             }
+            if ( i % 12 == 0)
+            {
+                clientList.add(new Client());
+            }
 
-            tm.addMonth();
+            if ( i % 12 == 0{
+                clientList.add(new Client());
+            }
+            
+             tm.addMonth();
 
             if (monthlyProgressReporting)
             {
