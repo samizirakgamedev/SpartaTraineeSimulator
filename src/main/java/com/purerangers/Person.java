@@ -2,6 +2,7 @@ package com.purerangers;
 
 import java.sql.Date;
 import java.util.Calendar;
+import java.util.Random;
 
 public class Person implements Graduation, SQLReadable
 {
@@ -31,9 +32,11 @@ public class Person implements Graduation, SQLReadable
     public Person()
     {
         this.startDate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
-        weeksAtCamp = 4 * 12;
+        weeksAtCamp = 4 * 3;
         this.id = getID();
-        this.courseType = CourseType.JAVA;
+
+        Random r = new Random();
+        this.courseType = CourseType.values()[r.nextInt(0, CourseType.values().length)];
     }
 
     @Override
