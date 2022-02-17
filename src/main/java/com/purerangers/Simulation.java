@@ -76,16 +76,12 @@ public class Simulation
             if (monthlyProgressReporting)
             {
                 // output a monthly report here
-
-                //System.out.println(new StringBuilder().append("Graduates on the bench: ").append(gbh.getGraduateBench().size()).toString());
-                //System.out.println(new StringBuilder().append("Total people added: ").append(totalPeopleAdded).toString());
+                display();
             }
         }
 
         // output a final report here
         display();
-        //System.out.println(new StringBuilder().append("Graduates on the bench: ").append(gbh.getGraduateBench().size()).toString());
-        //System.out.println(new StringBuilder().append("Total people added: ").append(totalPeopleAdded).toString());
     }
 
     public void addPeopleToTrainingList(int origin, int bound)
