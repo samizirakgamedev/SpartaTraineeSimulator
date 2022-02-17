@@ -13,15 +13,26 @@ public abstract class TrainingCentre
     int maxStrikes = 1;
 
     private static ArrayList<TrainingCentre> openCentreList;
+    private static ArrayList<TrainingCentre> closedCentreList;
 
     public static ArrayList<TrainingCentre> getOpenCentreList()
     {
         if (openCentreList == null)
         {
-            openCentreList = new ArrayList<TrainingCentre>();
+            openCentreList = new ArrayList<>();
         }
 
         return openCentreList;
+    }
+
+    public static ArrayList<TrainingCentre> getClosedCentreList()
+    {
+        if (closedCentreList == null)
+        {
+            closedCentreList = new ArrayList<>();
+        }
+
+        return closedCentreList;
     }
 
     public static void clearCentreList()
@@ -187,6 +198,7 @@ public abstract class TrainingCentre
         }
 
         getOpenCentreList().remove(this);
+        getClosedCentreList().add(this);
         closed = true;
     }
 
