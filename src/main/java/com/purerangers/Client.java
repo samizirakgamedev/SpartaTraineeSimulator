@@ -8,7 +8,7 @@ public class Client {
     protected int spartanNeeded;
     protected Date openDate;
     protected static CourseType courseType;
-    protected ArrayList<Person> spartans = filter(GraduateBenchHandler.getGraduateBench());
+    protected ArrayList<Person> spartans = filter(GraduateBenchHandler.getGraduateBench()); //filters bench list
     protected ArrayList<Person> spartansAtClient;
 
     protected boolean isClient;
@@ -34,6 +34,9 @@ public class Client {
     private static ArrayList<Person> filteredSpartans;
 
     public static ArrayList<Person> filter(ArrayList<Person> spartans){
+        if (spartans==null){
+            filteredSpartans= new ArrayList<>();
+        }
         for (Person p:spartans){
             if (p.getCourseType()==Client.courseType){
                 filteredSpartans.add(p);
