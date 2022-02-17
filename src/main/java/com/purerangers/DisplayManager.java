@@ -12,6 +12,11 @@ public class DisplayManager {
                         "\n **********************|| Welcome to Sparta Trainee Simulator ||********************** \n" +
                         "\n======================================================================================\n");
     }
+
+    public static void displaySeparator(){
+        displayMessage("\n======================================================================================\n");
+    }
+
     // Method for outputting the available program options.
     public static void outputOptions(){
         // Will be implemented when options within the program are more clear.
