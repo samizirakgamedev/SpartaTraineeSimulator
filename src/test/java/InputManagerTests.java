@@ -1,29 +1,43 @@
 import com.purerangers.InputManager;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Assertions;
+import com.purerangers.TextToNumberConverter;
+import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Collection;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+@RunWith(Parameterized.class)
 public class InputManagerTests {
-    Scanner scanner = new Scanner(System.in);
+    private String input;
+    private String expectedResult;
 
-    @Test
-    @DisplayName("Given an invalid input, the handleInputExceptions method will not throw a \"InputMismatchException\"")
-    public void getDoubleDoesNotThrowInputMismatchException(){
-        inTest();
-        Assertions.assertDoesNotThrow(InputManager::getDouble);
+    public InputManagerTests(String input, String expectedResult) {
+        this.input = input;
+        this.expectedResult = expectedResult;
     }
-    public void inTest(){
-        var data = "Hello, World!\r\n";
-        InputStream stdin = System.in;
-        try {
-            System.setIn(new ByteArrayInputStream(data.getBytes()));
-            System.out.println(scanner.nextLine());
-        } finally {
-            System.setIn(stdin);
-        }
+    @Parameterized.Parameters
+    public static Collection<Object[]> testData() {
+        return Arrays.asList(new Object[][] {
+                { "one" , "1 months"},
+                { "twelve", "12 months"},
+                { "thirty two", "32 months"},
+                { "three hundred", "300 months"},
+                { "four hundred and twenty", "420 months"},
+                { "six hundred and fifty two", "652 months"},
+                { "one thousand and twenty two", "1022 months"},
+                { "234", "234 months"},
+                { "three 23", "3 months"},
+                { "Twenty one months", "21 months"},
+                { "twenty-four weeks", "6 months"},
+                { "twenty-four years.", "288 months"},
+        });
+    }
+    @Test
+    public void convertTextualNumbersToMonths() {
+        assertEquals(expectedResult, InputManager.convertTextualNumbersInString(input));
     }
 }
