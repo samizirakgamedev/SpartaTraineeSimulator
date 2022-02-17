@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Connection;
 import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static com.purerangers.CreateTables.mysqlConnect;
 
@@ -12,7 +13,6 @@ public class PopulateDatabase {
     private static TraineeDatabase traineeDatabase;
     private static CreateTables createTables;
     public static void main(String[] args) throws SQLException {
-        int k = 0;
         CreateTables.dropAllTables();
         CreateTables.createTables();
         for (int i = 0; i < 100; i++) {
@@ -20,14 +20,14 @@ public class PopulateDatabase {
             Random random = new Random();
             // randomly selects an index from the arr
             int chosen = random.nextInt(arr.length);
-            String sqlInsert = "INSERT INTO `Training_Centres` (ID, Creation_Date, Type_ID) VALUES (" + i + ", '2022-05-06', '" + random.nextInt(3) + "');";
+            String sqlInsert = "INSERT INTO `Training_Centres` (Creation_Date, Type_ID, Teaching) VALUES ('2022-05-06', '" + random.nextInt(3) + ", " + random.nextInt(4) + "');";
             PreparedStatement st = mysqlConnect.connect().prepareStatement(sqlInsert);
             st.executeUpdate(sqlInsert);
             for (int j = 0; j < 10; j++) {
-                String sqlInsertTrainees = "INSERT INTO `Trainees` (ID, TC_ID, Date_joined) VALUES (" + k + ", " + i + ", '2022-05-06');";
+                String sqlInsertTrainees = "INSERT INTO `Trainees` (TC_ID, Date_joined) VALUES (" + i + ", '2022-05-06');";
                 PreparedStatement st2 = mysqlConnect.connect().prepareStatement(sqlInsertTrainees);
                 st2.executeUpdate(sqlInsertTrainees);
-                k++;
+                //k++;
             }
         }
         String checkCentres = "SELECT COUNT(*) AS ID FROM Training_Centres;";
