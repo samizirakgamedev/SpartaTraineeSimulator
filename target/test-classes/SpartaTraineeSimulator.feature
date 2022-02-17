@@ -106,68 +106,6 @@ Feature: SpartaTraineeSimulator
     And No other Training Centres are available
     Then No more Trainees can be added to this Training Hub and will be added to the Waiting List
 
-  @TrainingHubTechCentreTraineeCheck
-  Scenario: Bootcamp Trainee check
-    Given I have the Sparta Trainee Simulator
-    When A training centre is created
-    And I run the simulation for a month
-    When There are less than 25 trainees
-    Then The training centre is closed down and trainees are moved to another available centre
-
-  @SimulationOutputCheck
-  Scenario: Output simulation result
-    Given I have the Sparta Trainee Simulator
-    And I run the simulation
-    When The simulation finishes
-    Then The program outputs the result of centres and trainees and their course type
-
-  @TraineeBenchCheck
-  Scenario: Trainee bench state
-    Given I have the Sparta Trainee Simulator
-    And I run the simulation
-    When A trainee has been in training for a year
-    Then The trainee is moved to a benched state
-
-  @ClientCreationCheck
-  Scenario: Creation of a client
-    Given I have the Sparta Trainee Simulator
-    And I run the simulation
-    When A year runs in the simulation
-    Then A number of clients will be randomly created every month
-
-  @ClientNumberOfTrainees
-  Scenario: Set requirement for a created client
-    Given I have the Sparta Trainee Simulator
-    And I run the simulation
-    When A client is created
-    Then A random number of trainees (>=15) will be set as required and a random course type
-
-  @ClientMaximumTrainees
-  Scenario: Number of trainees for a client
-    Given I have the Sparta Trainee Simulator
-    And I run the simulation
-    When A client is created
-    And A month runs in the simulation
-    But Client´s trainees capacity is full
-    Then trainee will remain in bench
-
-  @ClientUnhappyState
-  Scenario: Client does not have enough trainees after a year
-    Given I have the Sparta Trainee Simulator
-    And I run the simulation
-    When A client is created
-    And A year runs in the simulation
-    But Client has not enough trainees
-    Then Client will leave unhappy
-
-  @ClientHappyState
-  Scenario: Client ha enough trainees after a year
-    Given I have the Sparta Trainee Simulator
-    And I run the simulation
-    When A client is created
-    And A year runs in the simulation
-    And Client has full capacity of trainees
-    Then Client will leave happy and return next year with same requirements
 
 
 
