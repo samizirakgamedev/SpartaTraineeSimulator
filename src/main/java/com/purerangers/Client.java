@@ -61,11 +61,14 @@ public class Client {
     }
 
     public int getFreeSpace() {
-        return spartanNeeded - getAmountOfSpartans();
+        return spartanNeeded - getAmountOfSpartansAtClient();
     }
 
     public Person getSpartan(Integer index) {
         return spartans.get(index);
+    }
+    public Person getSpartanAtClient(Integer index) {
+        return spartansAtClient.get(index);
     }
 
     public ArrayList<Person> getSpartans() {
@@ -97,12 +100,11 @@ public class Client {
                 closeAndReassign();
             }
             else{
-                spartanNeeded=spartanNeeded+(spartanNeeded/5);
+                spartanNeeded=+spartanNeeded/5;
                 monthsTillReview=11;
             }
 
         }
-
         if (getAmountOfSpartansAtClient() < spartanNeeded) {
             attemptToRecruitSpartans(spartans); // needs to be filtered
         }
@@ -116,22 +118,19 @@ public class Client {
         while (spartans.size() > 0 && getAmountOfSpartansAtClient() < spartanNeeded) {
             int b= RandomNumberGenerator.getRandomNumbersUsingNextInt(1,getFreeSpace());
             for (int i = 0; i < b; i++) {
-                if (getAmountOfSpartans()>1){
                 Person spartan = spartans.get(i);
                 spartans.remove(i);
                 addSpartan(spartan);
-            }}
+            }
         }
         return spartans;
     }
 
     //takes client off clientlist and adds Spartans back to bench (back of Q)
     public void closeAndReassign() {
-        ArrayList<Client> list = getClientList();
-
         // adds the spartans back to the grad bench queue
-        for (int i = 0; i < list.size(); i++) {
-            GraduateBenchHandler.addToBench(getSpartan(i));
+        for (int i = 0; i < getAmountOfSpartansAtClient(); i++) {
+            GraduateBenchHandler.addToBench(getSpartanAtClient(i));
         }
         getClientList().remove(this); // removes client from list
         isClient = false; // shows client is over
@@ -151,5 +150,4 @@ public class Client {
     public int getClientID() {
         return getClientList().indexOf(this);
     }
-
 }
