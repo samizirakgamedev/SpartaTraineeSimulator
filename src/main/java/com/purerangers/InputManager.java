@@ -1,9 +1,6 @@
 package com.purerangers;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class InputManager {
     // Initialises the 'Scanner'.
@@ -19,29 +16,38 @@ public class InputManager {
     final static List<String> boolFalseStrings = Arrays.asList("no", "false", "no thank you");
 
     // Getter for getting a String from the user.
-    public static String getSimulationDuration() {
+    public static String getSimulationDuration()
+    {
+        int simulationDuration = 0;
         String simString = "0";
         try{
             simString = convertTextualNumbersInString(scanner.nextLine());
         }catch (Exception e){
             handleInputExceptions(e);
-            scanner.nextLine();
             var i = scanner.nextLine();
             simString = convertTextualNumbersInString(i);
             getSimulationDuration();
         }
       return simString;
     }
+
     public static String convertTextualNumbersInString(String inputText) {
         // Splits text into words and deals with hyphenated numbers.
         // Used linked list due to manipulation during processing.
-        List<String> words = new LinkedList<>(cleanAndTokenizeText(inputText));
+        List<String> words = new LinkedList<>(cleanAndTokenizeText(inputText.toLowerCase()));
 
         // Calls method to replace all the textual numbers with actual integers.
         words = replaceTextualNumbers(words);
 
         // Calls method to convert input into months if it detects a string such as "years" after the number.
-        monthsOfSimulation = convertInputToMonths(words);
+        try
+        {
+            monthsOfSimulation = convertInputToMonths(words);
+        }
+        catch (Exception e)
+        {
+            handleInputExceptions(e);
+        }
 
         // Calls method that put spaces back in and returns the string.
         // This should be the same as input text except from textual numbers that should now be ints.
@@ -126,14 +132,14 @@ public class InputManager {
             words.add("months");
             return totalMonths;
         }
-        if (words.get(1).toLowerCase().contains("days")){
+        if (words.get(1).contains("days")){
             totalMonths = Integer.parseInt(words.get(0)) / 30;
             words.set(0, String.valueOf(totalMonths));
-        } else if (words.get(1).toLowerCase().contains("weeks")){
+        } else if (words.get(1).contains("weeks")){
             double weeks = Double.parseDouble(words.get(0)) / 4.34524;
             totalMonths = Integer.parseInt(String.valueOf(Math.round(weeks)));
             words.set(0, String.valueOf(totalMonths));
-        } else if (words.get(1).toLowerCase().contains("years")){
+        } else if (words.get(1).contains("years")){
             totalMonths = Integer.parseInt(words.get(0)) * 12;
             words.set(0, String.valueOf(totalMonths));
         } else{

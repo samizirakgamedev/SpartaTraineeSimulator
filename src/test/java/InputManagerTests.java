@@ -14,10 +14,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class InputManagerTests {
     private String input;
     private String expectedResult;
-
+  
     public InputManagerTests(String input, String expectedResult) {
         this.input = input;
         this.expectedResult = expectedResult;
+
     }
     @Parameterized.Parameters
     public static Collection<Object[]> testData() {
