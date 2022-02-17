@@ -3,22 +3,22 @@ package com.purerangers;
 import java.sql.Date;
 import java.util.ArrayList;
 
-/*
- * -CHECK ISHAPPY after 12 months, from Database, if happy, they go for another year
- * - From database, pass filtered graduateslist that have the same courseType
- * */
 public class Client {
     private static ArrayList<Client> clientList;
     protected int spartanNeeded;
     protected Date openDate;
-    protected ArrayList<Person> spartans = GraduateBenchHandler.getGraduateBench(); //make filtered gradlist?
+    protected static CourseType courseType;
+    protected ArrayList<Person> spartans = filter(GraduateBenchHandler.getGraduateBench()); //filters bench list
+    protected ArrayList<Person> spartansAtClient;
+
     protected boolean isClient;
+    protected int monthsTillReview=11;
 
     //Not sure if coursetype is needed as a parameter because of RandomCourseGenerator.RandomCourse();
-    public Client(int spartansNeeded, CourseType courseType) {
-        this.spartanNeeded = spartansNeeded;
+    public Client() {
+        this.spartanNeeded = RandomNumberGenerator.getRandomNumbersUsingNextInt(15,50);
         this.openDate = new Date(TimeManager.getInstance().getCurrentDate().getTime());
-        //courseType= RandomCourseGenerator.RandomCourse();
+        courseType= RandomCourseGenerator.RandomCourse();
         getClientList().add(this);
         TimeManager.getInstance().clients.add(this);
         isClient = true;
@@ -31,35 +31,47 @@ public class Client {
         return clientList;
     }
 
+    private static ArrayList<Person> filteredSpartans;
+
+    public static ArrayList<Person> filter(ArrayList<Person> spartans){
+        if (spartans==null){
+            filteredSpartans= new ArrayList<>();
+        }
+        for (Person p:spartans){
+            if (p.getCourseType()==Client.courseType){
+                filteredSpartans.add(p);
+            }
+        }
+        return filteredSpartans;
+    }
+
     //Clear the clientlist
     public static void clearClientList() {
         clientList = new ArrayList<>();
     }
 
-    public static void main(String[] args) {
-        Client a = new Client(30, CourseType.JAVA);
-
-        Person ab = new Person();
-        a.addSpartan(ab);
-        System.out.println(a.getAmountOfSpartans());
-        System.out.println(a);
-    }
-
+    //amount of available spartans
     public int getAmountOfSpartans() {
         return spartans.size();
     }
+    //amount of spartans at client
+    public int getAmountOfSpartansAtClient() {
+        return spartansAtClient.size();
+    }
 
-    //NEEDS TO BE CHECKED AFTER 12 MONTHS
     public Boolean isHappy() {
         return getFreeSpace() != 0;
     }
 
     public int getFreeSpace() {
-        return spartanNeeded - getAmountOfSpartans();
+        return spartanNeeded - getAmountOfSpartansAtClient();
     }
 
     public Person getSpartan(Integer index) {
         return spartans.get(index);
+    }
+    public Person getSpartanAtClient(Integer index) {
+        return spartansAtClient.get(index);
     }
 
     public ArrayList<Person> getSpartans() {
@@ -71,26 +83,34 @@ public class Client {
             throw new NullPointerException();
         }
 
-        if (getAmountOfSpartans() < spartanNeeded) {
-            spartans.add(spartan);
+        if (getAmountOfSpartansAtClient() < spartanNeeded) {
+            spartansAtClient.add(spartan);
             return true;
         }
         return false;
     }
 
     public void updateDate(Date newDate) {
+        monthsTillReview--;
         if (isClient = false) {
             return;
         }
-
         if (newDate == null) {
             throw new NullPointerException();
         }
+        if (monthsTillReview==0){
+            if (isHappy()==false){
+                closeAndReassign();
+            }
+            else{
+                spartanNeeded=+spartanNeeded/5;
+                monthsTillReview=11;
+            }
 
-        if (getAmountOfSpartans() < spartanNeeded) {
-            attemptToRecruitSpartans(GraduateBenchHandler.getGraduateBench());
         }
-
+        if (getAmountOfSpartansAtClient() < spartanNeeded) {
+            attemptToRecruitSpartans(spartans); // needs to be filtered
+        }
     }
 
     public ArrayList<Person> attemptToRecruitSpartans(ArrayList<Person> spartans) {
@@ -98,7 +118,7 @@ public class Client {
             throw new NullPointerException();
         }
 
-        while (spartans.size() > 0 && getAmountOfSpartans() < spartanNeeded) {
+        while (spartans.size() > 0 && getAmountOfSpartansAtClient() < spartanNeeded) {
             int b= RandomNumberGenerator.getRandomNumbersUsingNextInt(1,getFreeSpace());
             for (int i = 0; i < b; i++) {
                 Person spartan = spartans.get(i);
@@ -111,11 +131,9 @@ public class Client {
 
     //takes client off clientlist and adds Spartans back to bench (back of Q)
     public void closeAndReassign() {
-        ArrayList<Client> list = getClientList();
-
         // adds the spartans back to the grad bench queue
-        for (int i = 0; i < list.size(); i++) {
-            GraduateBenchHandler.addToBench(getSpartan(i));
+        for (int i = 0; i < getAmountOfSpartansAtClient(); i++) {
+            GraduateBenchHandler.addToBench(getSpartanAtClient(i));
         }
         getClientList().remove(this); // removes client from list
         isClient = false; // shows client is over
@@ -127,7 +145,7 @@ public class Client {
                 "spartanNeeded=" + spartanNeeded +
                 ", openDate=" + openDate +
                 ", spartans=" + spartans +
-                ", closed=" + isClient +
+                ", isClient=" + isClient +
                 '}';
     }
 
