@@ -93,15 +93,14 @@ public class Client {
         }
 
     }
-
+///////////////////////////////////Easy fix but pulling anyway so people can see//// but needs to do random number
     public ArrayList<Person> attemptToRecruitSpartans(ArrayList<Person> spartans) {
         if (spartans == null) {
             throw new NullPointerException();
         }
 
-        while (spartans.size() > 0 && getAmountOfSpartans()<spartanNeeded) {
-            int i=RandomNumberGenerator.getRandomNumbersUsingNextInt(1,getFreeSpace());
-            for (() < spartanNeeded; i++) {
+        while (spartans.size() > 0) {
+            for (int i = 0; getAmountOfSpartans() < spartanNeeded; i++) {
                 Person spartan = spartans.get(i);
                 spartans.remove(i);
                 addSpartan(spartan);
