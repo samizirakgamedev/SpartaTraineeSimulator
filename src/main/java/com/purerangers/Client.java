@@ -6,7 +6,6 @@ import java.util.ArrayList;
 /*
  * -CHECK ISHAPPY after 12 months, from Database, if happy, they go for another year
  * - From database, pass filtered graduateslist that have the same courseType
- * -NEED TO MAKE ATTEMPTTORECRUITRANDOM random number of spartans to add from min=1 max= remaining
  * */
 public class Client {
     private static ArrayList<Client> clientList;
@@ -93,14 +92,15 @@ public class Client {
         }
 
     }
-///////////////////////////////////Easy fix but pulling anyway so people can see//// but needs to do random number
+
     public ArrayList<Person> attemptToRecruitSpartans(ArrayList<Person> spartans) {
         if (spartans == null) {
             throw new NullPointerException();
         }
 
-        while (spartans.size() > 0) {
-            for (int i = 0; getAmountOfSpartans() < spartanNeeded; i++) {
+        while (spartans.size() > 0 && getAmountOfSpartans() < spartanNeeded) {
+            int b= RandomNumberGenerator.getRandomNumbersUsingNextInt(1,getFreeSpace());
+            for (int i = 0; i < b; i++) {
                 Person spartan = spartans.get(i);
                 spartans.remove(i);
                 addSpartan(spartan);
