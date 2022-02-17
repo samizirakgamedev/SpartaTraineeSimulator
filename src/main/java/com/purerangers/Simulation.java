@@ -36,8 +36,12 @@ public class Simulation
 
     public void runSimulation()
     {
+
+
         for (int i = 0; i < monthsToSimulate; i++)
         {
+
+
             if (i % 2 != 0) // if the month is even
             {
                 int numberOfHubsToSpawn = r.nextInt(3);
@@ -56,7 +60,9 @@ public class Simulation
                 //System.out.println(trainingCentre.toString());
             }
 
+
             tm.addMonth();
+            Client c= new Client();
 
             if (monthlyProgressReporting)
             {
@@ -64,6 +70,7 @@ public class Simulation
                 //System.out.println(new StringBuilder().append("Graduates on the bench: ").append(gbh.getGraduateBench().size()).toString());
                 //System.out.println(new StringBuilder().append("Total people added: ").append(totalPeopleAdded).toString());
             }
+
         }
 
         // output a final report here
