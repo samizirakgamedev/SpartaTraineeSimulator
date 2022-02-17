@@ -1,8 +1,6 @@
 package com.purerangers;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class TextToNumberConverter {
     // List of stings that are allowed within the input we are converting.
@@ -13,7 +11,7 @@ public class TextToNumberConverter {
 
     // Main method for debugging.
     public static void main(String[] args) {
-        String sentence = "five hundred and two";
+        String sentence = "32 years";
         String words = convertTextualNumbersInString(sentence);
         System.out.println("Input before: " + sentence);
         System.out.println("Input after: " + words);
@@ -28,6 +26,9 @@ public class TextToNumberConverter {
 
         // Calls method to replace all the textual numbers with actual integers.
         words = replaceTextualNumbers(words);
+
+        // Calls method to convert input into months if it detects "years"
+        convertInputToMonths(words);
 
         // Calls method that put spaces back in and returns the string.
         // This should be the same as input text except from textual numbers that should now be ints.
@@ -83,6 +84,38 @@ public class TextToNumberConverter {
         return words;
     }
 
+    public static List<String> convertInputToMonths(List<String> words){
+        if(words.size() <= 1)
+            return words;
+        String[] index = new String[words.size()];
+        words.toArray(index);
+        words.clear();
+        switch (index[index.length - 1].toLowerCase()){
+            case "days":
+                int days = Integer.parseInt(index[0]) / 30;
+                index[0] = String.valueOf(days);
+                index[index.length - 1] = "Months";
+                break;
+            case "weeks":
+                double weeks = Double.parseDouble(index[0]) / 4.34524;
+                int truncated = Integer.parseInt(String.valueOf(Math.round(weeks)));
+                index[0] = String.valueOf(truncated);
+                index[index.length - 1] = "Months";
+                break;
+            case "years":
+                int years = Integer.parseInt(index[0]) * 12;
+                index[0] = String.valueOf(years);
+                index[index.length - 1] = "Months";
+                break;
+            default:
+                break;
+        }
+        for (int i = 0; i < index.length; i++){
+            words.add(index[i]);
+        }
+        return words;
+    }
+
     // Method for adding back in any punctuation to the string that has now been converted into a numerical string.
     private static String retainPunctuation(List<String> processingList, String wordAsDigits) {
         // Checks last word first for punctuation.
@@ -117,7 +150,6 @@ public class TextToNumberConverter {
                     words.addAll(i, splitWords);
                 }
             }
-
         }
         return words;
     }
@@ -135,7 +167,6 @@ public class TextToNumberConverter {
         }
         return result.toString();
     }
-
 
      // Method for taking a textual number string and converting it into a number.
      // E.g. twenty five -> 25
