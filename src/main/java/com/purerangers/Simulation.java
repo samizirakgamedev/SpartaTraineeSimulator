@@ -60,7 +60,6 @@ public class Simulation
                 //System.out.println(trainingCentre.toString());
             }
 
-            System.out.println("Month"+i);
            if ( i % 12 == 0)
             {
                 clientList.add(new Client());

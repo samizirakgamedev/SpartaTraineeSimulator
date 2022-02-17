@@ -1,5 +1,7 @@
 package com.purerangers;
 
+import java.util.Scanner;
+
 public class DisplayMain {
     public static void main(String[] args) {
         DisplayManager.displayWelcome();
@@ -26,7 +28,13 @@ public class DisplayMain {
         DisplayManager.displayMessage(String.valueOf(parsedInput));
         DisplayManager.displayMessage("You have chosen to run the simulation for "+ userInput);
         DisplayManager.displaySeparator();
+
         DisplayManager.displayMessage("Would you like a monthly simulation report?");
+        Scanner scanner = new Scanner(System.in);
+        boolean monthlyProgressReports = scanner.nextBoolean();
+
+        Simulation simulation = new Simulation(monthlyProgressReports, parsedInput);
+        simulation.runSimulation();
 
         //DisplayManager.outputStats(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
     }
