@@ -129,13 +129,9 @@ public class Client {
         int i=0;
         do  {
             if (spartans.size() > 0 && getAmountOfSpartansAtClient() < spartanNeeded) {
-                System.out.println("Amount of Spartans at Client:"+getAmountOfSpartansAtClient()+" Client ID"+getClientID());
-                System.out.println("Spartans needed"+spartanNeeded);
-                System.out.println("Is empty" + spartans.isEmpty());
                 Person spartan = spartans.get(i);
                 spartans.remove(i);
                 addSpartan(spartan);
-                System.out.println("Spartan "+spartans.get(i)+"Added to "+getClientID());
             }
             i++;
         }
