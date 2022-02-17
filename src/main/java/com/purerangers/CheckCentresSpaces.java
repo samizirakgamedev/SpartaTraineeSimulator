@@ -11,6 +11,16 @@ public class CheckCentresSpaces {
     static TraineeDatabase mysqlConnect = new TraineeDatabase();
     static int result = 0;
     static int maxSpaces = 0;
+    public static void checkAvailability() throws SQLException {
+        String sql1 = "SELECT DISTINCT TC_ID FROM Trainees;";
+        PreparedStatement st3 = mysqlConnect.connect().prepareStatement(sql1);
+        ResultSet rs3 = st3.executeQuery(sql1);
+        while (rs3.next()) {
+            int result3 = rs3.getInt("TC_ID");
+            System.out.println(result3);
+            System.out.println(returnAvailable(result3));
+        }
+    }
     public static int returnAvailable(int c){
         try {
             String sqlCentresList;
