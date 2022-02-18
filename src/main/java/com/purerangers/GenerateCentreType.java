@@ -32,7 +32,7 @@ public class GenerateCentreType {
     }
 
 
-    private static boolean isBootcampAvailable() throws SQLException {
+    public static boolean isBootcampAvailable() throws SQLException {
         boolean result = true;
         String sqlBootcamp = "SELECT COUNT(*) AS Total FROM `Training_Centres` WHERE Type_ID = 2;";
         PreparedStatement st = mysqlConnect.connect().prepareStatement(sqlBootcamp);
