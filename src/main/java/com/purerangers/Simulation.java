@@ -88,7 +88,7 @@ public class Simulation
 
             }
         }
-        System.out.println("Client size: "+clientList.size());
+        System.out.println("Client List: \n");
         for (int i=0;i<clientList.size();i++){
             System.out.println(clientList.get(i));
 

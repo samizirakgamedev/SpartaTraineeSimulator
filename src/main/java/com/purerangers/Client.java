@@ -116,7 +116,7 @@ public class Client {
                 spartansAtClient=new ArrayList<>();
             }
             else{
-                spartanNeeded += spartanNeeded *5;
+                spartanNeeded += spartanNeeded/5;
                 System.out.println("ClientID: "+getClientID()+" has increased their Spartans needed to "+spartanNeeded);
             }
 
