@@ -84,7 +84,7 @@ public class Simulation
                 //System.out.println(new StringBuilder().append("Graduates on the bench: ").append(gbh.getGraduateBench().size()).toString());
                 //System.out.println(new StringBuilder().append("Total people added: ").append(totalPeopleAdded).toString());
 
-                display();
+               // display();
 
             }
         }
@@ -99,7 +99,7 @@ public class Simulation
         //System.out.println(new StringBuilder().append("Graduates on the bench: ").append(gbh.getGraduateBench().size()).toString());
         //System.out.println(new StringBuilder().append("Total people added: ").append(totalPeopleAdded).toString());
 
-        display();
+        //display();
 
     }
 
