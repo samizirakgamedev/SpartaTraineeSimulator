@@ -1,16 +1,21 @@
 package com.purerangers;
 
-public class DisplayManager {
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+public class DisplayManager
+{
+    private static final Logger logger = LogManager.getLogger(DisplayManager.class.getName());
+
     // Method for outputting a bespoke message to the user.
-    public static void displayMessage(String message){
-        System.out.println(message);
+    public static void displayMessage(String message)
+    {
+        logger.info(message);
     }
     // Method for outputting a welcome message to the user.
     public static void displayWelcome(){
         displayMessage(
-                "\n======================================================================================\n"+
-                        "\n **********************|| Welcome to Sparta Trainee Simulator ||********************** \n" +
-                        "\n======================================================================================\n");
+                new StringBuilder().append("\n======================================================================================\n").append("\n **********************|| Welcome to Sparta Trainee Simulator ||********************** \n").append("\n======================================================================================\n").toString());
     }
 
     public static void displaySeparator(){
@@ -49,30 +54,6 @@ public class DisplayManager {
                                    int devOpsWaiting,
                                    int businessWaiting){
         displayMessage(
-                "\nSIMULATION STATISTICS\n" +
-                        "• Number of open centres: " + openCentres + "\n" +
-                        "   • Training Hubs: " + tHubOpen + "\n" +
-                        "   • Boot Camps: " + bCampOpen + "\n" +
-                        "   • Tech Centres: " + tCentresOpen + "\n" +
-                        "• Number of closed centres: " + closedCentres + "\n" +
-                        "   • Training Hubs: " + tHubClosed + "\n" +
-                        "   • Boot Camps: " + bCampClosed + "\n" +
-                        "   • Tech Centres: " + tCentresClosed + "\n" +
-                        "• Number of full centres: " + fullCentres + "\n" +
-                        "   • Training Hubs: " + tHubFull + "\n" +
-                        "   • Boot Camps: " + bCampFull + "\n" +
-                        "   • Tech Centres: " + tCentresFull + "\n" +
-                        "• Number of trainees in training: " + traineesTraining + "\n" +
-                        "   • Java: " + javaTraining + "\n" +
-                        "   • C#: " + cSharpTraining + "\n" +
-                        "   • Data: " + dataTraining + "\n" +
-                        "   • DevOps: " + devOpsTraining + "\n" +
-                        "   • Business: " + businessTraining + "\n" +
-                        "• Number of trainees on the waiting list: " + traineesWaiting + "\n" +
-                        "   • Java: " + javaWaiting + "\n" +
-                        "   • C#: " + cSharpWaiting + "\n" +
-                        "   • Data: " + dataWaiting + "\n" +
-                        "   • DevOps: " + devOpsWaiting + "\n" +
-                        "   • Business: " + businessWaiting + "\n");
+                new StringBuilder().append("\nSIMULATION STATISTICS\n").append("• Number of open centres: ").append(openCentres).append("\n").append("   • Training Hubs: ").append(tHubOpen).append("\n").append("   • Boot Camps: ").append(bCampOpen).append("\n").append("   • Tech Centres: ").append(tCentresOpen).append("\n").append("• Number of closed centres: ").append(closedCentres).append("\n").append("   • Training Hubs: ").append(tHubClosed).append("\n").append("   • Boot Camps: ").append(bCampClosed).append("\n").append("   • Tech Centres: ").append(tCentresClosed).append("\n").append("• Number of full centres: ").append(fullCentres).append("\n").append("   • Training Hubs: ").append(tHubFull).append("\n").append("   • Boot Camps: ").append(bCampFull).append("\n").append("   • Tech Centres: ").append(tCentresFull).append("\n").append("• Number of trainees in training: ").append(traineesTraining).append("\n").append("   • Java: ").append(javaTraining).append("\n").append("   • C#: ").append(cSharpTraining).append("\n").append("   • Data: ").append(dataTraining).append("\n").append("   • DevOps: ").append(devOpsTraining).append("\n").append("   • Business: ").append(businessTraining).append("\n").append("• Number of trainees on the waiting list: ").append(traineesWaiting).append("\n").append("   • Java: ").append(javaWaiting).append("\n").append("   • C#: ").append(cSharpWaiting).append("\n").append("   • Data: ").append(dataWaiting).append("\n").append("   • DevOps: ").append(devOpsWaiting).append("\n").append("   • Business: ").append(businessWaiting).append("\n").toString());
     }
 }
