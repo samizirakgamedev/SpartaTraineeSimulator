@@ -139,23 +139,17 @@ TBA
 Throughout the project we made use of multiple project management tools including:
 * **GitHub**, **GitHub Desktop** and **Sourcetree** for version control.
 * **Trello** for sprint and task management.
-* **Microsoft Teams** for collaborative working and meetings.
+* **Microsoft Teams** and **Discord** for collaborative working and meetings.
 
-Bellow is a commit graph showing the commit history of the project. We each branched off and worked on our separate tasks and would then merge together to update each of our branches with an up-to-date version of the project. In the last few days of the project we branched off one last time to make final updates and bug fixes whilst completing our README.md file for the project.
+Bellow is a commit graph showing the commit history of the project: 
 
-Our trello was also updated throughout our project to reflect the completion of deadlines and the completion of sprints and tests. The pictures below shows how our Trello has evolved:
+<img src="readmeImages/sourcetreevid.gif">
 
-**Progress Shot 1**
+We each branched off and worked on our separate tasks and would then merge together to update each of our branches with an up-to-date version of the project. In the last few days of the project we branched off less and merged in more frequently to refactor,make final updates and fix bugs.
 
+Our trello was also updated throughout our project to reflect the completion of deadlines and the completion of sprints and tests.
 
-
-**Progress Shot 2**
-
-
-
-**Progress Shot 3**
-
-
+<img src="readmeImages/trellovid.gif">
 
 <br/>
 <div align="right">
