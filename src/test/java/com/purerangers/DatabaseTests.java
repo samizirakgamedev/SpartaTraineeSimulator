@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 import static com.purerangers.CreateTables.mysqlConnect;
 
@@ -37,6 +38,20 @@ class DatabaseTests {
             e.printStackTrace();
         }
         Assertions.assertTrue(exists);
+    }
+    @Test
+    @DisplayName("Check if trainees are generated and inserted into database correctly")
+    void checkTraineeCreation() throws SQLException {
+        boolean isCreated = false;
+        CreateTrainees.generateTrainees(2);
+        String sqlCheckTrainee = "SELECT * FROM Queue;";
+        PreparedStatement st = mysqlConnect.connect().prepareStatement(sqlCheckTrainee); //prepare java statement
+        st.executeQuery(sqlCheckTrainee); //execute the query
+        ResultSet rs = st.executeQuery(sqlCheckTrainee); //execute the query
+        if (rs.next()) {
+            isCreated = true;
+        }
+        Assertions.assertTrue(isCreated);
     }
     @Test
     @DisplayName("Check if it stops creating a third Bootcamp")
@@ -74,6 +89,27 @@ class DatabaseTests {
             isGone = true;
         }
         Assertions.assertTrue(isGone);
+    }
+    @Test
+    @DisplayName("Check if TrainingCentres are generated and returned correctly from database")
+    void checkTrainingCentres() throws SQLException {
+        String generated = null;
+        LocalDate date = LocalDate.now();
+        generated = GenerateCentreType.generateType(date);
+        Assertions.assertNotNull(generated);
+    }
+    @Test
+    @DisplayName("Check if the correct centre type is returned from the database")
+    void checkCentreType() throws SQLException {
+        boolean correctType = false;
+        LocalDate date = LocalDate.now();
+        int chosen = 1; //Training Hub
+        int teaches = 2; //Java
+        String sqlCreateCentre = "INSERT INTO Training_Centres (ID, Creation_Date, Type_ID, Teaching) VALUES (1, '" + date + "', " + chosen + ", " + teaches + ");";
+        PreparedStatement st = mysqlConnect.connect().prepareStatement(sqlCreateCentre);
+        String type = CheckCentresSpaces.returnCentreType(1);
+        if ("Training Hub".equals(type)) correctType = true;
+        Assertions.assertTrue(correctType);
     }
 
 }
