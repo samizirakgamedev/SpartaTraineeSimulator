@@ -179,20 +179,20 @@ public class Client {
         return getClientList().indexOf(this);
     }
 
-    public static void main(String[] args) {
-        Client a= new Client();
-        System.out.println("A"+a.getSpartanNeeded());
-        System.out.println("A"+a.getFreeSpace());
-        System.out.println("A"+a);
-        getClientList().add(a);
-        System.out.println(getClientList());
-        Client b= new Client();
-        System.out.println("B"+b.getSpartanNeeded());
-        System.out.println("B"+b.getFreeSpace());
-        System.out.println("B"+b);
-
-        System.out.println(getClientList().add(b));
-        System.out.println(getClientList());
-    }
+//    public static void main(String[] args) {
+//        Client a= new Client();
+//        System.out.println("A"+a.getSpartanNeeded());
+//        System.out.println("A"+a.getFreeSpace());
+//        System.out.println("A"+a);
+//        getClientList().add(a);
+//        System.out.println(getClientList());
+//        Client b= new Client();
+//        System.out.println("B"+b.getSpartanNeeded());
+//        System.out.println("B"+b.getFreeSpace());
+//        System.out.println("B"+b);
+//
+//        System.out.println(getClientList().add(b));
+//        System.out.println(getClientList());
+//    }
 }
 

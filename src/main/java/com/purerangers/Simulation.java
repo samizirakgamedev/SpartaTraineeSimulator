@@ -41,8 +41,8 @@ public class Simulation
     {
         for (int i = 0; i < monthsToSimulate; i++)
         {
-            System.out.println("--------------------------------------------------");
-            System.out.println("Month"+i);
+//            System.out.println("--------------------------------------------------");
+//            System.out.println("Month"+i);
             if (i % 2 != 0) // if the month is even
             {
                 int numberOfHubsToSpawn = r.nextInt(3);
@@ -84,7 +84,7 @@ public class Simulation
         System.out.println("Client size: "+clientList.size());
         for (int i=0;i<clientList.size();i++){
             System.out.println(clientList.get(i));
-            
+
         }
 
         // output a final report here
