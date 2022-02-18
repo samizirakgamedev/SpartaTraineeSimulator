@@ -63,33 +63,33 @@ A simulator that will help track the number of people currently training at Spar
 ```
 <br/>
 <div align="right">
-    <b><a href="#csv-data-migration-application-java">↥ back to top</a></b>
+    <b><a href="#sparta-trainee-simulation-application-java">↥ back to top</a></b>
 </div>
 <br/>
 
 ### How To Use ###
 1. Navigate to the top of this GitHub repo and click the green **Code** button. This will open a menu where you will want to click **Download Zip**.
-   
-IMAGE TO BE ADDED
+
+<img src="readmeImages/htu1.jpg">
 
 2. Having clicked **Download ZIP** a **Save As** dialogue box will open. Choose where you want to store the compressed Sparta Trainee Simulation program and then click the **Save** button.
 
-IMAGE TO BE ADDED
+<img src="readmeImages/htu2.jpg">
 
 3. Using Windows Explorer navigate to the location you saved the compressed Sparta Trainee Simulation program in. Right-click on the program and select **Extract Here**.
 
-IMAGE TO BE ADDED
+<img src="readmeImages/htu3.jpg">
 
 4. Open IntelliJ Community Edition and click **File** and then **Open**. Navigate to the extracted Sparta Trainee Simulation program project folder and select it. Then click **Ok**.
 
-IMAGE TO BE ADDED
+<img src="readmeImages/htu4.jpg">
 
 5. Once the project has opened and all dependencies have been downloaded look to the top right-hand corner of IntelliJ and ensure that the class that has been set to run is **SpartaTraineeSimulationMain**. You can now run the program by clicking the green play button.
 
 IMAGE TO BE ADDED   
 
 <div align="right">
-    <b><a href="#csv-data-migration-application-java">↥ back to top</a></b>
+    <b><a href="#sparta-trainee-simulation-application-java">↥ back to top</a></b>
 </div>
 <br/>
 
@@ -127,11 +127,17 @@ Phase 2 has the following objectives:
     - Number of trainees on the waiting list (breakdown for each type)
 #### Phase 3 ####
 Phase 3 has the following objectives:
-TBA
+- If a trainee has been in training for 3 months, they are moved to a bench state
+- Clients will begin to be randomly created after 1 year of the simulation
+- A client will have a requirement when they are created e.g a need for 27 Java trainees. The requirement can be any value greater than or equal to 15
+- A client will take a random number of trainees from the bench each month (1 - full requirement) until their requirement is met
+- A client will only take one type of trainee (Java, C#, Data, DevOps or Business)
+- If a client does not collect enough trainees from the bench within a year, they will leave unhappy
+- If a client does collect enough trainees from the bench within a year, they will leave happy and return the next year with the same requirement
 
   <br/>
 <div align="right">
-    <b><a href="#csv-data-migration-application-java">↥ back to top</a></b>
+    <b><a href="#sparta-trainee-simulation-application-java">↥ back to top</a></b>
 </div>
 <br/>
 
@@ -153,7 +159,7 @@ Our trello was also updated throughout our project to reflect the completion of 
 
 <br/>
 <div align="right">
-    <b><a href="#csv-data-migration-application-java">↥ back to top</a></b>
+    <b><a href="#sparta-trainee-simulation-application-java">↥ back to top</a></b>
 </div>
 <br/>
 
@@ -161,6 +167,6 @@ Our trello was also updated throughout our project to reflect the completion of 
 
 <br/>
 <div align="right">
-    <b><a href="#csv-data-migration-application-java">↥ back to top</a></b>
+    <b><a href="#sparta-trainee-simulation-application-java">↥ back to top</a></b>
 </div>
 <br/>
