@@ -61,7 +61,10 @@ public class Simulation
                 //System.out.println(trainingCentre.toString());
             }
 
-            if (i % 12==0)
+
+
+           if ( i % 12 == 0)
+
             {
                 clientList.add(new Client());
             }
@@ -77,8 +80,12 @@ public class Simulation
             if (monthlyProgressReporting)
             {
                 // output a monthly report here
+
                 //System.out.println(new StringBuilder().append("Graduates on the bench: ").append(gbh.getGraduateBench().size()).toString());
                 //System.out.println(new StringBuilder().append("Total people added: ").append(totalPeopleAdded).toString());
+
+                display();
+
             }
         }
         System.out.println("Client size: "+clientList.size());
@@ -88,8 +95,12 @@ public class Simulation
         }
 
         // output a final report here
+
         //System.out.println(new StringBuilder().append("Graduates on the bench: ").append(gbh.getGraduateBench().size()).toString());
         //System.out.println(new StringBuilder().append("Total people added: ").append(totalPeopleAdded).toString());
+
+        display();
+
     }
 
     public void addPeopleToTrainingList(int origin, int bound)
