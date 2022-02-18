@@ -41,6 +41,8 @@ public class Simulation
     {
         for (int i = 0; i < monthsToSimulate; i++)
         {
+            System.out.println("--------------------------------------------------");
+            System.out.println("Month"+i);
             if (i % 2 != 0) // if the month is even
             {
                 int numberOfHubsToSpawn = r.nextInt(3);
@@ -58,16 +60,17 @@ public class Simulation
                 addPeopleToTrainingList(50, 100);
                 //System.out.println(trainingCentre.toString());
             }
-            System.out.println("Month"+i);
-            if ( i % 12 == 0)
+
+            if (i % 12==0)
             {
                 clientList.add(new Client());
             }
             if (i >12){
-                if(i%2 == 0){
+                if(i%4 == 0){
                     clientList.add(new Client());
                 }
             }
+
 
             tm.addMonth();
 
@@ -77,6 +80,11 @@ public class Simulation
                 //System.out.println(new StringBuilder().append("Graduates on the bench: ").append(gbh.getGraduateBench().size()).toString());
                 //System.out.println(new StringBuilder().append("Total people added: ").append(totalPeopleAdded).toString());
             }
+        }
+        System.out.println("Client size: "+clientList.size());
+        for (int i=0;i<clientList.size();i++){
+            System.out.println(clientList.get(i));
+            
         }
 
         // output a final report here

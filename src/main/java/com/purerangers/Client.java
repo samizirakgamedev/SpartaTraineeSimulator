@@ -22,6 +22,7 @@ public class Client {
         courseType= RandomCourseGenerator.RandomCourse();
         TimeManager.getInstance().clients.add(this);
         isClient = true;
+        getClientList().add(this);
     }
 
     public static ArrayList<Client> getClientList() {
@@ -136,7 +137,7 @@ public class Client {
         int b= RandomNumberGenerator.getRandomNumbersUsingNextInt(1,getFreeSpace());
         //System.out.println("Random number"+ b);
         int i=0;
-        System.out.println("Max they can add in Month:"+b);
+        //System.out.println("Max they can add in Month:"+b);
         do  {
             if (spartans.size() > 0 && getAmountOfSpartansAtClient() < spartanNeeded) {
                 Person spartan = spartans.get(i);
