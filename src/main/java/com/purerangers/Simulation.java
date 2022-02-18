@@ -41,8 +41,8 @@ public class Simulation
     {
         for (int i = 0; i < monthsToSimulate; i++)
         {
-//            System.out.println("--------------------------------------------------");
-//            System.out.println("Month"+i);
+            System.out.println("--------------------------------------------------");
+            System.out.println("Month"+i);
             if (i % 2 != 0) // if the month is even
             {
                 int numberOfHubsToSpawn = r.nextInt(3);

@@ -9,19 +9,16 @@ public class Client {
     protected Date openDate;
     protected static CourseType courseType=null;
     protected ArrayList<Person> spartans = filter(GraduateBenchHandler.getGraduateBench()); //filters bench list
-    protected static ArrayList<Person> spartansAtClient= new ArrayList<>();
-
-
-    protected boolean isClient;
+    protected ArrayList<Person> spartansAtClient= new ArrayList<>();
     protected int monthsTillReview=12;
-
+    Boolean isClient=true;
 
     public Client() {
         this.spartanNeeded = RandomNumberGenerator.getRandomNumbersUsingNextInt(15,50);
         this.openDate = new Date(TimeManager.getInstance().getCurrentDate().getTime());
+        Boolean isClient=true;
         courseType= RandomCourseGenerator.RandomCourse();
         TimeManager.getInstance().clients.add(this);
-        isClient = true;
         getClientList().add(this);
     }
 
@@ -31,7 +28,7 @@ public class Client {
         }
         return clientList;
     }
-    public static ArrayList<Person> getSpartansAtClient() {
+    public ArrayList<Person> getSpartansAtClient() {
         if (spartansAtClient == null) {
             spartansAtClient = new ArrayList<>();
         }
@@ -71,14 +68,14 @@ public class Client {
     }
 
     public Boolean isHappy() {
-        return getFreeSpace() != 0;
+        return getFreeSpace() == 0;
     }
     public int getSpartanNeeded(){
         return spartanNeeded;
     }
 
     public int getFreeSpace() {
-        return getSpartanNeeded() - getAmountOfSpartansAtClient();
+        return spartanNeeded - spartansAtClient.size();
     }
 
     public Person getSpartan(Integer index) {
@@ -109,21 +106,21 @@ public class Client {
 
     public void updateDate(Date newDate) {
         monthsTillReview--;
-        if (isClient = false) {
-            return;
-        }
+
         if (newDate == null) {
             throw new NullPointerException();
         }
         if (monthsTillReview==0){
-            if (isHappy()==false){
+            if (isHappy().equals(false)){
                 closeAndReassign();
+                spartansAtClient=new ArrayList<>();
             }
             else{
-                spartanNeeded=+spartanNeeded/5;
-                monthsTillReview=12;
+                spartanNeeded += spartanNeeded *5;
+                System.out.println("ClientID: "+getClientID()+" has increased their Spartans needed to "+spartanNeeded);
             }
 
+            monthsTillReview=12;
         }
         if (getAmountOfSpartansAtClient() < spartanNeeded) {
             attemptToRecruitSpartans(spartans); // needs to be filtered
@@ -139,7 +136,7 @@ public class Client {
         int i=0;
         //System.out.println("Max they can add in Month:"+b);
         do  {
-            if (spartans.size() > 0 && getAmountOfSpartansAtClient() < spartanNeeded) {
+            if (spartans.size() > i && getAmountOfSpartansAtClient() < spartanNeeded) {
                 Person spartan = spartans.get(i);
                 spartans.remove(i);
                 addSpartan(spartan);
@@ -157,20 +154,23 @@ public class Client {
         for (int i = 0; i < getAmountOfSpartansAtClient(); i++) {
             GraduateBenchHandler.addToBench(getSpartanAtClient(i));
         }
-        System.out.println("Removed Client at"+getClientList().indexOf(this));
-        getClientList().remove(this); // removes client from list
-        isClient = false; // shows client is over
-
+        spartanNeeded=0;
+        spartansAtClient=new ArrayList<>();
+        isClient=false;
+        //getClientList().remove(this); // removes client from list
+        //isClient = false; // shows client is over
     }
 
     @Override
     public String toString() {
         return "Client{" +
+                "ClientID :" +getClientID() +
                 "spartanNeeded=" + spartanNeeded +
                 ", openDate=" + openDate +
-                ", spartans=" + spartansAtClient +
-                ", isClient=" + isClient +
+                ", spartans at client=" + spartansAtClient.size() +
+                ", Difference=" + getFreeSpace() +
                 ", monthsTillReview=" + monthsTillReview +
+                ", is Client=" + isClient +
                 '}';
     }
 
