@@ -23,11 +23,11 @@ public class GenerateCentreType {
         //System.out.println(date);
         if (chosen == 3) teaches = random2.nextInt(courses.length - 1) + 1;
         if (chosen == 2 && isBootcampAvailable() == false) generateType(date);
-        System.out.println("Can we create bootcamp? " + isBootcampAvailable());
+        //System.out.println("Can we create bootcamp? " + isBootcampAvailable());
         String sqlCreateCentre = "INSERT INTO Training_Centres (Creation_Date, Type_ID, Teaching) VALUES ('" + date + "', " + chosen + ", " + teaches + ");";
         PreparedStatement st = mysqlConnect.connect().prepareStatement(sqlCreateCentre);
         st.executeUpdate(sqlCreateCentre);
-        System.out.println(arr[chosen-1] + " was created and inserted into database.");
+        //System.out.println(arr[chosen-1] + " was created and inserted into database.");
         return arr[chosen-1];
     }
 
