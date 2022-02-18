@@ -1,27 +1,25 @@
 package com.purerangers;
 
 import java.sql.Date;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 public class Client {
     private static ArrayList<Client> clientList;
-    protected int spartanNeeded;
+    protected int spartanNeeded=0;
     protected Date openDate;
-    protected static CourseType courseType;
+    protected static CourseType courseType=null;
     protected ArrayList<Person> spartans = filter(GraduateBenchHandler.getGraduateBench()); //filters bench list
-    protected ArrayList<Person> spartansAtClient= new ArrayList<>();
+    protected static ArrayList<Person> spartansAtClient= new ArrayList<>();
 
 
     protected boolean isClient;
-    protected int monthsTillReview=11;
+    protected int monthsTillReview=12;
 
-    //Not sure if coursetype is needed as a parameter because of RandomCourseGenerator.RandomCourse();
+
     public Client() {
         this.spartanNeeded = RandomNumberGenerator.getRandomNumbersUsingNextInt(15,50);
         this.openDate = new Date(TimeManager.getInstance().getCurrentDate().getTime());
         courseType= RandomCourseGenerator.RandomCourse();
-        getClientList().add(this);
         TimeManager.getInstance().clients.add(this);
         isClient = true;
     }
@@ -31,6 +29,12 @@ public class Client {
             clientList = new ArrayList<>();
         }
         return clientList;
+    }
+    public static ArrayList<Person> getSpartansAtClient() {
+        if (spartansAtClient == null) {
+            spartansAtClient = new ArrayList<>();
+        }
+        return spartansAtClient;
     }
 
     private static ArrayList<Person> filteredSpartans;
@@ -68,9 +72,12 @@ public class Client {
     public Boolean isHappy() {
         return getFreeSpace() != 0;
     }
+    public int getSpartanNeeded(){
+        return spartanNeeded;
+    }
 
     public int getFreeSpace() {
-        return spartanNeeded - getAmountOfSpartansAtClient();
+        return getSpartanNeeded() - getAmountOfSpartansAtClient();
     }
 
     public Person getSpartan(Integer index) {
@@ -90,8 +97,10 @@ public class Client {
         }
 
         if (getAmountOfSpartansAtClient() < spartanNeeded) {
-            //System.out.println("SPARTAN SIZE"+spartansAtClient.size());
+
+           // System.out.println("Amount of spartans needed:"+spartanNeeded+"amount they have:"+getAmountOfSpartansAtClient()+"Difference: "+getFreeSpace());
             spartansAtClient.add(spartan);
+            //System.out.println("Spartan size"+ spartansAtClient.size());
             return true;
         }
         return false;
@@ -111,7 +120,7 @@ public class Client {
             }
             else{
                 spartanNeeded=+spartanNeeded/5;
-                monthsTillReview=11;
+                monthsTillReview=12;
             }
 
         }
@@ -127,6 +136,7 @@ public class Client {
         int b= RandomNumberGenerator.getRandomNumbersUsingNextInt(1,getFreeSpace());
         //System.out.println("Random number"+ b);
         int i=0;
+        System.out.println("Max they can add in Month:"+b);
         do  {
             if (spartans.size() > 0 && getAmountOfSpartansAtClient() < spartanNeeded) {
                 Person spartan = spartans.get(i);
@@ -146,8 +156,10 @@ public class Client {
         for (int i = 0; i < getAmountOfSpartansAtClient(); i++) {
             GraduateBenchHandler.addToBench(getSpartanAtClient(i));
         }
+        System.out.println("Removed Client at"+getClientList().indexOf(this));
         getClientList().remove(this); // removes client from list
         isClient = false; // shows client is over
+
     }
 
     @Override
@@ -155,8 +167,9 @@ public class Client {
         return "Client{" +
                 "spartanNeeded=" + spartanNeeded +
                 ", openDate=" + openDate +
-                ", spartans=" + spartans +
+                ", spartans=" + spartansAtClient +
                 ", isClient=" + isClient +
+                ", monthsTillReview=" + monthsTillReview +
                 '}';
     }
 
@@ -165,5 +178,20 @@ public class Client {
         return getClientList().indexOf(this);
     }
 
+    public static void main(String[] args) {
+        Client a= new Client();
+        System.out.println("A"+a.getSpartanNeeded());
+        System.out.println("A"+a.getFreeSpace());
+        System.out.println("A"+a);
+        getClientList().add(a);
+        System.out.println(getClientList());
+        Client b= new Client();
+        System.out.println("B"+b.getSpartanNeeded());
+        System.out.println("B"+b.getFreeSpace());
+        System.out.println("B"+b);
+
+        System.out.println(getClientList().add(b));
+        System.out.println(getClientList());
+    }
 }
 
