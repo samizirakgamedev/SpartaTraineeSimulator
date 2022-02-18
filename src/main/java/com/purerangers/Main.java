@@ -13,7 +13,7 @@ public class Main
 {
     public static void main(String[] args)
     {
-        Simulation simulation = new Simulation(true, 24);
+        Simulation simulation = new Simulation(true, 23);
         simulation.runSimulation();
     }
 }
