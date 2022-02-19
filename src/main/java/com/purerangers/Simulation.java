@@ -20,6 +20,7 @@ public class Simulation
     int totalPeopleAdded;
     ArrayList<TrainingCentre> trainingCentres;
     ArrayList<Client> clientList;
+    ArrayList<Client> debugList;
     Random r;
 
     public Simulation(boolean monthlyProgressReporting, int monthsToSimulate)
@@ -28,10 +29,7 @@ public class Simulation
         this.gbh = GraduateBenchHandler.getInstance();
         this.tm = TimeManager.getInstance();
         this.wlh = WaitingListHandler.getInstance();
-
-
         this.monthlyProgressReporting = monthlyProgressReporting;
-
         this.monthsToSimulate = monthsToSimulate;
         totalPeopleAdded = 0;
         trainingCentres = new ArrayList<>();
@@ -64,19 +62,18 @@ public class Simulation
                 addPeopleToTrainingList(50, 100);
                 //System.out.println(trainingCentre.toString());
             }
-
-
-
-           if ( i % 12 == 0)
-
-            {
-                clientList.add(new Client());
+//            debugList= Client.getClientList();
+//            for (Client c:debugList){
+//                System.out.println("C"+c.toString());
+//            }
+            if (i% 12==0&& i != 0){
+                new Client();
             }
-            if (i >12){
-                if(i%4 == 0){
-                    clientList.add(new Client());
-                }
+                if(i%3==0&& i%12!=0){
+                    new Client();
             }
+
+
 
 
             tm.addMonth();
@@ -92,12 +89,12 @@ public class Simulation
 
             }
         }
-        System.out.println("Client List: \n");
-        for (int i=0;i<clientList.size();i++){
-            System.out.println(clientList.get(i));
-
+        System.out.println("----------------------------------\n");
+        System.out.println("Client List:");
+        for (int i=0;i<Client.getClientList().size();i++){
+            System.out.println(Client.getClientList().get(i));
         }
-
+        System.out.println("----------------------------------\n");
         // output a final report here
 
         //System.out.println(new StringBuilder().append("Graduates on the bench: ").append(gbh.getGraduateBench().size()).toString());

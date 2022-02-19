@@ -28,6 +28,7 @@ public class Client {
         }
         return clientList;
     }
+
     public ArrayList<Person> getSpartansAtClient() {
         if (spartansAtClient == null) {
             spartansAtClient = new ArrayList<>();
@@ -38,13 +39,13 @@ public class Client {
     private static ArrayList<Person> filteredSpartans;
 
     public static ArrayList<Person> filter(ArrayList<Person> spartans){
-        if (spartans.isEmpty()){
-            filteredSpartans= new ArrayList<>();
-        }
+        filteredSpartans= new ArrayList<>();
+        if (spartans.size()>0){
         for (Person p:spartans){
             if (p.getCourseType()==Client.courseType){
                 filteredSpartans.add(p);
             }
+        }
         }
         return filteredSpartans;
     }
@@ -95,7 +96,6 @@ public class Client {
         }
 
         if (getAmountOfSpartansAtClient() < spartanNeeded) {
-
            // System.out.println("Amount of spartans needed:"+spartanNeeded+"amount they have:"+getAmountOfSpartansAtClient()+"Difference: "+getFreeSpace());
             spartansAtClient.add(spartan);
             //System.out.println("Spartan size"+ spartansAtClient.size());
@@ -129,7 +129,7 @@ public class Client {
 
     public ArrayList<Person> attemptToRecruitSpartans(ArrayList<Person> spartans) {
         if (spartans == null) {
-            throw new NullPointerException();
+            return new ArrayList<>();
         }
         int b= RandomNumberGenerator.getRandomNumbersUsingNextInt(1,getFreeSpace());
         //System.out.println("Random number"+ b);
@@ -177,12 +177,6 @@ public class Client {
     //get client ID
     public int getClientID() {
         return getClientList().indexOf(this);
-    }
-
-    public static void main(String[] args) {
-        Client a= new Client();
-        Client b= new Client();
-        System.out.println(getClientList());
     }
 }
 
