@@ -1,34 +1,36 @@
 package com.purerangers;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Scanner;
 
 public class InputManager {
-    // Initialises the 'Scanner'.
-    private static Scanner scanner = new Scanner(System.in);
-    // Global variable to store the desired length of the simulation.
-    private static int monthsOfSimulation = 0;
     // List of stings that are allowed within the input we are converting.
     final static List<String> textualAllowedStrings = Arrays.asList("and", "zero", "one", "two", "three", "four", "five",
             "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen",
             "seventeen", "eighteen", "nineteen", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty",
             "ninety", "hundred", "thousand", "million", "billion", "trillion");
-    final static List<String> boolAllowedStrings = Arrays.asList("yes", "true", "okay", "ok", "sure","please", "okie dokie");
+    final static List<String> boolAllowedStrings = Arrays.asList("yes", "true", "okay", "ok", "sure", "please", "okie dokie");
     final static List<String> boolFalseStrings = Arrays.asList("no", "false", "no thank you");
+    // Initialises the 'Scanner'.
+    private static Scanner scanner = new Scanner(System.in);
+    // Global variable to store the desired length of the simulation.
+    private static int monthsOfSimulation = 0;
 
     // Getter for getting a String from the user.
-    public static String getSimulationDuration()
-    {
+    public static String getSimulationDuration() {
         int simulationDuration = 0;
         String simString = "0";
-        try{
+        try {
             simString = convertTextualNumbersInString(scanner.nextLine());
-        }catch (Exception e){
+        } catch (Exception e) {
             handleInputExceptions(e);
             var i = scanner.nextLine();
             simString = convertTextualNumbersInString(i);
             getSimulationDuration();
         }
-      return simString;
+        return simString;
     }
 
     public static String convertTextualNumbersInString(String inputText) {
@@ -40,12 +42,9 @@ public class InputManager {
         words = replaceTextualNumbers(words);
 
         // Calls method to convert input into months if it detects a string such as "years" after the number.
-        try
-        {
+        try {
             monthsOfSimulation = convertInputToMonths(words);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             handleInputExceptions(e);
         }
 
@@ -53,10 +52,12 @@ public class InputManager {
         // This should be the same as input text except from textual numbers that should now be ints.
         return wordListToString(words);
     }
+
     // Getter to retrieve the length of the simulation from the class.
     public static int getMonthsOfSimulation() {
         return monthsOfSimulation;
     }
+
     // Removes any symbols and spaces their may be in the string ready for processing.
     // E.g. twenty-two -> twenty two
     private static List<String> cleanAndTokenizeText(String sentence) {
@@ -76,6 +77,7 @@ public class InputManager {
         }
         return words;
     }
+
     // Method that is called to process each word in the string by grouping them and replace the textual numbers with their respective number/s.
     // This list of words is then returned following processing.
     private static List<String> replaceTextualNumbers(List<String> words) {
@@ -124,6 +126,7 @@ public class InputManager {
         }
         return words;
     }
+
     // Takes the list containing the non-textual number and checks (based on the second string in the list) if the number needs converting to months.
     public static int convertInputToMonths(List<String> words) {
         int totalMonths;
@@ -132,22 +135,23 @@ public class InputManager {
             words.add("months");
             return totalMonths;
         }
-        if (words.get(1).contains("days")){
+        if (words.get(1).contains("days")) {
             totalMonths = Integer.parseInt(words.get(0)) / 30;
             words.set(0, String.valueOf(totalMonths));
-        } else if (words.get(1).contains("weeks")){
+        } else if (words.get(1).contains("weeks")) {
             double weeks = Double.parseDouble(words.get(0)) / 4.34524;
             totalMonths = Integer.parseInt(String.valueOf(Math.round(weeks)));
             words.set(0, String.valueOf(totalMonths));
-        } else if (words.get(1).contains("years")){
+        } else if (words.get(1).contains("years")) {
             totalMonths = Integer.parseInt(words.get(0)) * 12;
             words.set(0, String.valueOf(totalMonths));
-        } else{
-                totalMonths = Integer.parseInt(words.get(0));
+        } else {
+            totalMonths = Integer.parseInt(words.get(0));
         }
         words.set(1, "months");
         return totalMonths;
     }
+
     // Method that is called to build a string back together from a list of strings. This includes spaces.
     private static String wordListToString(List<String> list) {
         StringBuilder result = new StringBuilder("");
@@ -161,6 +165,7 @@ public class InputManager {
         }
         return result.toString();
     }
+
     // Method for adding back in any punctuation to the string that has now been converted into a numerical string.
     private static String retainPunctuation(List<String> processingList, String wordAsDigits) {
         // Checks last word first for punctuation.
@@ -177,6 +182,7 @@ public class InputManager {
         }
         return wordAsDigits;
     }
+
     // Method for taking a textual number string and converting it into a number.
     // E.g. twenty five -> 25
     private static long convertWordsToNum(List<String> words) {
@@ -265,19 +271,21 @@ public class InputManager {
         intermediateResult = 0;
         return finalResult;
     }
+
     // Method to be called to  handle input exceptions.
-    public static void handleInputExceptions(Exception e){
+    public static void handleInputExceptions(Exception e) {
         String message;
-        switch (e.toString()){
+        switch (e.toString()) {
             case "java.util.InputMismatchException":
-                message =  "Please enter your input in the desired format.";
+                message = "Please enter your input in the desired format.";
                 break;
             case "java.lang.NullPointerException":
                 message = "Please ensure you have entered a value before pressing enter.";
                 break;
             default:
                 message = "Your input was invalid, please review it and try again.";
-        };
+        }
+        ;
         DisplayManager.displayMessage(message);
     }
 

@@ -5,15 +5,13 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public class LogfileGenerator
-{
-    public static void splitLogfile(String name) throws IOException
-    {
+public class LogfileGenerator {
+    public static void splitLogfile(String name) throws IOException {
         String logFolder = "src/logs/";
 
         String[] filteredNames = name.replaceAll("\\.", "/").split("/");
 
-        String createdName = filteredNames[filteredNames.length-1];
+        String createdName = filteredNames[filteredNames.length - 1];
 
         createdName = new StringBuilder().append(logFolder).append(createdName).toString();
 
@@ -21,8 +19,7 @@ public class LogfileGenerator
         String finalFileName;
 
         int i = 0;
-        while (true)
-        {
+        while (true) {
             finalFileName = new StringBuilder().append(createdName).append(" months (").append(i).append(")").append(".log").toString();
             if (!new File(finalFileName).exists()) break;
             System.out.println(createdName);
@@ -31,8 +28,7 @@ public class LogfileGenerator
 
         Path path = Path.of(logFolder);
 
-        if (!Files.isDirectory(path))
-        {
+        if (!Files.isDirectory(path)) {
             Files.createDirectory(path);
         }
 

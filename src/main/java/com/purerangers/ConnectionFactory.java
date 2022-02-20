@@ -12,111 +12,83 @@ import java.util.Queue;
 
 import static com.purerangers.SimLogger.logger;
 
-public class ConnectionFactory
-{
+public class ConnectionFactory {
     private static ConnectionFactory instance;
-
-    public boolean getAutoExpand()
-    {
-        return autoExpand;
-    }
-
-    public void setAutoExpand(boolean autoExpand)
-    {
-        this.autoExpand = autoExpand;
-    }
-
     private boolean autoExpand;
+    private Queue<Connection> connections = new LinkedList<>();
 
-    public static ConnectionFactory getInstance()
-    {
-        if (instance == null)
-        {
+    private ConnectionFactory() {
+        autoExpand = false;
+    }
+
+    public static ConnectionFactory getInstance() {
+        if (instance == null) {
             instance = new ConnectionFactory();
         }
 
         return instance;
     }
 
-    private Queue<Connection> connections = new LinkedList<>();
+    public boolean getAutoExpand() {
+        return autoExpand;
+    }
 
-    private Connection getNewConnection()
-    {
-        try (InputStream inputStream = new FileInputStream("src/main/resources/mysql.properties"))
-        {
+    public void setAutoExpand(boolean autoExpand) {
+        this.autoExpand = autoExpand;
+    }
+
+    private Connection getNewConnection() {
+        try (InputStream inputStream = new FileInputStream("src/main/resources/mysql.properties")) {
             Properties properties = new Properties();
             properties.load(inputStream);
 
             return DriverManager.getConnection(properties.getProperty("dbURL"), properties.getProperty("dbUser"), properties.getProperty("dbPassword"));
-        }
-        catch (SQLException | IOException e)
-        {
+        } catch (SQLException | IOException e) {
             logger.error(() -> e.toString());
         }
 
         return null;
     }
 
-    public void setPooledConnections(int numberOfConnections)
-    {
+    public void setPooledConnections(int numberOfConnections) {
         connections = new LinkedList<>();
 
-        for (int i = 0; i < numberOfConnections; i++)
-        {
+        for (int i = 0; i < numberOfConnections; i++) {
             connections.add(getNewConnection());
         }
     }
 
-    public Connection getConnection()
-    {
-        if (connections.size() == 0)
-        {
-            if (autoExpand)
-            {
+    public Connection getConnection() {
+        if (connections.size() == 0) {
+            if (autoExpand) {
                 connections.add(getNewConnection());
-            }
-            else
-            {
+            } else {
                 throw new NullPointerException();
             }
         }
 
         Connection connection = connections.remove();
 
-        try
-        {
+        try {
             connection.setAutoCommit(false);
-        }
-        catch (SQLException e)
-        {
+        } catch (SQLException e) {
             logger.error(() -> e.toString());
         }
 
         return connection;
     }
 
-    public void closeConnections()
-    {
-        try
-        {
-            for (int i = 0; i < connections.size(); i++)
-            {
+    public void closeConnections() {
+        try {
+            for (int i = 0; i < connections.size(); i++) {
                 connections.remove().close();
             }
-        }
-        catch (SQLException e)
-        {
+        } catch (SQLException e) {
             logger.error(() -> e.toString());
         }
     }
 
-    public void returnConnection(Connection connection)
-    {
+    public void returnConnection(Connection connection) {
         connections.add(connection);
-    }
-
-    private ConnectionFactory()
-    {
-        autoExpand = false;
     }
 }

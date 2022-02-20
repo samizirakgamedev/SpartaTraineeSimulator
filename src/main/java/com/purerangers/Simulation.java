@@ -73,9 +73,6 @@ public class Simulation
                     new Client();
             }
 
-
-
-
             tm.addMonth();
 
             if (monthlyProgressReporting)
@@ -86,7 +83,6 @@ public class Simulation
                 //System.out.println(new StringBuilder().append("Total people added: ").append(totalPeopleAdded).toString());
 
                // display();
-
             }
         }
         System.out.println("----------------------------------\n");

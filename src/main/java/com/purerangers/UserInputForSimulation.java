@@ -15,7 +15,7 @@ public class UserInputForSimulation {
             try {
                 Scanner scanner = new Scanner(System.in);
                 arrSize = Integer.parseInt(scanner.next());
-                logger.info("User has selected: " + arrSize+" Month(s)");
+                logger.info("User has selected: " + arrSize + " Month(s)");
             } catch (Exception e) {
                 System.out.println("You must enter a valid number to the corresponding sort.");
                 logger.error("Invalid input to the console for choice for array", e);
@@ -63,14 +63,16 @@ public class UserInputForSimulation {
         while (numChoice == 0);
         return numChoice;
     }
+
+    public static void main(String[] args) {
+        numOfMonths();
+        simChoice();
+    }
+
     // enum for user choice
     enum UserChoice {
         PrintMonthly,
         PrintFinalResults,
         Exit
-    }
-    public static void main(String[] args) {
-        numOfMonths();
-        simChoice();
     }
 }

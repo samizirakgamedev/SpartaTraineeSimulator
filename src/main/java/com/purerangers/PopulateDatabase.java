@@ -3,15 +3,14 @@ package com.purerangers;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Connection;
 import java.util.Random;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import static com.purerangers.CreateTables.mysqlConnect;
 
 public class PopulateDatabase {
     private static TraineeDatabase traineeDatabase;
     private static CreateTables createTables;
+
     public static void main(String[] args) throws SQLException {
         CreateTables.dropAllTables();
         CreateTables.createTables();
