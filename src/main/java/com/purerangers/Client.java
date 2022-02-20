@@ -105,9 +105,7 @@ public class Client {
         }
 
         if (getAmountOfSpartansAtClient() < spartanNeeded) {
-           // System.out.println("Amount of spartans needed:"+spartanNeeded+"amount they have:"+getAmountOfSpartansAtClient()+"Difference: "+getFreeSpace());
             spartansAtClient.add(spartan);
-            //System.out.println("Spartan size"+ spartansAtClient.size());
             return true;
         }
         return false;
@@ -142,9 +140,7 @@ public class Client {
             return new ArrayList<>();
         }
         int b= RandomNumberGenerator.getRandomNumbersUsingNextInt(1,getFreeSpace());
-        //System.out.println("Random number"+ b);
         int i=0;
-        //System.out.println("Max they can add in Month:"+b);
         do  {
             if (spartans.size() > i && getAmountOfSpartansAtClient() < spartanNeeded) {
                 Person spartan = spartans.get(i);
@@ -154,11 +150,9 @@ public class Client {
             i++;
         }
         while (i<b-1);
-
         return spartans;
     }
 
-    //takes client off clientlist and adds Spartans back to bench (back of Q)
     public void closeAndReassign() {
         // adds the spartans back to the grad bench queue
         for (int i = 0; i < getAmountOfSpartansAtClient(); i++) {
@@ -167,8 +161,6 @@ public class Client {
         spartanNeeded=0;
         spartansAtClient=new ArrayList<>();
         isClient=false;
-        //getClientList().remove(this); // removes client from list
-        //isClient = false; // shows client is over
     }
 
     @Override

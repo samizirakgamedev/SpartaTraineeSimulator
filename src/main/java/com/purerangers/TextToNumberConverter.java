@@ -1,6 +1,8 @@
 package com.purerangers;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 public class TextToNumberConverter {
     // List of stings that are allowed within the input we are converting.
@@ -84,13 +86,13 @@ public class TextToNumberConverter {
         return words;
     }
 
-    public static List<String> convertInputToMonths(List<String> words){
-        if(words.size() <= 1)
+    public static List<String> convertInputToMonths(List<String> words) {
+        if (words.size() <= 1)
             return words;
         String[] index = new String[words.size()];
         words.toArray(index);
         words.clear();
-        switch (index[index.length - 1].toLowerCase()){
+        switch (index[index.length - 1].toLowerCase()) {
             case "days":
                 int days = Integer.parseInt(index[0]) / 30;
                 index[0] = String.valueOf(days);
@@ -110,7 +112,7 @@ public class TextToNumberConverter {
             default:
                 break;
         }
-        for (int i = 0; i < index.length; i++){
+        for (int i = 0; i < index.length; i++) {
             words.add(index[i]);
         }
         return words;
@@ -168,8 +170,8 @@ public class TextToNumberConverter {
         return result.toString();
     }
 
-     // Method for taking a textual number string and converting it into a number.
-     // E.g. twenty five -> 25
+    // Method for taking a textual number string and converting it into a number.
+    // E.g. twenty five -> 25
     private static long convertWordsToNum(List<String> words) {
         long finalResult = 0;
         long intermediateResult = 0;

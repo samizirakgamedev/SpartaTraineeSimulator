@@ -16,7 +16,7 @@ public class GenerateCentreType {
         String[] arr = {"Training Hub", "Bootcamp", "Tech Centre"};
         Random random = new Random();
         // randomly selects an index from the arr
-        int chosen = random.nextInt(1,4);
+        int chosen = random.nextInt(1, 4);
         //System.out.println(chosen);
         int teaches = 0;
         //int chosen2 = random2.nextInt(courses.length - 1);
@@ -28,7 +28,7 @@ public class GenerateCentreType {
         PreparedStatement st = mysqlConnect.connect().prepareStatement(sqlCreateCentre);
         st.executeUpdate(sqlCreateCentre);
         //System.out.println(arr[chosen-1] + " was created and inserted into database.");
-        return arr[chosen-1];
+        return arr[chosen - 1];
     }
 
 
@@ -44,6 +44,7 @@ public class GenerateCentreType {
         if (number >= 2) result = false;
         return result;
     }
+
     public static void returnCentres() throws SQLException {
         String sqlReturnCentres = "SELECT ID, Type_ID, Teaching FROM `Training_Centres`;";
         Statement st = mysqlConnect.connect().createStatement();

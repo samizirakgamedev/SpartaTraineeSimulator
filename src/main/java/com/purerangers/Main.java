@@ -1,34 +1,26 @@
 package com.purerangers;
 
-import com.purerangers.TrainingCentreTypes.BootCamp;
-import com.purerangers.TrainingCentreTypes.TrainingCentre;
-import com.purerangers.TrainingCentreTypes.TrainingHub;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.Scanner;
 
-public class Main
-{
+public class Main {
     private static final Logger logger = LogManager.getLogger(Main.class.getName());
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         DisplayManager.displayWelcome();
 
         String userInput = "";
         int parsedMonthsToSimulate = -1;
 
-        while (parsedMonthsToSimulate == -1)
-        {
+        while (parsedMonthsToSimulate == -1) {
             DisplayManager.displayMessage("How long would you like to run the simulation to for (e.g. 3 months, three years): ");
             userInput = InputManager.getSimulationDuration();
-            try
-            {
+            try {
                 parsedMonthsToSimulate = Integer.parseInt(userInput.replaceAll(" months", ""));
-            } catch (Exception e)
-            {
+            } catch (Exception e) {
                 parsedMonthsToSimulate = -1;
             }
 
@@ -36,7 +28,7 @@ public class Main
         }
 
         DisplayManager.displayMessage(String.valueOf(parsedMonthsToSimulate));
-        DisplayManager.displayMessage("You have chosen to run the simulation for "+ userInput);
+        DisplayManager.displayMessage("You have chosen to run the simulation for " + userInput);
         DisplayManager.displaySeparator();
 
         DisplayManager.displayMessage("Would you like a monthly simulation report?");
@@ -46,12 +38,9 @@ public class Main
         Simulation simulation = new Simulation(monthlyProgressReports, parsedMonthsToSimulate);
         simulation.runSimulation();
 
-        try
-        {
+        try {
             LogfileGenerator.splitLogfile(String.valueOf(parsedMonthsToSimulate));
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

@@ -4,33 +4,13 @@ import java.sql.Date;
 import java.util.Calendar;
 import java.util.Random;
 
-public class Person implements Graduation, SQLReadable
-{
+public class Person implements Graduation, SQLReadable {
     public static int idCounter = 0;
-    public static int getID()
-    {
-        int id = idCounter;
-        idCounter++;
-        return id;
-    }
-
     private int id;
     private Date startDate;
     private CourseType courseType;
     private int weeksAtCamp;
-
-    public Date getStartDate()
-    {
-        return startDate;
-    }
-
-    public int getWeeksAtCamp()
-    {
-        return weeksAtCamp;
-    }
-
-    public Person()
-    {
+    public Person() {
         this.startDate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
         weeksAtCamp = 4 * 3;
         this.id = getID();
@@ -39,20 +19,31 @@ public class Person implements Graduation, SQLReadable
         this.courseType = CourseType.values()[r.nextInt(0, CourseType.values().length)];
     }
 
+    public static int getID() {
+        int id = idCounter;
+        idCounter++;
+        return id;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public int getWeeksAtCamp() {
+        return weeksAtCamp;
+    }
+
     @Override
-    public boolean checkGraduation(Date date)
-    {
-        if (date == null)
-        {
+    public boolean checkGraduation(Date date) {
+        if (date == null) {
             throw new NullPointerException();
         }
 
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DATE, weeksAtCamp*7);
+        calendar.add(Calendar.DATE, weeksAtCamp * 7);
         Date graduation = new java.sql.Date(calendar.getTime().getTime());
 
-        if (graduation.before(date))
-        {
+        if (graduation.before(date)) {
             //System.out.println(id + " graduated!");
             return true;
         }
@@ -61,8 +52,7 @@ public class Person implements Graduation, SQLReadable
     }
 
     @Override
-    public Object[] readSQLObject()
-    {
+    public Object[] readSQLObject() {
         Object[] objectArray = new Object[3];
 
         objectArray[0] = id;
@@ -72,8 +62,7 @@ public class Person implements Graduation, SQLReadable
         return objectArray;
     }
 
-    public CourseType getCourseType()
-    {
+    public CourseType getCourseType() {
         return courseType;
     }
 }

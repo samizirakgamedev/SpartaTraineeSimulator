@@ -3,11 +3,8 @@ package com.purerangers;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.time.LocalDate;
-import com.purerangers.CheckCentresSpaces;
+
 import static com.purerangers.RandomNumberGenerator.getRandomNumbersUsingNextInt;
-import com.purerangers.GenerateCentreType;
-import com.purerangers.CreateTables;
-import com.purerangers.CreateTrainees;
 
 public class TimeTraveller {
 
