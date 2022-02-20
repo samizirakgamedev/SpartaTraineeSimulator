@@ -1,4 +1,4 @@
-package com.purerangers;
+package com.purerangers.database;
 
 import com.purerangers.database.TraineeDatabase;
 
@@ -6,7 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class CheckCentresSpaces {
+public class CheckCentresSpaces
+{
     static TraineeDatabase mysqlConnect = new TraineeDatabase();
     static int result = 0;
     static int maxSpaces = 0;

@@ -7,6 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
+import java.util.Queue;
 import java.util.Random;
 
 public class Simulation
@@ -45,8 +46,6 @@ public class Simulation
     {
         for (int i = 0; i < monthsToSimulate; i++)
         {
-            System.out.println("--------------------------------------------------");
-            System.out.println("Month"+i);
             if (i % 2 != 0) // if the month is even
             {
                 int numberOfHubsToSpawn = r.nextInt(3);
@@ -56,59 +55,38 @@ public class Simulation
                     trainingCentres.add(sm.getNewCentre());
                 }
             }
-
-            //addPeopleToTrainingList(50, 100);
-
-            for (TrainingCentre trainingCentre : TrainingCentre.getOpenCentreList())
+            ArrayList<TrainingCentre> openCentreList = TrainingCentre.getOpenCentreList();
+            for (int j = 0; j < openCentreList.size(); j++)
             {
                 addPeopleToTrainingList(50, 100);
-                //System.out.println(trainingCentre.toString());
             }
-//            debugList= Client.getClientList();
-//            for (Client c:debugList){
-//                System.out.println("C"+c.toString());
-//            }
-            if (i% 12==0&& i != 0){
+
+            if (i% 12==0&& i != 0)
+            {
                 new Client();
             }
-                if(i%3==0&& i%12!=0){
-                    new Client();
+
+            if(i%3==0&& i%12!=0)
+            {
+                new Client();
             }
 
             tm.addMonth();
 
             if (monthlyProgressReporting)
             {
-                // output a monthly report here
-
-                //System.out.println(new StringBuilder().append("Graduates on the bench: ").append(gbh.getGraduateBench().size()).toString());
-                //System.out.println(new StringBuilder().append("Total people added: ").append(totalPeopleAdded).toString());
-
-               // display();
+               display();
             }
         }
-        System.out.println("----------------------------------\n");
-        System.out.println("Client List:");
-        for (int i=0;i<Client.getClientList().size();i++){
-            System.out.println(Client.getClientList().get(i));
-        }
-        System.out.println("----------------------------------\n");
-        // output a final report here
 
-        //System.out.println(new StringBuilder().append("Graduates on the bench: ").append(gbh.getGraduateBench().size()).toString());
-        //System.out.println(new StringBuilder().append("Total people added: ").append(totalPeopleAdded).toString());
-
-        //display();
-
+        display();
     }
 
     public void addPeopleToTrainingList(int origin, int bound)
     {
-        /// here is the bit that adds recruits each month
         int numberOfNewRecruits = r.nextInt(origin, bound);
         wlh.addRandomPeopleToList(numberOfNewRecruits);
         totalPeopleAdded += numberOfNewRecruits;
-        /// if neil says that we need each centre to have it's own trainees generated move this into the enhanced for loop below
     }
 
     public void display()
@@ -129,11 +107,11 @@ public class Simulation
         logger.info("Number of full centres: " + fullCentres.size());
         processCentreList(fullCentres);
 
-        var ts = getTrainees();
+        ArrayList<Person> ts = getTrainees();
         logger.info("Number of trainees in training: " + ts.size());
         processPersonList(ts);
 
-        var wl = wlh.getWaitingList();
+        Queue<Person> wl = wlh.getWaitingList();
         ArrayList<Person> persons = new ArrayList<>();
 
         while (wl.size() > 0)
@@ -198,12 +176,12 @@ public class Simulation
 
             if (numberOnCourse > 0)
             {
-                StringBuilder sb = new StringBuilder();
-                sb.append("  • ");
-                sb.append(currentType.getCourseName());
-                sb.append(": ");
-                sb.append(numberOnCourse);
-                logger.info(sb.toString());
+                StringBuilder stringBuilder = new StringBuilder();
+                stringBuilder.append("  • ");
+                stringBuilder.append(currentType.getCourseName());
+                stringBuilder.append(": ");
+                stringBuilder.append(numberOnCourse);
+                logger.info(stringBuilder.toString());
             }
         }
     }

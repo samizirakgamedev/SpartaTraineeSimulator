@@ -7,16 +7,18 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class DateFormat {
-    private static final Logger logger = LogManager.getLogger("DateFormat logger:");
+    private static final Logger logger = LogManager.getLogger(DateFormat.class.getName());
 
-    public static LocalDate formatDate(String s) {
-        try {
+    public static LocalDate formatDate(String s)
+    {
+        try
+        {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
             LocalDate date = LocalDate.parse(s, formatter);
-            //System.out.println("Date is: " + date);
             return date;
-        } catch (Exception e) {
-            //System.out.println("Invalid input for Date");
+        }
+        catch (Exception e)
+        {
             logger.warn("Unable to format String: " + s);
         }
         return null;

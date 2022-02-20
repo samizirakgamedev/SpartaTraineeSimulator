@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.Date;
+import java.sql.Time;
 import java.util.ArrayList;
 
 
@@ -14,9 +15,10 @@ public class TimeManager {
     private Date simulationStartDate;
     private Date currentDate;
 
-    private static final Logger logger = LogManager.getLogger(Simulation.class.getName());
+    private static final Logger logger = LogManager.getLogger(TimeManager.class.getName());
 
-    private TimeManager() {
+    private TimeManager()
+    {
         simulationStartDate = new Date(System.currentTimeMillis());
         ;
         currentDate = new Date(simulationStartDate.getTime());
@@ -24,7 +26,8 @@ public class TimeManager {
         clients = new ArrayList<>();
     }
 
-    public static TimeManager getInstance() {
+    public static TimeManager getInstance()
+    {
         if (instance == null) {
             instance = new TimeManager();
         }
@@ -32,22 +35,24 @@ public class TimeManager {
         return instance;
     }
 
-    public Date getSimulationStartDate() {
-        return simulationStartDate;
-    }
-
-    public Date getCurrentDate() {
+    public Date getCurrentDate()
+    {
         return currentDate;
     }
 
-    public void addMonth() {
+    public void addMonth()
+    {
         long hours = 24L * 7 * 4;
         currentDate = new Date(currentDate.getTime() + hours * 60 * 60 * 1000);
-        logger.info("Month being added to all Training centres and Clients");
-        for (TrainingCentre trainingCentre : trainingCentres) {
+        logger.info("Simulation advanced by 1 month");
+
+        for (TrainingCentre trainingCentre : trainingCentres)
+        {
             trainingCentre.updateDate(currentDate);
         }
-        for (Client c : clients) {
+
+        for (Client c : clients)
+        {
             c.updateDate(currentDate);
         }
     }
