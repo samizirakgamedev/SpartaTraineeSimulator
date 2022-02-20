@@ -9,16 +9,12 @@ public class DisplayMain {
         String userInput = "";
         int parsedInput = -1;
 
-        while (parsedInput == -1)
-        {
+        while (parsedInput == -1) {
             DisplayManager.displayMessage("How long would you like to run the simulation to for (e.g. 3 months, three years): ");
             userInput = InputManager.getSimulationDuration();
-
-            try
-            {
+            try {
                 parsedInput = Integer.parseInt(userInput.replaceAll(" months", ""));
-            } catch (Exception e)
-            {
+            } catch (Exception e) {
                 parsedInput = -1;
             }
 
@@ -26,7 +22,7 @@ public class DisplayMain {
         }
 
         DisplayManager.displayMessage(String.valueOf(parsedInput));
-        DisplayManager.displayMessage("You have chosen to run the simulation for "+ userInput);
+        DisplayManager.displayMessage("You have chosen to run the simulation for " + userInput);
         DisplayManager.displaySeparator();
 
         DisplayManager.displayMessage("Would you like a monthly simulation report?");

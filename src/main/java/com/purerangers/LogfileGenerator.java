@@ -37,7 +37,7 @@ public class LogfileGenerator
     {
         String[] filteredNames = name.replaceAll("\\.", "/").split("/");
 
-        String createdName = filteredNames[filteredNames.length-1];
+        String createdName = filteredNames[filteredNames.length - 1];
 
         String logFolder = "src/logs/";
         createdName = new StringBuilder().append(logFolder).append(createdName).toString();
@@ -45,8 +45,7 @@ public class LogfileGenerator
         String finalFileName;
 
         int i = 0;
-        while (true)
-        {
+        while (true) {
             finalFileName = new StringBuilder().append(createdName).append(" months (").append(i).append(")").append(".log").toString();
             if (!new File(finalFileName).exists()) break;
             i++;
@@ -77,6 +76,9 @@ public class LogfileGenerator
                 }
                 currentLine++;
             }
+
+        if (!Files.isDirectory(path)) {
+            Files.createDirectory(path);
         }
 
         Files.delete(tempFile.toPath());

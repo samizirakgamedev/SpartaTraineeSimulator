@@ -3,9 +3,11 @@ package com.purerangers;
 import java.sql.Date;
 import java.util.ArrayList;
 
+import static com.purerangers.SimLogger.*;
+
 public class Client {
     private static ArrayList<Client> clientList;
-    protected int spartanNeeded=0;
+    protected int spartanNeeded;
     protected Date openDate;
     protected static CourseType courseType=null;
     protected ArrayList<Person> spartans = filter(GraduateBenchHandler.getGraduateBench()); //filters bench list
@@ -28,6 +30,7 @@ public class Client {
         }
         return clientList;
     }
+
     public ArrayList<Person> getSpartansAtClient() {
         if (spartansAtClient == null) {
             spartansAtClient = new ArrayList<>();
@@ -38,13 +41,17 @@ public class Client {
     private static ArrayList<Person> filteredSpartans;
 
     public static ArrayList<Person> filter(ArrayList<Person> spartans){
-        if (spartans.isEmpty()){
-            filteredSpartans= new ArrayList<>();
+        if (spartans==null){
+            logInfo("Spartans available null arraylist, so empty arraylist made");
+            return new ArrayList<>();
         }
+        filteredSpartans= new ArrayList<>();
+        if (spartans.size()>0){
         for (Person p:spartans){
             if (p.getCourseType()==Client.courseType){
                 filteredSpartans.add(p);
             }
+        }
         }
         return filteredSpartans;
     }
@@ -62,6 +69,7 @@ public class Client {
     //amount of spartans at client
     public int getAmountOfSpartansAtClient() {
         if (spartansAtClient == null){
+            logWarn("Spartans at Client is null");
             return 0;
         }
         return spartansAtClient.size();
@@ -91,14 +99,12 @@ public class Client {
 
     public boolean addSpartan(Person spartan) {
         if (spartan ==null) {
+            logError("Person attempting to be add is null");
             throw new NullPointerException();
         }
 
         if (getAmountOfSpartansAtClient() < spartanNeeded) {
-
-           // System.out.println("Amount of spartans needed:"+spartanNeeded+"amount they have:"+getAmountOfSpartansAtClient()+"Difference: "+getFreeSpace());
             spartansAtClient.add(spartan);
-            //System.out.println("Spartan size"+ spartansAtClient.size());
             return true;
         }
         return false;
@@ -108,6 +114,7 @@ public class Client {
         monthsTillReview--;
 
         if (newDate == null) {
+            logError("There is no date to be updated");
             throw new NullPointerException();
         }
         if (monthsTillReview==0){
@@ -117,7 +124,7 @@ public class Client {
             }
             else{
                 spartanNeeded += spartanNeeded/5;
-                System.out.println("ClientID: "+getClientID()+" has increased their Spartans needed to "+spartanNeeded);
+                logInfo("ClientID: "+getClientID()+" has increased their Spartans needed to "+spartanNeeded);
             }
 
             monthsTillReview=12;
@@ -129,12 +136,10 @@ public class Client {
 
     public ArrayList<Person> attemptToRecruitSpartans(ArrayList<Person> spartans) {
         if (spartans == null) {
-            throw new NullPointerException();
+            return new ArrayList<>();
         }
         int b= RandomNumberGenerator.getRandomNumbersUsingNextInt(1,getFreeSpace());
-        //System.out.println("Random number"+ b);
         int i=0;
-        //System.out.println("Max they can add in Month:"+b);
         do  {
             if (spartans.size() > i && getAmountOfSpartansAtClient() < spartanNeeded) {
                 Person spartan = spartans.get(i);
@@ -144,11 +149,9 @@ public class Client {
             i++;
         }
         while (i<b-1);
-
         return spartans;
     }
 
-    //takes client off clientlist and adds Spartans back to bench (back of Q)
     public void closeAndReassign() {
         // adds the spartans back to the grad bench queue
         for (int i = 0; i < getAmountOfSpartansAtClient(); i++) {
@@ -157,8 +160,6 @@ public class Client {
         spartanNeeded=0;
         spartansAtClient=new ArrayList<>();
         isClient=false;
-        //getClientList().remove(this); // removes client from list
-        //isClient = false; // shows client is over
     }
 
     @Override
@@ -177,12 +178,6 @@ public class Client {
     //get client ID
     public int getClientID() {
         return getClientList().indexOf(this);
-    }
-
-    public static void main(String[] args) {
-        Client a= new Client();
-        Client b= new Client();
-        System.out.println(getClientList());
     }
 }
 
