@@ -13,7 +13,7 @@ public class InputManager {
             "seventeen", "eighteen", "nineteen", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty",
             "ninety", "hundred", "thousand", "million", "billion", "trillion");
 
-    // Getter for getting a String from the user.
+    // Getter for getting an input from the user.
     public static String getSimulationDuration() {
         int simulationDuration = 0;
         String simString = "0";
@@ -27,27 +27,29 @@ public class InputManager {
         }
       return simString;
     }
+    // Driver method for the InputManager class.
     public static String convertTextualNumbersInString(String inputText) {
-        // Splits text into words and deals with hyphenated numbers.
-        // Used linked list due to manipulation during processing.
-        List<String> words = new LinkedList<>(cleanAndTokenizeText(inputText.toLowerCase()));
-
-        // Calls method to replace all the textual numbers with actual integers.
-        words = replaceTextualNumbers(words);
-
-        // Calls method to convert input into months if it detects a string such as "years" after the number.
         try
         {
+            // Splits text into words and deals with hyphenated numbers.
+            // Used linked list due to manipulation during processing.
+            List<String> words = new LinkedList<>(cleanAndTokenizeText(inputText.toLowerCase()));
+
+            // Calls method to replace all the textual numbers with actual integers.
+            words = replaceTextualNumbers(words);
+
+            // Calls method to convert input into months if it detects a string such as "years" after the number.
             monthsOfSimulation = convertInputToMonths(words);
+
+            // Calls method that put spaces back in and returns the string.
+            // This should be the same as input text except from textual numbers that should now be ints.
+            return wordListToString(words);
         }
         catch (Exception e)
         {
             handleInputExceptions(e);
         }
-
-        // Calls method that put spaces back in and returns the string.
-        // This should be the same as input text except from textual numbers that should now be ints.
-        return wordListToString(words);
+        return null;
     }
     // Removes any symbols and spaces their may be in the string ready for processing.
     // E.g. twenty-two -> twenty two
