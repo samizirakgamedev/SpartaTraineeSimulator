@@ -3,12 +3,11 @@ package com.purerangers;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 public class CreateTrainees {
     static TraineeDatabase mysqlConnect = new TraineeDatabase();
+
     public static void generateTrainees(int numberOfTrainees) throws SQLException {
         String[] courses = {"Java", "C#", "Data", "DevOps", "Business"};
         Random random = new Random();
@@ -27,14 +26,15 @@ public class CreateTrainees {
             result2 = rs.getInt("Max2");
         }
         if (result2 > result) result = result2;
-        for (int i = result+1; i < numberOfTrainees + result; i++) {
+        for (int i = result + 1; i < numberOfTrainees + result; i++) {
             int chosen = random.nextInt(1, 6);
-            String randomCourse = courses[chosen-1];
+            String randomCourse = courses[chosen - 1];
             String sqlInsertInQueue = "INSERT INTO `Queue` (`ID_Trainee`, `ID_Course`) VALUES (" + i + ", " + chosen + ");";
             PreparedStatement st2 = mysqlConnect.connect().prepareStatement(sqlInsertInQueue); //prepare java statement
             st2.executeUpdate(sqlInsertInQueue); //execute the query
         }
     }
+
     public static void showQueue() throws SQLException {
         String[] courses = {"Java", "C#", "Data", "DevOps", "Business"};
         String sqlShowQueue = "SELECT * FROM Queue;";
@@ -45,17 +45,18 @@ public class CreateTrainees {
         while (rs.next()) {
             trainee = rs.getInt("ID_Trainee");
             course = rs.getInt("ID_Course");
-            String courseName = courses[course-1];
+            String courseName = courses[course - 1];
             System.out.println("Trainee " + trainee + " is waiting for course " + courseName);
         }
     }
+
     public static void parseQueue() throws SQLException {
         String findCentreType = "SELECT DISTINCT Type_ID FROM Training_Centres;";
         PreparedStatement st = mysqlConnect.connect().prepareStatement(findCentreType); //prepare java statement
         ResultSet rs = st.executeQuery(findCentreType); //execute the query
         int[] res = new int[10000];
         int i = 0;
-        while (rs.next()){
+        while (rs.next()) {
             int type = rs.getInt("Type_ID");
             res[i] = type;
             //System.out.println(res[i]);

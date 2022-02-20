@@ -1,16 +1,14 @@
 package com.purerangers;
-import static com.purerangers.SimLogger.logger;
 
-import java.sql.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Connection;
 
 public class CheckCentresSpaces {
     static TraineeDatabase mysqlConnect = new TraineeDatabase();
     static int result = 0;
     static int maxSpaces = 0;
+
     public static void checkAvailability() throws SQLException {
         String sql1 = "SELECT DISTINCT TC_ID FROM Trainees;";
         PreparedStatement st3 = mysqlConnect.connect().prepareStatement(sql1);
@@ -21,7 +19,8 @@ public class CheckCentresSpaces {
             System.out.println(returnAvailable(result3));
         }
     }
-    public static int returnAvailable(int c){
+
+    public static int returnAvailable(int c) {
         try {
             String sqlCentresList;
             sqlCentresList = "SELECT COUNT(*) AS ID FROM `Trainees` WHERE TC_ID = " + c + ";";
@@ -39,6 +38,7 @@ public class CheckCentresSpaces {
 
         return maxSpaces - result;
     }
+
     public static String returnCentreType(int t) throws SQLException {
         String type = "";
         String sqlGetType = "SELECT Name FROM `Centre_Type` WHERE ID = " + t + ";";
