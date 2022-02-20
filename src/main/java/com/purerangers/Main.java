@@ -15,6 +15,15 @@ public class Main
 
     public static void main(String[] args)
     {
+        try
+        {
+            LogfileGenerator.backupLogFile();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
         DisplayManager.displayWelcome();
 
         String userInput = "";
@@ -28,7 +37,8 @@ public class Main
             try
             {
                 parsedMonthsToSimulate = Integer.parseInt(userInput.replaceAll(" months", ""));
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 parsedMonthsToSimulate = -1;
             }
