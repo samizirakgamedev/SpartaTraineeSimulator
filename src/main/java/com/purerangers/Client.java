@@ -127,7 +127,7 @@ public class Client {
             }
             else{
                 spartanNeeded += spartanNeeded/5;
-                System.out.println("ClientID: "+getClientID()+" has increased their Spartans needed to "+spartanNeeded);
+                logInfo("ClientID: "+getClientID()+" has increased their Spartans needed to "+spartanNeeded);
             }
 
             monthsTillReview=12;
