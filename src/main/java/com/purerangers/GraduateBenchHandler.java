@@ -2,7 +2,7 @@ package com.purerangers;
 
 import java.util.ArrayList;
 import java.util.Queue;
-
+import static com.purerangers.SimLogger.*;
 public class GraduateBenchHandler
 {
     private static GraduateBenchHandler instance;
@@ -13,7 +13,6 @@ public class GraduateBenchHandler
         {
             instance = new GraduateBenchHandler();
         }
-
         return instance;
     }
 
@@ -38,10 +37,11 @@ public class GraduateBenchHandler
         while (0 < peopleToAdd.size())
         {
             Person person = peopleToAdd.remove();
-
+            logInfo("Graduates added to bench");
             if (!getGraduateBench().contains(person))
             {
                 getGraduateBench().add(person);
+
             }
         }
     }

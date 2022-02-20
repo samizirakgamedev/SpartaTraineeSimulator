@@ -3,6 +3,8 @@ package com.purerangers;
 import java.sql.Date;
 import java.util.ArrayList;
 
+import static com.purerangers.SimLogger.*;
+
 public class Client {
     private static ArrayList<Client> clientList;
     protected int spartanNeeded;
@@ -24,6 +26,7 @@ public class Client {
 
     public static ArrayList<Client> getClientList() {
         if (clientList == null) {
+            logInfo("ClientList is null");
             clientList = new ArrayList<>();
         }
         return clientList;
@@ -40,6 +43,7 @@ public class Client {
 
     public static ArrayList<Person> filter(ArrayList<Person> spartans){
         if (spartans==null){
+            logInfo("Spartans available null arraylist, so empty arraylist made");
             return new ArrayList<>();
         }
         filteredSpartans= new ArrayList<>();
@@ -66,6 +70,7 @@ public class Client {
     //amount of spartans at client
     public int getAmountOfSpartansAtClient() {
         if (spartansAtClient == null){
+            logWarn("Spartans at Client is null");
             return 0;
         }
         return spartansAtClient.size();
@@ -95,6 +100,7 @@ public class Client {
 
     public boolean addSpartan(Person spartan) {
         if (spartan ==null) {
+            logError("Person attempting to be add is null");
             throw new NullPointerException();
         }
 
@@ -111,6 +117,7 @@ public class Client {
         monthsTillReview--;
 
         if (newDate == null) {
+            logError("There is no date to be updated");
             throw new NullPointerException();
         }
         if (monthsTillReview==0){

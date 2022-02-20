@@ -1,7 +1,7 @@
 package com.purerangers;
 
 import com.purerangers.TrainingCentreTypes.TrainingCentre;
-
+import static com.purerangers.SimLogger.*;
 import java.sql.Date;
 import java.util.ArrayList;
 
@@ -48,7 +48,7 @@ public class TimeManager
     {
         long hours = 24L * 7 * 4;
         currentDate = new Date(currentDate.getTime() + hours*60*60*1000);
-
+        logInfo("Month being added to all Training centres and Clients");
         for (TrainingCentre trainingCentre : trainingCentres)
         {
             trainingCentre.updateDate(currentDate);
