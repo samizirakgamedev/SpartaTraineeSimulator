@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class ClientTests {
+public class ClientTesting {
     @Test
     @DisplayName("Given no spartans available for recruit, empty arraylist returned")
     public void noSpartansReturnsEmptyArrayList()

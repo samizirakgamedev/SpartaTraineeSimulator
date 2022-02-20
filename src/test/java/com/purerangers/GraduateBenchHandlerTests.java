@@ -64,9 +64,10 @@ public class GraduateBenchHandlerTests
 
             tm.addMonth();
         }
-        
+
+        int expected = 1100;
         int actual = gbh.getGraduateBench().size();
 
-        Assertions.assertTrue(actual > 0);
+        Assertions.assertEquals(expected, actual);
     }
 }

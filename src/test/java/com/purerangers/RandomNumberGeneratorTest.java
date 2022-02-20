@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import static com.purerangers.generators.RandomNumberGenerator.getRandomNumbersUsingNextInt;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class RandomNumberGeneratorTests {
+public class RandomNumberGeneratorTest {
     @Test
     @DisplayName("RandomNumber: Check distribution probability above 90")
     public void checkRandomHigherNumDistribution() throws ParseException

@@ -164,7 +164,7 @@ public class TrainingCentreTests
     @DisplayName("TechCentre can only take the specific students")
     public void techCentre()
     {
-        TechCentre techCentre = new TechCentre();
+        TrainingCentre techCentre = new TechCentre();
 
         Queue<Person> trainingQueue = new LinkedList<>();
 
@@ -180,8 +180,7 @@ public class TrainingCentreTests
         boolean hadIncorrectCourseType = false;
 
         for (Person person : techCentreTrainees) {
-            if (person.getCourseType() != techCentre.getCentreType())
-            {
+            if (person.getCourseType() != CourseType.JAVA) {
                 hadIncorrectCourseType = true;
             }
 

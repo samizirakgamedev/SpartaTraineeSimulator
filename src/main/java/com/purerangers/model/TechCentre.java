@@ -8,11 +8,6 @@ import java.util.Queue;
 
 public class TechCentre extends TrainingCentre {
     protected static final int MAX_TRAINEES = 200;
-
-    public CourseType getCentreType() {
-        return centreType;
-    }
-
     protected CourseType centreType;
 
     public TechCentre() {

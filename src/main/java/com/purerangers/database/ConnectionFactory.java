@@ -15,13 +15,12 @@ import java.util.Properties;
 import java.util.Queue;
 
 
-public class ConnectionFactory
-{
+public class ConnectionFactory {
     private static ConnectionFactory instance;
     private boolean autoExpand;
     private Queue<Connection> connections = new LinkedList<>();
 
-    private static final Logger logger = LogManager.getLogger(ConnectionFactory.class.getName());
+    private static final Logger logger = LogManager.getLogger(Simulation.class.getName());
 
     private ConnectionFactory() {
         autoExpand = false;
