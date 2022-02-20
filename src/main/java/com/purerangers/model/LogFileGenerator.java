@@ -1,18 +1,15 @@
-package com.purerangers;
+package com.purerangers.model;
 
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.logging.LogManager;
 
-public class LogfileGenerator
-{
+public class LogFileGenerator {
     private static File file;
     private static int backupFileLines;
 
-    public static void backupLogFile() throws IOException
-    {
+    public static void backupLogFile() throws IOException {
         file = new File("logfile.log");
         Path filePath = file.toPath();
 
@@ -20,8 +17,7 @@ public class LogfileGenerator
         File backupFile = new File(backupFileString);
         Path backupFilePath = backupFile.toPath();
 
-        if (Files.exists(backupFilePath))
-        {
+        if (Files.exists(backupFilePath)) {
             Files.delete(backupFilePath);
         }
 
@@ -29,12 +25,11 @@ public class LogfileGenerator
 
         FileReader fileReader = new FileReader(file);
         LineNumberReader lineNumberReader = new LineNumberReader(fileReader);
-        backupFileLines = (int)lineNumberReader.lines().count() + 1;
+        backupFileLines = (int) lineNumberReader.lines().count() + 1;
         lineNumberReader.close();
     }
 
-    public static void splitLogfile(String name) throws IOException
-    {
+    public static void splitLogfile(String name) throws IOException {
         String[] filteredNames = name.replaceAll("\\.", "/").split("/");
 
         String createdName = filteredNames[filteredNames.length - 1];
@@ -53,41 +48,37 @@ public class LogfileGenerator
 
         Path logFolderPath = Path.of(logFolder);
 
-        if (!Files.isDirectory(logFolderPath))
-        {
+        if (!Files.isDirectory(logFolderPath)) {
             Files.createDirectory(logFolderPath);
         }
 
         File finalFile = new File(finalFileName);
 
         File originalFile = file;
-        File tempFile = new File(originalFile+".tmp");
+        File tempFile = new File(originalFile + ".tmp");
         ArrayList<String> allLinesAfterBackup = new ArrayList<>();
         try (BufferedReader in = new BufferedReader(new FileReader(originalFile));
-             PrintWriter pw = new PrintWriter(new FileWriter(tempFile)))
-        {
+             PrintWriter pw = new PrintWriter(new FileWriter(tempFile))) {
             int currentLine = 0;
 
-            for (String data; (data = in.readLine()) != null; )
-            {
-                if (currentLine > backupFileLines)
-                {
+            for (String data; (data = in.readLine()) != null; ) {
+                if (currentLine > backupFileLines) {
                     allLinesAfterBackup.add(data);
                 }
                 currentLine++;
             }
 
-        if (!Files.isDirectory(path)) {
-            Files.createDirectory(path);
-        }
+            if (!Files.isDirectory(logFolderPath)) {
+                Files.createDirectory(logFolderPath);
+            }
 
-        Files.delete(tempFile.toPath());
+            Files.delete(tempFile.toPath());
 
-        FileWriter writer = new FileWriter(finalFile);
-        for(String str: allLinesAfterBackup)
-        {
-            writer.write(str + System.lineSeparator());
+            FileWriter writer = new FileWriter(finalFile);
+            for (String str : allLinesAfterBackup) {
+                writer.write(str + System.lineSeparator());
+            }
+            writer.close();
         }
-        writer.close();
     }
 }

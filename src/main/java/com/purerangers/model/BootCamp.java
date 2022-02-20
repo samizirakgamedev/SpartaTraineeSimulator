@@ -1,4 +1,4 @@
-package com.purerangers.TrainingCentreTypes;
+package com.purerangers.model;
 
 public class BootCamp extends TrainingCentre {
     protected static final int MAX_TRAINEES = 500;

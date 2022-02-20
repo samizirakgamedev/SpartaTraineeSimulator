@@ -1,4 +1,6 @@
-package com.purerangers;
+package com.purerangers.model;
+
+import com.purerangers.database.SQLReadable;
 
 import java.sql.Date;
 import java.util.Calendar;

@@ -1,14 +1,18 @@
 package com.purerangers;
 
+import com.purerangers.database.TraineeDatabase;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import static com.purerangers.SimLogger.logger;
-
 public class CreateTables {
     static TraineeDatabase mysqlConnect = new TraineeDatabase();
+
+    private static final Logger logger = LogManager.getLogger(Simulation.class.getName());
 
     public static void dropAllTables() {
         String[] tables = {"Training_Centres", "Trainees", "Centre_Type", "Course_Type", "Queue"};

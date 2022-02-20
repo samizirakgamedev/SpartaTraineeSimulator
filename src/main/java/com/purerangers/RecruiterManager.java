@@ -1,8 +1,9 @@
 package com.purerangers;
 
 
-import com.purerangers.TrainingCentreTypes.BootCamp;
-import com.purerangers.TrainingCentreTypes.TrainingCentre;
+import com.purerangers.model.BootCamp;
+import com.purerangers.model.TrainingCentre;
+import com.purerangers.model.Person;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

@@ -1,5 +1,7 @@
 package com.purerangers;
 
+import com.purerangers.model.Person;
+
 import java.util.ArrayList;
 import java.util.Queue;
 
@@ -34,10 +36,5 @@ public class GraduateBenchHandler {
 
             }
         }
-    }
-
-    public static void main(String[] args) {
-        GraduateBenchHandler a = new GraduateBenchHandler();
-
     }
 }

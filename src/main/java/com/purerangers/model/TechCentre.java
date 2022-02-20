@@ -1,8 +1,6 @@
-package com.purerangers.TrainingCentreTypes;
+package com.purerangers.model;
 
-import com.purerangers.CourseType;
-import com.purerangers.Person;
-import com.purerangers.RandomCourseGenerator;
+import com.purerangers.generators.RandomCourseGenerator;
 import com.purerangers.TimeManager;
 
 import java.util.LinkedList;

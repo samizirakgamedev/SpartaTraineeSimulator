@@ -1,6 +1,7 @@
 package com.purerangers;
 
 import com.mysql.cj.jdbc.DatabaseMetaData;
+import com.purerangers.database.TraineeDatabase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

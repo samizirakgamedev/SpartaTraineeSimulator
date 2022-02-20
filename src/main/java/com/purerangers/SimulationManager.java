@@ -1,9 +1,9 @@
 package com.purerangers;
 
-import com.purerangers.TrainingCentreTypes.BootCamp;
-import com.purerangers.TrainingCentreTypes.TechCentre;
-import com.purerangers.TrainingCentreTypes.TrainingCentre;
-import com.purerangers.TrainingCentreTypes.TrainingHub;
+import com.purerangers.model.BootCamp;
+import com.purerangers.model.TechCentre;
+import com.purerangers.model.TrainingCentre;
+import com.purerangers.model.TrainingHub;
 
 import java.util.Random;
 

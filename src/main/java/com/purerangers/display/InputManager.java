@@ -1,40 +1,77 @@
-package com.purerangers;
+package com.purerangers.display;
 
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Scanner;
 
-public class TextToNumberConverter {
+public class InputManager {
     // List of stings that are allowed within the input we are converting.
-    final static List<String> allowedStrings = Arrays.asList("and", "zero", "one", "two", "three", "four", "five",
+    final static List<String> textualAllowedStrings = Arrays.asList("and", "zero", "one", "two", "three", "four", "five",
             "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen",
             "seventeen", "eighteen", "nineteen", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty",
             "ninety", "hundred", "thousand", "million", "billion", "trillion");
+    // Initialises the 'Scanner'.
+    private static Scanner scanner = new Scanner(System.in);
+    // Global variable to store the desired length of the simulation.
+    private static int monthsOfSimulation = 0;
+    // Getter for getting an input from the user.
+    public static String getSimulationDuration() {
+        int simulationDuration = 0;
+        String simString = "0";
+        try {
+            simString = convertTextualNumbersInString(scanner.nextLine());
+        } catch (Exception e) {
+            handleInputExceptions(e);
+            var i = scanner.nextLine();
+            simString = convertTextualNumbersInString(i);
+            getSimulationDuration();
+        }
+        return simString;
+    }
+    // Driver method for the InputManager class.
+    public static String convertTextualNumbersInString(String inputText) {
+        try
+        {
+            // Splits text into words and deals with hyphenated numbers.
+            // Used linked list due to manipulation during processing.
+            List<String> words = new LinkedList<>(cleanAndTokenizeText(inputText.toLowerCase()));
 
-    // Main method for debugging.
-    public static void main(String[] args) {
-        String sentence = "32 years";
-        String words = convertTextualNumbersInString(sentence);
-        System.out.println("Input before: " + sentence);
-        System.out.println("Input after: " + words);
+            // Calls method to replace all the textual numbers with actual integers.
+            words = replaceTextualNumbers(words);
+
+            // Calls method to convert input into months if it detects a string such as "years" after the number.
+            monthsOfSimulation = convertInputToMonths(words);
+
+            // Calls method that put spaces back in and returns the string.
+            // This should be the same as input text except from textual numbers that should now be ints.
+            return wordListToString(words);
+        }
+        catch (Exception e)
+        {
+            handleInputExceptions(e);
+        }
+        return null;
     }
 
-    // Main driver method for converting textual numbers to a string.
-    public static String convertTextualNumbersInString(String inputText) {
-
-        // Splits text into words and deals with hyphenated numbers.
-        // Used linked list due to manipulation during processing.
-        List<String> words = new LinkedList<>(cleanAndTokenizeText(inputText));
-
-        // Calls method to replace all the textual numbers with actual integers.
-        words = replaceTextualNumbers(words);
-
-        // Calls method to convert input into months if it detects "years"
-        convertInputToMonths(words);
-
-        // Calls method that put spaces back in and returns the string.
-        // This should be the same as input text except from textual numbers that should now be ints.
-        return wordListToString(words);
+    // Removes any symbols and spaces their may be in the string ready for processing.
+    // E.g. twenty-two -> twenty two
+    private static List<String> cleanAndTokenizeText(String sentence) {
+        List<String> words = new LinkedList<String>(Arrays.asList(sentence.split(" ")));
+        // Removes hyphenated textual numbers
+        for (int i = 0; i < words.size(); i++) {
+            String str = words.get(i);
+            if (str.contains("-")) {
+                List<String> splitWords = Arrays.asList(str.split("-"));
+                // Just checks the first word is a textual number. Caters for
+                // "twenty-five," without having to strip the comma
+                if (splitWords.size() > 1 && textualAllowedStrings.contains(splitWords.get(0))) {
+                    words.remove(i);
+                    words.addAll(i, splitWords);
+                }
+            }
+        }
+        return words;
     }
 
     // Method that is called to process each word in the string by grouping them and replace the textual numbers with their respective number/s.
@@ -59,7 +96,7 @@ public class TextToNumberConverter {
             String wordStripped = word.replaceAll("[^a-zA-Z\\s]", "").toLowerCase();
 
             // Conditional statement that checks for and removes "and" words by themselves or "and"s at start of number.
-            if (allowedStrings.contains(wordStripped) && !(processingList.size() == 0 && wordStripped.equals("and"))) {
+            if (textualAllowedStrings.contains(wordStripped) && !(processingList.size() == 0 && wordStripped.equals("and"))) {
                 words.remove(i); // remove from main list, will process later
                 processingList.add(word);
             } else if (processingList.size() > 0) { // If there are no more textual words to process.
@@ -86,36 +123,43 @@ public class TextToNumberConverter {
         return words;
     }
 
-    public static List<String> convertInputToMonths(List<String> words) {
-        if (words.size() <= 1)
-            return words;
-        String[] index = new String[words.size()];
-        words.toArray(index);
-        words.clear();
-        switch (index[index.length - 1].toLowerCase()) {
-            case "days":
-                int days = Integer.parseInt(index[0]) / 30;
-                index[0] = String.valueOf(days);
-                index[index.length - 1] = "Months";
-                break;
-            case "weeks":
-                double weeks = Double.parseDouble(index[0]) / 4.34524;
-                int truncated = Integer.parseInt(String.valueOf(Math.round(weeks)));
-                index[0] = String.valueOf(truncated);
-                index[index.length - 1] = "Months";
-                break;
-            case "years":
-                int years = Integer.parseInt(index[0]) * 12;
-                index[0] = String.valueOf(years);
-                index[index.length - 1] = "Months";
-                break;
-            default:
-                break;
+    // Takes the list containing the non-textual number and checks (based on the second string in the list) if the number needs converting to months.
+    public static int convertInputToMonths(List<String> words) {
+        int totalMonths;
+        if (words.size() <= 1) {
+            totalMonths = Integer.parseInt(words.get(0));
+            words.add("months");
+            return totalMonths;
         }
-        for (int i = 0; i < index.length; i++) {
-            words.add(index[i]);
+        if (words.get(1).contains("day")){
+            totalMonths = Integer.parseInt(words.get(0)) / 30;
+            words.set(0, String.valueOf(totalMonths));
+        } else if (words.get(1).contains("week")){
+            double weeks = Double.parseDouble(words.get(0)) / 4.34524;
+            totalMonths = Integer.parseInt(String.valueOf(Math.round(weeks)));
+            words.set(0, String.valueOf(totalMonths));
+        } else if (words.get(1).contains("year")){
+            totalMonths = Integer.parseInt(words.get(0)) * 12;
+            words.set(0, String.valueOf(totalMonths));
+        } else {
+            totalMonths = Integer.parseInt(words.get(0));
         }
-        return words;
+        words.set(1, "months");
+        return totalMonths;
+    }
+
+    // Method that is called to build a string back together from a list of strings. This includes spaces.
+    private static String wordListToString(List<String> list) {
+        StringBuilder result = new StringBuilder("");
+        for (int i = 0; i < list.size(); i++) {
+            String str = list.get(i);
+            if (i == 0 && str != null) {
+                result.append(list.get(i));
+            } else if (str != null) {
+                result.append(" ").append(list.get(i));
+            }
+        }
+        return result.toString();
     }
 
     // Method for adding back in any punctuation to the string that has now been converted into a numerical string.
@@ -133,41 +177,6 @@ public class TextToNumberConverter {
             wordAsDigits = firstChar + wordAsDigits;
         }
         return wordAsDigits;
-    }
-
-    // Removes any symbols and spaces their may be in the string ready for processing.
-    // E.g. twenty-two -> twenty two
-    private static List<String> cleanAndTokenizeText(String sentence) {
-        List<String> words = new LinkedList<String>(Arrays.asList(sentence.split(" ")));
-
-        // Removes hyphenated textual numbers
-        for (int i = 0; i < words.size(); i++) {
-            String str = words.get(i);
-            if (str.contains("-")) {
-                List<String> splitWords = Arrays.asList(str.split("-"));
-                // Just checks the first word is a textual number. Caters for
-                // "twenty-five," without having to strip the comma
-                if (splitWords.size() > 1 && allowedStrings.contains(splitWords.get(0))) {
-                    words.remove(i);
-                    words.addAll(i, splitWords);
-                }
-            }
-        }
-        return words;
-    }
-
-    // Method that is called to build a string back together from a list of strings. This includes spaces.
-    private static String wordListToString(List<String> list) {
-        StringBuilder result = new StringBuilder("");
-        for (int i = 0; i < list.size(); i++) {
-            String str = list.get(i);
-            if (i == 0 && str != null) {
-                result.append(list.get(i));
-            } else if (str != null) {
-                result.append(" " + list.get(i));
-            }
-        }
-        return result.toString();
     }
 
     // Method for taking a textual number string and converting it into a number.
@@ -258,5 +267,21 @@ public class TextToNumberConverter {
         intermediateResult = 0;
         return finalResult;
     }
-}
 
+    // Method to be called to  handle input exceptions.
+    public static void handleInputExceptions(Exception e) {
+        String message;
+        switch (e.toString()) {
+            case "java.util.InputMismatchException":
+                message = "Please enter your input in the desired format.";
+                break;
+            case "java.lang.NullPointerException":
+                message = "Please ensure you have entered a value before pressing enter.";
+                break;
+            default:
+                message = "Your input was invalid, please review it and try again.";
+        }
+        ;
+        DisplayManager.displayMessage(message);
+    }
+}

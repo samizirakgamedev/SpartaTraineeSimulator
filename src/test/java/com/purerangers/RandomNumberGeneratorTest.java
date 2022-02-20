@@ -4,11 +4,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.text.ParseException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
-import static com.purerangers.DateFormat.formatDate;
-import static com.purerangers.RandomNumberGenerator.getRandomNumbersUsingNextInt;
+import static com.purerangers.generators.RandomNumberGenerator.getRandomNumbersUsingNextInt;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class RandomNumberGeneratorTest {

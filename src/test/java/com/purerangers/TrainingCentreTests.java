@@ -1,8 +1,6 @@
 package com.purerangers;
 
-import com.purerangers.TrainingCentreTypes.BootCamp;
-import com.purerangers.TrainingCentreTypes.TechCentre;
-import com.purerangers.TrainingCentreTypes.TrainingCentre;
+import com.purerangers.model.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

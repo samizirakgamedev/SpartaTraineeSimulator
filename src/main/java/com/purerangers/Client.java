@@ -1,9 +1,15 @@
 package com.purerangers;
 
+import com.purerangers.generators.RandomCourseGenerator;
+import com.purerangers.generators.RandomNumberGenerator;
+import com.purerangers.model.CourseType;
+import com.purerangers.model.Person;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.sql.Date;
 import java.util.ArrayList;
 
-import static com.purerangers.SimLogger.*;
 
 public class Client {
     private static ArrayList<Client> clientList;
@@ -14,6 +20,8 @@ public class Client {
     protected ArrayList<Person> spartansAtClient= new ArrayList<>();
     protected int monthsTillReview=12;
     Boolean isClient=true;
+
+    private static final Logger logger = LogManager.getLogger(Simulation.class.getName());
 
     public Client() {
         this.spartanNeeded = RandomNumberGenerator.getRandomNumbersUsingNextInt(15,50);
@@ -42,7 +50,7 @@ public class Client {
 
     public static ArrayList<Person> filter(ArrayList<Person> spartans){
         if (spartans==null){
-            logInfo("Spartans available null arraylist, so empty arraylist made");
+            logger.info("Spartans available null arraylist, so empty arraylist made");
             return new ArrayList<>();
         }
         filteredSpartans= new ArrayList<>();
@@ -69,7 +77,7 @@ public class Client {
     //amount of spartans at client
     public int getAmountOfSpartansAtClient() {
         if (spartansAtClient == null){
-            logWarn("Spartans at Client is null");
+            logger.warn("Spartans at Client is null");
             return 0;
         }
         return spartansAtClient.size();
@@ -99,7 +107,7 @@ public class Client {
 
     public boolean addSpartan(Person spartan) {
         if (spartan ==null) {
-            logError("Person attempting to be add is null");
+            logger.error("Person attempting to be add is null");
             throw new NullPointerException();
         }
 
@@ -114,7 +122,7 @@ public class Client {
         monthsTillReview--;
 
         if (newDate == null) {
-            logError("There is no date to be updated");
+            logger.error("There is no date to be updated");
             throw new NullPointerException();
         }
         if (monthsTillReview==0){
@@ -124,7 +132,7 @@ public class Client {
             }
             else{
                 spartanNeeded += spartanNeeded/5;
-                logInfo("ClientID: "+getClientID()+" has increased their Spartans needed to "+spartanNeeded);
+                logger.info("ClientID: "+getClientID()+" has increased their Spartans needed to "+spartanNeeded);
             }
 
             monthsTillReview=12;

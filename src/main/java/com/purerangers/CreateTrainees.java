@@ -1,5 +1,7 @@
 package com.purerangers;
 
+import com.purerangers.database.TraineeDatabase;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

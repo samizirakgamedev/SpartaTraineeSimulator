@@ -1,4 +1,4 @@
-package com.purerangers;
+package com.purerangers.model;
 
 public enum CourseType {
     JAVA("Java"),

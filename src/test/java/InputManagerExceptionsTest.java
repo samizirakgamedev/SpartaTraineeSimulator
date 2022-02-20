@@ -1,4 +1,4 @@
-import com.purerangers.InputManager;
+import com.purerangers.display.InputManager;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

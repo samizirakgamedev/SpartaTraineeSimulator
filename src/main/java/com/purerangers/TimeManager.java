@@ -1,11 +1,11 @@
 package com.purerangers;
-
-import com.purerangers.TrainingCentreTypes.TrainingCentre;
+import com.purerangers.model.TrainingCentre;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.Date;
 import java.util.ArrayList;
 
-import static com.purerangers.SimLogger.logInfo;
 
 public class TimeManager {
     private static TimeManager instance;
@@ -13,6 +13,8 @@ public class TimeManager {
     public ArrayList<Client> clients;
     private Date simulationStartDate;
     private Date currentDate;
+
+    private static final Logger logger = LogManager.getLogger(Simulation.class.getName());
 
     private TimeManager() {
         simulationStartDate = new Date(System.currentTimeMillis());
@@ -41,7 +43,7 @@ public class TimeManager {
     public void addMonth() {
         long hours = 24L * 7 * 4;
         currentDate = new Date(currentDate.getTime() + hours * 60 * 60 * 1000);
-        logInfo("Month being added to all Training centres and Clients");
+        logger.info("Month being added to all Training centres and Clients");
         for (TrainingCentre trainingCentre : trainingCentres) {
             trainingCentre.updateDate(currentDate);
         }

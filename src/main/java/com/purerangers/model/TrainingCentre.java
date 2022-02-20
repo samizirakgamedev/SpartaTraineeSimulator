@@ -1,4 +1,4 @@
-package com.purerangers.TrainingCentreTypes;
+package com.purerangers.model;
 
 import com.purerangers.*;
 

@@ -1,5 +1,8 @@
 package com.purerangers;
 
+import com.purerangers.display.DisplayManager;
+import com.purerangers.display.InputManager;
+
 import java.util.Scanner;
 
 public class DisplayMain {
@@ -25,7 +28,7 @@ public class DisplayMain {
         DisplayManager.displayMessage("You have chosen to run the simulation for " + userInput);
         DisplayManager.displaySeparator();
 
-        DisplayManager.displayMessage("Would you like a monthly simulation report?");
+        DisplayManager.displayMessage("Would you like a monthly simulation report? (true or false)");
         Scanner scanner = new Scanner(System.in);
         boolean monthlyProgressReports = scanner.nextBoolean();
 

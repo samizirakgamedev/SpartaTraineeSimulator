@@ -1,10 +1,9 @@
 package com.purerangers;
 
+import com.purerangers.model.Person;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.sql.Date;
 
 public class PersonTests
 {

@@ -1,4 +1,4 @@
-import com.purerangers.InputManager;
+import com.purerangers.display.InputManager;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;

@@ -1,4 +1,4 @@
-package com.purerangers;
+package com.purerangers.display;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

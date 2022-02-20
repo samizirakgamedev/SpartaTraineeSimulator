@@ -1,4 +1,8 @@
-package com.purerangers;
+package com.purerangers.database;
+
+import com.purerangers.Simulation;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -10,12 +14,13 @@ import java.util.LinkedList;
 import java.util.Properties;
 import java.util.Queue;
 
-import static com.purerangers.SimLogger.logger;
 
 public class ConnectionFactory {
     private static ConnectionFactory instance;
     private boolean autoExpand;
     private Queue<Connection> connections = new LinkedList<>();
+
+    private static final Logger logger = LogManager.getLogger(Simulation.class.getName());
 
     private ConnectionFactory() {
         autoExpand = false;

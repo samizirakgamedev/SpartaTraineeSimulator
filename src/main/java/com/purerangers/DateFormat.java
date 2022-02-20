@@ -6,14 +6,8 @@ import org.apache.logging.log4j.Logger;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-
 public class DateFormat {
     private static final Logger logger = LogManager.getLogger("DateFormat logger:");
-
-    public static void main(String[] args) {
-        //"9/21/1982"
-        formatDate("21/9/1982");
-    }
 
     public static LocalDate formatDate(String s) {
         try {

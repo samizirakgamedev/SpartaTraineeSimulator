@@ -1,4 +1,4 @@
-package com.purerangers;
+package com.purerangers.model;
 
 import java.sql.Date;
 

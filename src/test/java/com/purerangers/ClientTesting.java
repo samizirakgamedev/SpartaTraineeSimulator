@@ -1,5 +1,6 @@
 package com.purerangers;
 
+import com.purerangers.model.Person;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

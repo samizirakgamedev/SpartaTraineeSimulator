@@ -1,4 +1,4 @@
-package com.purerangers.TrainingCentreTypes;
+package com.purerangers.model;
 
 public class TrainingHub extends TrainingCentre
 {

@@ -1,5 +1,7 @@
 package com.purerangers;
 
+import com.purerangers.model.Person;
+
 import java.util.LinkedList;
 import java.util.Queue;
 

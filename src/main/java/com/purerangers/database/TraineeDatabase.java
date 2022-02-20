@@ -1,17 +1,21 @@
-package com.purerangers;
+package com.purerangers.database;
+
+import com.purerangers.Simulation;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
-import static com.purerangers.SimLogger.logger;
-
 public class TraineeDatabase {
     private static final String DATABASE_DRIVER = "com.mysql.cj.jdbc.Driver";
     private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/zzz";
     private static final String USERNAME = "root";
     private static final String PASSWORD = "12pass34";
+
+    private static final Logger logger = LogManager.getLogger(Simulation.class.getName());
 
     // init connection object
     private static Connection connection;

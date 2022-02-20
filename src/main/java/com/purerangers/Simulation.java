@@ -1,6 +1,8 @@
 package com.purerangers;
 
-import com.purerangers.TrainingCentreTypes.TrainingCentre;
+import com.purerangers.model.CourseType;
+import com.purerangers.model.TrainingCentre;
+import com.purerangers.model.Person;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
