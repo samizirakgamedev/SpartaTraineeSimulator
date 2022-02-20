@@ -7,7 +7,7 @@ import java.util.Queue;
 
 public class GraduateBenchHandler
 {
-    public static ArrayList<Person> graduateBench;
+    public ArrayList<Person> graduateBench;
     private static GraduateBenchHandler instance;
 
     public static GraduateBenchHandler getInstance()
@@ -20,7 +20,7 @@ public class GraduateBenchHandler
         return instance;
     }
 
-    public static ArrayList<Person> getGraduateBench()
+    public ArrayList<Person> getGraduateBench()
     {
         if (graduateBench == null)
         {
@@ -30,12 +30,12 @@ public class GraduateBenchHandler
         return graduateBench;
     }
 
-    public static void addToBench(Person personToBeAdded)
+    public void addToBench(Person personToBeAdded)
     {
         getGraduateBench().add(personToBeAdded);
     }
 
-    public static void addPeople(Queue<Person> peopleToAdd)
+    public void addPeople(Queue<Person> peopleToAdd)
     {
         while (0 < peopleToAdd.size())
         {
