@@ -12,7 +12,6 @@ public class DisplayMain {
         while (parsedInput == -1) {
             DisplayManager.displayMessage("How long would you like to run the simulation to for (e.g. 3 months, three years): ");
             userInput = InputManager.getSimulationDuration();
-
             try {
                 parsedInput = Integer.parseInt(userInput.replaceAll(" months", ""));
             } catch (Exception e) {
