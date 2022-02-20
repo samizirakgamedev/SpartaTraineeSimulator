@@ -24,7 +24,8 @@ A simulator that will help track the number of people currently training at Spar
     - [Phase 2](#phase-2)
     - [Phase 3](#phase-3)
 + [Project Management](#project-management)
-+ [JUnit Testing](#junit-testing)
++ [Testing](#testing)
++ [Outcomes and Future Work](#outcomes-and-future-work)
 ### Software & Dependencies ###
 * **IntelliJ Community Edition** [Version 2021.3.2](https://www.jetbrains.com/idea/download/#section=windows)
 * **JDK** [Version 17.0.2](https://jdk.java.net/17/)
@@ -163,10 +164,65 @@ Our trello was also updated throughout our project to reflect the completion of 
 </div>
 <br/>
 
-### JUnit Testing ###
+### Testing ###
+
+The user will see a first prompt asking long the simulation will run for and a second to ask if the user would like a
+simulation report detailing each month. This is shown in the figure below:
+
+<img src="readmeImages/usin.png">
+
+
+#### Automatic (JUnit Testing) ####
+
+JUnit Testing is a series of automatic tests that quickly test the methods within classes that have been created. 
+It consists of comparing 'actual' and 'expected' results as well as testing how the programme handle exceptions that 
+may be thrown. In this project JUnit Testing was carried out using the following classes:
+
+* DateFormatTests
+* PersonTests
+* RandomNumberGeneratorTests
+* TimeManagerTests
+* TrainingCentreTests
+* WaitingListHandlerTests
+* ClientTests
+* InputManagerTests
+* GraduateManagerTests
+* InputManagerExceptionsTests
+
+The automatic tests described above all passed as shown below along with their individual test functionalities:
+
+<img src="readmeImages/junt1.png">
+
+#### Manual Testing ####
+
+Manual Testing was carried out as it was not feasible to test everything using JUnit Testing. The details of the Manual 
+Testing is provided below where all tests showed the expected output:
+
+* An invalid input for the first user question is entered, where the programme repeats the question to the user 
+until a valid response is given:
+
+<img src="readmeImages/mnul1.png">
+
+* An input of 2 years is entered which the programme understands as 24 months. The user then chooses a monthly 
+simulation report by inputting 'true' for the second prompt:
+
+<img src="readmeImages/mnul2.png">
+
+* An input of '800 days' was entered to make sure that the programme understands 'days' as a unit for time, with the 
+monthly simulation report being selected as per the previous Manual Test:
+
+<img src="readmeImages/mnul3.png">
+
+* The final Manual Test consisted of a first input of 'fifty weeks' to validate that the programme can understand 50 
+when written literally. Then 'false' is chosen to show that both true and false inputs for the second prompt 
+give the desired output:
+
+<img src="readmeImages/mnul4.png">
 
 <br/>
 <div align="right">
     <b><a href="#sparta-trainee-simulation-application-java">↥ back to top</a></b>
 </div>
 <br/>
+
+### Outcomes and Future Work ###
