@@ -6,10 +6,21 @@ import org.apache.logging.log4j.Logger;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class Main {
+public class Main
+{
     private static final Logger logger = LogManager.getLogger(Main.class.getName());
+  
+    public static void main(String[] args)
+    {
+        try
+        {
+            LogfileGenerator.backupLogFile();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
 
-    public static void main(String[] args) {
         DisplayManager.displayWelcome();
 
         String userInput = "";
@@ -18,9 +29,12 @@ public class Main {
         while (parsedMonthsToSimulate == -1) {
             DisplayManager.displayMessage("How long would you like to run the simulation to for (e.g. 3 months, three years): ");
             userInput = InputManager.getSimulationDuration();
-            try {
+            try
+            {
                 parsedMonthsToSimulate = Integer.parseInt(userInput.replaceAll(" months", ""));
-            } catch (Exception e) {
+            }
+          catch (Exception e)
+            {
                 parsedMonthsToSimulate = -1;
             }
 
