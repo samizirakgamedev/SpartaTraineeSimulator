@@ -226,3 +226,6 @@ give the desired output:
 <br/>
 
 ### Outcomes and Future Work ###
+
+This project was tasked with giving an output for all phases listed in their respective section. The final output 
+needed would show the following criteria with monthly details
