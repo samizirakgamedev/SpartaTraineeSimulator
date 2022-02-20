@@ -26,7 +26,6 @@ public class Client {
 
     public static ArrayList<Client> getClientList() {
         if (clientList == null) {
-            logInfo("ClientList is null");
             clientList = new ArrayList<>();
         }
         return clientList;
