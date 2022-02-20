@@ -12,12 +12,9 @@ public class InputManager {
             "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen",
             "seventeen", "eighteen", "nineteen", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty",
             "ninety", "hundred", "thousand", "million", "billion", "trillion");
-    final static List<String> boolAllowedStrings = Arrays.asList("yes", "true", "okay", "ok", "sure","please", "okie dokie");
-    final static List<String> boolFalseStrings = Arrays.asList("no", "false", "no thank you");
 
     // Getter for getting a String from the user.
-    public static String getSimulationDuration()
-    {
+    public static String getSimulationDuration() {
         int simulationDuration = 0;
         String simString = "0";
         try{
@@ -30,7 +27,6 @@ public class InputManager {
         }
       return simString;
     }
-
     public static String convertTextualNumbersInString(String inputText) {
         // Splits text into words and deals with hyphenated numbers.
         // Used linked list due to manipulation during processing.
@@ -52,10 +48,6 @@ public class InputManager {
         // Calls method that put spaces back in and returns the string.
         // This should be the same as input text except from textual numbers that should now be ints.
         return wordListToString(words);
-    }
-    // Getter to retrieve the length of the simulation from the class.
-    public static int getMonthsOfSimulation() {
-        return monthsOfSimulation;
     }
     // Removes any symbols and spaces their may be in the string ready for processing.
     // E.g. twenty-two -> twenty two
@@ -132,14 +124,14 @@ public class InputManager {
             words.add("months");
             return totalMonths;
         }
-        if (words.get(1).contains("days")){
+        if (words.get(1).contains("day")){
             totalMonths = Integer.parseInt(words.get(0)) / 30;
             words.set(0, String.valueOf(totalMonths));
-        } else if (words.get(1).contains("weeks")){
+        } else if (words.get(1).contains("week")){
             double weeks = Double.parseDouble(words.get(0)) / 4.34524;
             totalMonths = Integer.parseInt(String.valueOf(Math.round(weeks)));
             words.set(0, String.valueOf(totalMonths));
-        } else if (words.get(1).contains("years")){
+        } else if (words.get(1).contains("year")){
             totalMonths = Integer.parseInt(words.get(0)) * 12;
             words.set(0, String.valueOf(totalMonths));
         } else{
@@ -280,5 +272,4 @@ public class InputManager {
         };
         DisplayManager.displayMessage(message);
     }
-
 }
