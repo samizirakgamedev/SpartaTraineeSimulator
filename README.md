@@ -84,9 +84,9 @@ A simulator that will help track the number of people currently training at Spar
 
 <img src="readmeImages/htu4.jpg">
 
-5. Once the project has opened and all dependencies have been downloaded look to the top right-hand corner of IntelliJ and ensure that the class that has been set to run is **SpartaTraineeSimulationMain**. You can now run the program by clicking the green play button.
+5. Once the project has opened and all dependencies have been downloaded look to the top right-hand corner of IntelliJ and ensure that the class that has been set to run is **DisplayMain**. You can now run the program by clicking the green play button.
 
-IMAGE TO BE ADDED   
+<img src="readmeImages/htu5.jpg"> 
 
 <div align="right">
     <b><a href="#sparta-trainee-simulation-application-java">↥ back to top</a></b>
