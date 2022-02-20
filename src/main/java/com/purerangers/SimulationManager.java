@@ -27,15 +27,12 @@ public class SimulationManager
             case 0:
                 if (numberOfBootCamps < 2)
                 {
-                    ///System.out.println("Spawned a boot camp");
                     numberOfBootCamps++;
                     return new BootCamp();
                 }
             case 1:
-                //System.out.println("Spawned a training hub");
                 return new TrainingHub();
             case 2:
-                //System.out.println("Spawned a tech centre");
                 return new TechCentre();
         }
 

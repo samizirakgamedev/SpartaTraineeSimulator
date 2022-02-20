@@ -9,7 +9,8 @@ public class LogFileGenerator {
     private static File file;
     private static int backupFileLines;
 
-    public static void backupLogFile() throws IOException {
+    public static void backupLogFile() throws IOException
+    {
         file = new File("logfile.log");
         Path filePath = file.toPath();
 
@@ -29,7 +30,8 @@ public class LogFileGenerator {
         lineNumberReader.close();
     }
 
-    public static void splitLogfile(String name) throws IOException {
+    public static void splitLogfile(String name) throws IOException
+    {
         String[] filteredNames = name.replaceAll("\\.", "/").split("/");
 
         String createdName = filteredNames[filteredNames.length - 1];
@@ -68,11 +70,10 @@ public class LogFileGenerator {
                 currentLine++;
             }
 
-            if (!Files.isDirectory(logFolderPath)) {
+            if (!Files.isDirectory(logFolderPath))
+            {
                 Files.createDirectory(logFolderPath);
             }
-
-            Files.delete(tempFile.toPath());
 
             FileWriter writer = new FileWriter(finalFile);
             for (String str : allLinesAfterBackup) {

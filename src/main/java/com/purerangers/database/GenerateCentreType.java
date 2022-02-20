@@ -1,4 +1,4 @@
-package com.purerangers;
+package com.purerangers.database;
 
 import com.purerangers.database.TraineeDatabase;
 

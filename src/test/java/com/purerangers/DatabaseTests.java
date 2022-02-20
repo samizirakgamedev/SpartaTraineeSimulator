@@ -1,6 +1,9 @@
 package com.purerangers;
 
 import com.mysql.cj.jdbc.DatabaseMetaData;
+import com.purerangers.database.CheckCentresSpaces;
+import com.purerangers.database.CreateTrainees;
+import com.purerangers.database.GenerateCentreType;
 import com.purerangers.database.TraineeDatabase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
