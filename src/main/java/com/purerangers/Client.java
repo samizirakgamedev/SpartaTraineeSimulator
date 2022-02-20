@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Client {
     private static ArrayList<Client> clientList;
-    protected int spartanNeeded=0;
+    protected int spartanNeeded;
     protected Date openDate;
     protected static CourseType courseType=null;
     protected ArrayList<Person> spartans = filter(GraduateBenchHandler.getGraduateBench()); //filters bench list
@@ -39,6 +39,9 @@ public class Client {
     private static ArrayList<Person> filteredSpartans;
 
     public static ArrayList<Person> filter(ArrayList<Person> spartans){
+        if (spartans==null){
+            return new ArrayList<>();
+        }
         filteredSpartans= new ArrayList<>();
         if (spartans.size()>0){
         for (Person p:spartans){
