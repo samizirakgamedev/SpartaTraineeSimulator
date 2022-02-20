@@ -17,7 +17,7 @@ public class Client
     protected int spartanNeeded;
     protected Date openDate;
     protected static CourseType courseType=null;
-    protected ArrayList<Person> spartans = filter(GraduateBenchHandler.getGraduateBench()); //filters bench list
+    protected ArrayList<Person> spartans = filter(GraduateBenchHandler.getInstance().getGraduateBench()); //filters bench list
     protected ArrayList<Person> spartansAtClient= new ArrayList<>();
     protected int monthsTillReview=12;
     Boolean isClient=true;
@@ -165,7 +165,7 @@ public class Client
     public void closeAndReassign() {
         // adds the spartans back to the grad bench queue
         for (int i = 0; i < getAmountOfSpartansAtClient(); i++) {
-            GraduateBenchHandler.addToBench(getSpartanAtClient(i));
+            GraduateBenchHandler.getInstance().addToBench(getSpartanAtClient(i));
         }
         spartanNeeded=0;
         spartansAtClient=new ArrayList<>();
