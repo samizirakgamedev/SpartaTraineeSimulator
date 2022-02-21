@@ -178,16 +178,16 @@ JUnit Testing is a series of automatic tests that quickly test the methods withi
 It consists of comparing 'actual' and 'expected' results as well as testing how the programme handle exceptions that 
 may be thrown. In this project JUnit Testing was carried out using the following classes:
 
-* DateFormatTests
-* PersonTests
-* RandomNumberGeneratorTests
-* TimeManagerTests
-* TrainingCentreTests
-* WaitingListHandlerTests
-* ClientTests
-* InputManagerTests
-* GraduateManagerTests
-* InputManagerExceptionsTests
+* DateFormatTests.
+* PersonTests.
+* RandomNumberGeneratorTests.
+* TimeManagerTests.
+* TrainingCentreTests.
+* WaitingListHandlerTests.
+* ClientTests.
+* InputManagerTests.
+* GraduateManagerTests.
+* InputManagerExceptionsTests.
 
 The automatic tests described above all passed as shown below along with their individual test functionalities:
 
@@ -227,5 +227,34 @@ give the desired output:
 
 ### Outcomes and Future Work ###
 
+#### Outcomes ####
+
 This project was tasked with giving an output for all phases listed in their respective section. The final output 
-needed would show the following criteria with monthly details
+needed would show the following criteria with monthly details or overall details for the time period that the user 
+entered, depending on whether 'true' or 'false' was entered for the second prompt:
+
+* Number of open centres.
+* Number of closed centres.
+* Number of full centres.
+* Number of trainees in training.
+* Number of trainees on the waiting list.
+
+When entering 2 years as the input and selecting both 'true' and 'false' for the second prompt, both examples below 
+showed that the output was exactly as the project task describes:
+
+<img src="readmeImages/otcm1.png">
+
+<img src="readmeImages/otcm2.png">
+
+#### Future Work ####
+
+This project performed the expectations perfectly. The programme however doesn't have many circumstances where someone 
+would want to use and obtain this information. Finances would make the programme a lot more useful as it would allow 
+the user to understand Sparta Globals profit margins accurately. Key information like Profit per month from 1 client 
+employee and cost of training per trainee would drastically improve the program's usability.
+
+<br/>
+<div align="right">
+    <b><a href="#sparta-trainee-simulation-application-java">↥ back to top</a></b>
+</div>
+<br/>
